@@ -1,5 +1,5 @@
 {
-  "name": "@sulsul/ui",
+  "name": "@sulsul/token",
   "main": "./src/index.ts",
   "scripts": {
     "lint": "eslint .",
@@ -8,14 +8,7 @@
   "devDependencies": {
     "@sulsul/eslint": "workspace:*",
     "@sulsul/tsconfig": "workspace:*",
-    "@types/react": "^18.0.25",
-    "@types/react-dom": "^18.0.9",
     "eslint": "^8.33.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "typescript": "4.9.3"
-  },
-  "peerDependencies": {
-    "react": "^16.8 || ^17 || ^18"
   }
 }

@@ -1,7 +1,7 @@
 module.exports = {
-  ...require('@sulsul/eslint/next.js'),
+  ...require('@sulsul/eslint/react.js'),
   parserOptions: {
     tsconfigRootDir: __dirname,
     project: './tsconfig.json',
   },
-};
+}
