@@ -62,11 +62,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui
       '@suspensive/react':
-        specifier: ^1.9.3
-        version: 1.9.3(react@18.2.0)
+        specifier: ^1.9.4
+        version: 1.9.4(react@18.2.0)
       '@suspensive/react-query':
-        specifier: ^1.9.3
-        version: 1.9.3(@suspensive/react@1.9.3)(@tanstack/react-query@4.29.3)(react@18.2.0)
+        specifier: ^1.9.4
+        version: 1.9.4(@suspensive/react@1.9.4)(@tanstack/react-query@4.29.3)(react@18.2.0)
       '@tanstack/react-query':
         specifier: ^4.29.3
         version: 4.29.3(react-dom@18.2.0)(react@18.2.0)
@@ -888,20 +888,22 @@ packages:
     resolution: {integrity: sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==}
     dev: false
 
-  /@suspensive/react-query@1.9.3(@suspensive/react@1.9.3)(@tanstack/react-query@4.29.3)(react@18.2.0):
-    resolution: {integrity: sha512-umQS3IPIHiuk6jcfUBKXc3hxTVQpddMTfjTwfQNrsz0x/UK9FkrB8JRymwp5oUwVBmkXF9QcP1Bt6BS2VSTMjw==}
+  /@suspensive/react-query@1.9.4(@suspensive/react@1.9.4)(@tanstack/react-query@4.29.3)(react@18.2.0):
+    resolution: {integrity: sha512-F0fVKNsyc0jHIv1n2/uENPxZB3WyWJQgwtTimxY471uGGJJdengT4CnHT9P5jDTPdhLdn0XdEvfa4egTydjwHA==}
     peerDependencies:
       '@suspensive/react': ^1
       '@tanstack/react-query': ^4
       react: ^16.8 || ^17 || ^18
     dependencies:
-      '@suspensive/react': 1.9.3(react@18.2.0)
+      '@suspensive/react': 1.9.4(react@18.2.0)
       '@tanstack/react-query': 4.29.3(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
     dev: false
+    bundledDependencies:
+      - tsd
 
-  /@suspensive/react@1.9.3(react@18.2.0):
-    resolution: {integrity: sha512-5NdD8wS4xiyBgg/TYcOjVGoYj9vK1RXF3D94pjifg6Adk1Xurl9uVsci5YNOB9lpKaK3ZTqiHgCJy3zNva8sYQ==}
+  /@suspensive/react@1.9.4(react@18.2.0):
+    resolution: {integrity: sha512-rcK7cKMgGdoqM2pxU9NJXhpAS/pj6mwwgmwcgJknmsrrDfOmbJ/LnCBlREx9xhm3dXtnqrYk3KES2U4uPb2lGw==}
     peerDependencies:
       react: ^16.8 || ^17 || ^18
     dependencies:
