@@ -53,8 +53,8 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0(react-hook-form@7.43.9)
       '@jsxcss/emotion':
-        specifier: ^0.4.1
-        version: 0.4.1(@emotion/react@11.10.6)(react@18.2.0)
+        specifier: ^1.0.0
+        version: 1.0.0(@emotion/react@11.10.6)(react@18.2.0)
       '@sulsul/token':
         specifier: workspace:*
         version: link:../../packages/token
@@ -709,22 +709,22 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@jsxcss/core@0.4.1(react@18.2.0):
-    resolution: {integrity: sha512-m3oP7JdehVWr+GX/IzfFm/5WGOmT30HHn2OcVjjEolX8niQBqJXLOg1/L7aAuVuJ+Ep6TtDfPDmZiO+p0gTkhA==}
+  /@jsxcss/core@1.0.0(react@18.2.0):
+    resolution: {integrity: sha512-AS0l1HoyxbEHYQrI+KYN6OljhrslhBCcBqiCcJDwd6FMBXa1pJNP+Nspj0a0rb7UfufSq5qG6ZjBKRKuAQeugg==}
     peerDependencies:
       react: ^16.8 || ^17 || ^18
     dependencies:
       react: 18.2.0
     dev: false
 
-  /@jsxcss/emotion@0.4.1(@emotion/react@11.10.6)(react@18.2.0):
-    resolution: {integrity: sha512-zKCXCp/sL84QVVAzJuMtWabm64vo0b7mcP+I6c84r0PPVY6+pmHzdxzzE6nkuPA4Rsl0bo7kwzvR3kyidaj/sw==}
+  /@jsxcss/emotion@1.0.0(@emotion/react@11.10.6)(react@18.2.0):
+    resolution: {integrity: sha512-uDYkhV402LTwqCSLJDgsrV5BUwTnW62bh8ALWAl0+rB8lq7H5E7fe5ubw7phXGuB9nqncA7/wvsUTQZtaL0srg==}
     peerDependencies:
-      '@emotion/react': '*'
+      '@emotion/react': 11.10.6
       react: ^16.8 || ^17 || ^18
     dependencies:
       '@emotion/react': 11.10.6(@types/react@18.0.25)(react@18.2.0)
-      '@jsxcss/core': 0.4.1(react@18.2.0)
+      '@jsxcss/core': 1.0.0(react@18.2.0)
       react: 18.2.0
     dev: false
 

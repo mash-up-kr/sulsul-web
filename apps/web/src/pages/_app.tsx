@@ -38,7 +38,6 @@ const App = ({ Component, pageProps }: AppProps) => (
       <ThemeProvider theme={overridingTheme}>
         <Component {...pageProps} />
       </ThemeProvider>
-
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </SuspensiveProvider>
