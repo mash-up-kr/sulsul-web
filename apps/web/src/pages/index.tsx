@@ -1,11 +1,11 @@
-import { css, useTheme } from '@emotion/react';
-import s, { AutoLayout, Box, Flex, Stack } from '@jsxcss/emotion';
+import { useTheme } from '@emotion/react';
+import { Box, Flex, Stack } from '@jsxcss/emotion';
 import { Delay, Suspense } from '@suspensive/react';
 import { useSuspenseQuery } from '@suspensive/react-query';
 import axios from 'axios';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ComponentPropsWithoutRef, forwardRef, PropsWithChildren } from 'react';
-import { useToggle, useWindowSize } from '../hooks/test';
+import { useToggle, useWindowSize } from '~/hooks/test';
 
 const Web = () => (
   <Suspense.CSROnly
@@ -46,29 +46,26 @@ const LoadingComponent = () => {
 
   return (
     <Stack.Vertical
-      css={css(
-        s.padding(12),
-        s.color({ backgroundColor: '#fafafa' }),
-        s.border({ width: 1, style: 'solid', color: 'lightgray', radius: 16 })
-      )}
+      padding={12}
+      backgroundColor="#fafafa"
+      border="1px solid lightgray"
+      borderRadius={16}
     >
       <Flex
         as="section"
-        css={css`
-          ${s.padding({ left: 16, y: 16 })}
-          ${s.color({ backgroundColor: 'lightgray' })}
-          ${s.border({ radius: 12 })}
-        `}
+        padding={16}
+        paddingRight={0}
+        backgroundColor="lighgray"
+        borderRadius={12}
       >
         받아온 userId: {query.data.userId}, windowSize: ({windowSize.width},{' '}
         {windowSize.height})
       </Flex>
       <Stack.Vertical
-        css={css(
-          s.padding(12),
-          s.color({ backgroundColor: theme.colors.black }),
-          s.border({ width: 1, style: 'solid', color: 'lightgray', radius: 16 })
-        )}
+        padding={12}
+        backgroundColor={theme.colors.black}
+        border="1px solid lightgray"
+        borderRadius={16}
       >
         <Button>버튼을 누르세요</Button>
         <Button>버튼을 누르세요</Button>
@@ -76,24 +73,6 @@ const LoadingComponent = () => {
           버튼을 누르세요
         </Button>
       </Stack.Vertical>
-      <AutoLayout
-        direction={windowSize.width < 740 ? 'vertical' : 'horizontal'}
-        spacing={windowSize.width < 740 ? 24 : 24}
-        padding={{ x: 16, y: 24 }}
-        css={css(
-          s.padding(12),
-          s.color({ backgroundColor: theme.colors.black }),
-          s.border({ width: 1, style: 'solid', color: 'lightgray', radius: 16 })
-        )}
-      >
-        <Button loading={isLoading} onClick={() => toggleIsLoading()}>
-          버튼을 누르세요
-        </Button>
-        <Button loading={isLoading} onClick={() => toggleIsLoading()}>
-          버튼을 누르세요
-        </Button>
-        <Button>버튼을 누르세요</Button>
-      </AutoLayout>
     </Stack.Vertical>
   );
 };
@@ -106,62 +85,50 @@ const Button = forwardRef<
     }
   >
 >(({ children, loading = false, ...rest }, ref) => (
-  <AutoLayout.Horizontal
+  <Stack.Horizontal
     as={motion.button}
     ref={ref}
     whileTap={{ scale: 0.92, backgroundColor: 'rgb(46, 0, 90)' }}
     whileHover={{ scale: 0.98, opacity: 0.86 }}
-    css={css`
-      ${s.padding({ x: 50, y: 16 })};
-      ${s.color({ backgroundColor: 'blueviolet' })};
-      ${s.border({ radius: 12, style: 'none' })};
-      cursor: pointer;
-      position: relative;
-    `}
+    padding="16px 50px"
+    backgroundColor="blueviolet"
+    borderRadius={12}
+    borderStyle="none"
+    cursor="pointer"
+    position="relative"
     {...rest}
   >
-    <Flex.Center
-      css={css`
-        position: absolute;
-        top: 0;
-        left: 20px;
-        bottom: 0;
-      `}
-    >
+    <Flex.Center position="absolute" top={0} left={20} bottom={0}>
       <AnimatePresence>{loading && <Spinner />}</AnimatePresence>
     </Flex.Center>
-    <Flex.Center
-      css={css`
-        ${s.color({ color: 'white' })};
-        flex: 1;
-        font-size: 16px;
-      `}
-    >
+    <Flex.Center color="white" flex={1} fontSize={16}>
       {children}
     </Flex.Center>
-  </AutoLayout.Horizontal>
+  </Stack.Horizontal>
 ));
 
 const Spinner = () => (
-  <motion.div
+  <Box
+    as={motion.div}
     initial={{ x: -20, scale: 0 }}
     animate={{ x: 0, scale: 1 }}
     exit={{ x: -20, scale: 0 }}
   >
-    <motion.div
+    <Box
+      as={motion.div}
       animate={{
         scale: [1, 1.2, 1, 1.2, 1],
         rotate: [0, 180, 360],
         transition: { repeat: Infinity, duration: 1, ease: 'linear' },
       }}
       exit={{ scale: 0 }}
-      css={css`
-        ${s.size({ width: 12, height: 12 })}
-        ${s.border({ width: 1, color: 'white', radius: '50%', style: 'solid' })}
-      border-top: none;
-        border-right: none;
-        margin: 8px auto;
-      `}
+      width={12}
+      height={12}
+      border="1px solid white"
+      borderRadius="50%"
+      borderTop="none"
+      borderRight="none"
+      margin="8px auto"
     />
-  </motion.div>
+  </Box>
 );

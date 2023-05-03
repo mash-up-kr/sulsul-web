@@ -13,7 +13,7 @@
     "@emotion/styled": "^11.10.6",
     "@hookform/devtools": "^4.3.1",
     "@hookform/resolvers": "^3.1.0",
-    "@jsxcss/emotion": "^1.0.0",
+    "@jsxcss/emotion": "^1.3.1",
     "@sulsul/token": "workspace:*",
     "@sulsul/ui": "workspace:*",
     "@suspensive/react": "^1.9.4",
