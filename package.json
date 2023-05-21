@@ -1,7 +1,7 @@
 {
   "name": "sulsul-web",
   "private": true,
-  "packageManager": "pnpm@7.15.0",
+  "packageManager": "pnpm@8.1.1",
   "scripts": {
     "commit": "cz",
     "build": "turbo run build",
