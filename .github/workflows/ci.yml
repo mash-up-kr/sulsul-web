@@ -1,0 +1,32 @@
+name: ci
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  quality:
+    name: Check quality
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        command: ['pnpm build',
+        #  'pnpm lint' // TODO: lint 설정 제대로 하기
+         ]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'pnpm'
+          cache-dependency-path: 'pnpm-lock.yaml'
+          node-version-file: '.nvmrc'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: CI commands
+        run: ${{ matrix.command }}

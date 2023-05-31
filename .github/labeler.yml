@@ -1,0 +1,17 @@
+apps/web:
+  - apps/web/*
+  - apps/web/**/*
+apps/map:
+  - apps/map/*
+  - apps/map/**/*
+packages:
+  - packages/*
+  - packages/**/*
+configs:
+  - configs/*
+  - configs/**/*
+dependencies:
+  - "**/pnpm-lock.yaml"
+.github:
+  - .github/*
+  - .github/**/*

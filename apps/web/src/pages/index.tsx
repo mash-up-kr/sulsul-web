@@ -11,7 +11,7 @@ const Web = () => (
   <Suspense.CSROnly
     fallback={
       <Box>
-        1000 delay 시작 Amplify new commit test
+        1000 delay 시작 Amplify new commit test labeler workflow test
         <Delay ms={1000}>
           <Spinner />
         </Delay>
