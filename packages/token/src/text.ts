@@ -28,7 +28,7 @@ export const text = {
     },
     2: {
       fontSize: '16px',
-      lineHeight: '18px',
+      lineHeight: '24px',
     },
     3: {
       fontSize: '14px',
