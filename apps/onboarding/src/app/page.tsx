@@ -3,7 +3,7 @@
 import styled from '@emotion/styled';
 
 export default function Home() {
-  return <Button>onboarding</Button>;
+  return <Button>onboarding test</Button>;
 }
 
 const Button = styled.button`
