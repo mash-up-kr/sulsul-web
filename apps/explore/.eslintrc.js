@@ -1,7 +1,8 @@
 module.exports = {
-  ...require('@sulsul/eslint/next.js'),
+  root: true,
+  extends: ['@sulsul/eslint-config/next'],
   parserOptions: {
     tsconfigRootDir: __dirname,
     project: './tsconfig.json',
   },
-};
+}
