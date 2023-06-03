@@ -2,5 +2,4 @@
 import { colors } from './colors';
 import { text } from './text';
 
-export const overridingTheme = { colors, text } as const;
-export type OverridingTheme = typeof overridingTheme;
+export const theme = { colors, text } as const;
