@@ -2,11 +2,12 @@
 
 import { ThemeProvider } from '@emotion/react';
 import { Flex, MediaQueryProvider } from '@jsxcss/emotion';
+import { overridingTheme } from '@sulsul/token';
 import { SuspensiveConfigs, SuspensiveProvider } from '@suspensive/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Inter } from 'next/font/google';
-import { overridingTheme } from '~/styles/theme';
+
 import './globals.css';
 
 const queryClient = new QueryClient({
