@@ -3,5 +3,10 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "eslint.packageManager": "pnpm",
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
-  "cSpell.words": ["packlint", "nextjs"]
+  "cSpell.words": ["packlint", "nextjs"],
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true,
+    "source.fixAll.eslint": true
+  },
+  "editor.formatOnSave": true,
 }
