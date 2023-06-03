@@ -1,10 +1,10 @@
 {
   "name": "sulsul-web",
   "private": true,
-  "packageManager": "pnpm@8.1.1",
+  "packageManager": "pnpm@8.5.1",
   "scripts": {
-    "commit": "cz",
     "build": "turbo run build",
+    "commit": "cz",
     "dev": "turbo run dev",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo run lint",

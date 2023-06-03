@@ -10,10 +10,7 @@ module.exports = {
   },
   rules: {
     'prettier/prettier': 'error',
-    'react/function-component-definition': [
-      'error',
-      { namedComponents: 'arrow-function' },
-    ],
+    'react/function-component-definition': ['off'],
     'react/react-in-jsx-scope': ['off'],
     'react/jsx-props-no-spreading': ['off'],
     'react/destructuring-assignment': ['off'],

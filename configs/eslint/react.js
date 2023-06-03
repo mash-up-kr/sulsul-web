@@ -3,15 +3,23 @@ module.exports = {
     browser: true,
     node: true,
   },
-  extends: ['airbnb', 'airbnb-typescript', 'plugin:import/recommended', 'plugin:import/typescript', 'prettier'],
+  extends: [
+    'airbnb',
+    'airbnb-typescript',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
+    'prettier',
+  ],
   plugins: ['@typescript-eslint', 'import', 'prettier'],
   settings: {
     'import/parsers': { '@typescript-eslint/parser': ['.ts', '.tsx'] },
-    'import/resolver': { typescript: { alwaysTryTypes: true, project: ['packages/*/tsconfig.json'] } },
+    'import/resolver': {
+      typescript: { alwaysTryTypes: true, project: ['packages/*/tsconfig.json'] },
+    },
   },
   rules: {
     'prettier/prettier': 'error',
-    'react/function-component-definition': ['error', { namedComponents: 'arrow-function' }],
+    'react/function-component-definition': ['off'],
     'react/jsx-props-no-spreading': ['off'],
     'react/destructuring-assignment': ['off'],
     'react/state-in-constructor': ['off'],
@@ -33,5 +41,15 @@ module.exports = {
     ],
     'sort-imports': ['error', { ignoreDeclarationSort: true }],
   },
-  ignorePatterns: ['**/*.js', '**/*.json', 'node_modules', 'public', 'styles', '.next', 'coverage', 'dist', '.turbo'],
-}
+  ignorePatterns: [
+    '**/*.js',
+    '**/*.json',
+    'node_modules',
+    'public',
+    'styles',
+    '.next',
+    'coverage',
+    'dist',
+    '.turbo',
+  ],
+};
