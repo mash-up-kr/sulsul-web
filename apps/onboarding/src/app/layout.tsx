@@ -2,7 +2,7 @@
 
 import { ThemeProvider } from '@emotion/react';
 import { Flex, MediaQueryProvider } from '@jsxcss/emotion';
-import { theme } from '@sulsul/token';
+import { token } from '@sulsul/token';
 import { SuspensiveConfigs, SuspensiveProvider } from '@suspensive/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MediaQueryProvider pxs={[0, 768, 1440]}>
           <SuspensiveProvider configs={suspensiveConfigs}>
             <QueryClientProvider client={queryClient}>
-              <ThemeProvider theme={theme}>{children}</ThemeProvider>
+              <ThemeProvider theme={token}>{children}</ThemeProvider>
               <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>
           </SuspensiveProvider>
