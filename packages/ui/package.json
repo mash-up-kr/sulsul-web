@@ -2,11 +2,11 @@
   "name": "@sulsul/ui",
   "main": "./src/index.ts",
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint \"**/*.ts*\"",
     "type:check": "tsc --noEmit"
   },
   "devDependencies": {
-    "@sulsul/eslint": "workspace:*",
+    "@sulsul/eslint-config": "workspace:*",
     "@sulsul/tsconfig": "workspace:*",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
