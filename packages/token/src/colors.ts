@@ -1,4 +1,26 @@
 export const colors = {
-  white: '#ffffff',
   black: '#000000',
+  grey: {
+    '000': '#1F2229',
+    '050': '#23272E',
+    '100': '#2C3039',
+    '200': '#3F434F',
+    '300': '#525664',
+    '400': '#676A79',
+    '500': '#7C7F8F',
+    '600': '#9395A4',
+    '700': '#AAACBA',
+    '800': '#C3C4CF',
+    '900': '#DDDDE4',
+  },
+  white: '#ffffff',
+  primary: {
+    '100': '#FD6234',
+    '200': '#FF8B4B',
+    '300': '#FFBE5C',
+  },
+  blue: '#4E4DFF',
+  purple: '#BBB6FF',
+  green: '#C6DC84',
+  error: '#FF6262',
 } as const;
