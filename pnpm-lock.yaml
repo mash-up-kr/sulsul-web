@@ -30,7 +30,7 @@ importers:
         version: 1.9.3(eslint@7.32.0)
       eslint-plugin-import:
         specifier: ^2.25.3
-        version: 2.26.0(@typescript-eslint/parser@5.59.0)(eslint-import-resolver-typescript@3.5.5)(eslint@8.42.0)
+        version: 2.26.0(@typescript-eslint/parser@5.59.0)(eslint-import-resolver-typescript@2.5.0)(eslint@8.42.0)
       eslint-plugin-jest:
         specifier: 27.2.1
         version: 27.2.1(@typescript-eslint/eslint-plugin@5.59.0)(eslint@7.32.0)(typescript@4.9.3)
@@ -313,6 +313,13 @@ importers:
         version: 4.9.3
 
   packages/ui:
+    dependencies:
+      '@sulsul/token':
+        specifier: workspace:*
+        version: link:../token
+      framer-motion:
+        specifier: ^10.12.4
+        version: 10.12.4(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       '@emotion/react':
         specifier: ^11.11.0
@@ -2389,7 +2396,7 @@ packages:
       eslint: 8.42.0
       eslint-import-resolver-node: 0.3.6
       eslint-import-resolver-typescript: 3.5.5(@typescript-eslint/parser@5.59.0)(eslint-import-resolver-node@0.3.6)(eslint-plugin-import@2.26.0)(eslint@8.42.0)
-      eslint-plugin-import: 2.26.0(@typescript-eslint/parser@5.59.0)(eslint-import-resolver-typescript@3.5.5)(eslint@8.42.0)
+      eslint-plugin-import: 2.26.0(@typescript-eslint/parser@5.59.0)(eslint-import-resolver-typescript@2.5.0)(eslint@8.42.0)
       eslint-plugin-jsx-a11y: 6.6.1(eslint@8.42.0)
       eslint-plugin-react: 7.31.11(eslint@8.42.0)
       eslint-plugin-react-hooks: 4.6.0(eslint@8.42.0)
@@ -2465,7 +2472,6 @@ packages:
       tsconfig-paths: 3.14.1
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   /eslint-import-resolver-typescript@3.5.5(@typescript-eslint/parser@5.59.0)(eslint-import-resolver-node@0.3.6)(eslint-plugin-import@2.26.0)(eslint@8.42.0):
     resolution: {integrity: sha512-TdJqPHs2lW5J9Zpe17DZNQuDnox4xo2o+0tE7Pggain9Rbc19ik8kFtXdxZ250FVx2kF4vlt2RSf4qlUpG7bhw==}
@@ -2478,7 +2484,7 @@ packages:
       enhanced-resolve: 5.13.0
       eslint: 8.42.0
       eslint-module-utils: 2.7.4(@typescript-eslint/parser@5.59.0)(eslint-import-resolver-node@0.3.6)(eslint-import-resolver-typescript@3.5.5)(eslint@8.42.0)
-      eslint-plugin-import: 2.26.0(@typescript-eslint/parser@5.59.0)(eslint-import-resolver-typescript@3.5.5)(eslint@8.42.0)
+      eslint-plugin-import: 2.26.0(@typescript-eslint/parser@5.59.0)(eslint-import-resolver-typescript@2.5.0)(eslint@8.42.0)
       get-tsconfig: 4.5.0
       globby: 13.1.4
       is-core-module: 2.11.0
@@ -2518,7 +2524,6 @@ packages:
       eslint-import-resolver-typescript: 2.5.0(eslint-plugin-import@2.26.0)(eslint@8.42.0)
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   /eslint-module-utils@2.7.4(@typescript-eslint/parser@5.59.0)(eslint-import-resolver-node@0.3.6)(eslint-import-resolver-typescript@3.5.5)(eslint@8.42.0):
     resolution: {integrity: sha512-j4GT+rqzCoRKHwURX7pddtIPGySnX9Si/cgMI5ztrcqOPtk5dDEeZ34CQVPphnqkJytlc97Vuk05Um2mJ3gEQA==}
@@ -2578,7 +2583,6 @@ packages:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
       - supports-color
-    dev: false
 
   /eslint-plugin-import@2.26.0(@typescript-eslint/parser@5.59.0)(eslint-import-resolver-typescript@3.5.5)(eslint@8.42.0):
     resolution: {integrity: sha512-hYfi3FXaM8WPLf4S1cikh/r4IxnO6zrhZbEGz2b660EJRbuxgpDS5gkCuYgGWg2xxh2rBuIr4Pvhve/7c31koA==}
@@ -2597,7 +2601,7 @@ packages:
       doctrine: 2.1.0
       eslint: 8.42.0
       eslint-import-resolver-node: 0.3.6
-      eslint-module-utils: 2.7.4(@typescript-eslint/parser@5.59.0)(eslint-import-resolver-node@0.3.6)(eslint-import-resolver-typescript@3.5.5)(eslint@8.42.0)
+      eslint-module-utils: 2.7.4(@typescript-eslint/parser@5.59.0)(eslint-import-resolver-node@0.3.6)(eslint-import-resolver-typescript@2.5.0)(eslint@8.42.0)
       has: 1.0.3
       is-core-module: 2.11.0
       is-glob: 4.0.3
@@ -2609,6 +2613,7 @@ packages:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
       - supports-color
+    dev: false
 
   /eslint-plugin-jest@27.2.1(@typescript-eslint/eslint-plugin@5.59.0)(eslint@7.32.0)(typescript@4.9.3):
     resolution: {integrity: sha512-l067Uxx7ZT8cO9NJuf+eJHvt6bqJyz2Z29wykyEdz/OtmcELQl2MQGQLX8J94O1cSJWAwUSEvCjwjA7KEK3Hmg==}

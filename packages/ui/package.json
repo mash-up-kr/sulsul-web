@@ -5,6 +5,10 @@
     "lint": "eslint \"**/*.ts*\"",
     "type:check": "tsc --noEmit"
   },
+  "dependencies": {
+    "framer-motion": "^10.12.4",
+    "@sulsul/token": "workspace:*"
+  },
   "devDependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
