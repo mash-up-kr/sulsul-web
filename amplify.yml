@@ -1,0 +1,38 @@
+version: 1
+applications:
+  - appRoot: apps/explore
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm i -g pnpm
+            - pnpm install
+        build:
+          commands:
+            - npx turbo run build --filter=explore
+      artifacts:
+        baseDirectory: apps/explore/.next
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*
+      buildPath: /
+  - appRoot: apps/onboarding
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm i -g pnpm
+            - pnpm install
+        build:
+          commands:
+            - npx turbo run build --filter=onboarding
+      artifacts:
+        baseDirectory: apps/onboarding/.next
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*
+      buildPath: /

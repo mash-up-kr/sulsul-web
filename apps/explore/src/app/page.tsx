@@ -1,5 +1,5 @@
 'use client';
 
 export default function Home() {
-  return <main>explore</main>;
+  return <main>explore amplify test</main>;
 }
