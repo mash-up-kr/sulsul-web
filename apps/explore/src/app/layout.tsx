@@ -7,6 +7,7 @@ import { SuspensiveConfigs, SuspensiveProvider } from '@suspensive/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Inter } from 'next/font/google';
+import RootStyleRegistry from '../../emotion';
 
 import './globals.css';
 
@@ -33,14 +34,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <MediaQueryProvider pxs={[0, 768, 1440]}>
-          <SuspensiveProvider configs={suspensiveConfigs}>
-            <QueryClientProvider client={queryClient}>
-              <ThemeProvider theme={token}>{children}</ThemeProvider>
-              <ReactQueryDevtools initialIsOpen={false} />
-            </QueryClientProvider>
-          </SuspensiveProvider>
-        </MediaQueryProvider>
+        <RootStyleRegistry>
+          <MediaQueryProvider pxs={[0, 768, 1440]}>
+            <SuspensiveProvider configs={suspensiveConfigs}>
+              <QueryClientProvider client={queryClient}>
+                <ThemeProvider theme={token}>{children}</ThemeProvider>
+                <ReactQueryDevtools initialIsOpen={false} />
+              </QueryClientProvider>
+            </SuspensiveProvider>
+          </MediaQueryProvider>
+        </RootStyleRegistry>
       </body>
     </html>
   );
