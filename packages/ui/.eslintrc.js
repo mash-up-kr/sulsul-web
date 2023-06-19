@@ -1,7 +1,8 @@
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
-  extends: ['@sulsul/eslint-config/react'],
-  parserOptions: {
-    tsconfigRootDir: __dirname,
-    project: './tsconfig.json',
+  root: true,
+  extends: ['@sulsul/eslint-config/react-ts'],
+  rules: {
+    'react/no-unknown-property': ['error', { ignore: ['css'] }],
   },
-}
+};

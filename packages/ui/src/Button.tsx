@@ -64,7 +64,10 @@ const smStyle = css`
   padding : 5px 8px;
 `;
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  props,
+  ref
+) {
   const { children, appearance = 'default', size = 'md', ...restProps } = props;
 
   const appearanceStyle = {
