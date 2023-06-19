@@ -6,8 +6,8 @@
     "type:check": "tsc --noEmit"
   },
   "dependencies": {
-    "framer-motion": "^10.12.4",
-    "@sulsul/token": "workspace:*"
+    "@sulsul/token": "workspace:*",
+    "framer-motion": "^10.12.4"
   },
   "devDependencies": {
     "@emotion/react": "^11.11.0",
@@ -16,10 +16,10 @@
     "@sulsul/tsconfig": "workspace:*",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
-    "eslint": "^8.33.0",
+    "eslint": "^8.42.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "typescript": "4.9.3"
+    "typescript": "^4.9.5"
   },
   "peerDependencies": {
     "@emotion/react": "^11",

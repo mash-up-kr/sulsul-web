@@ -1,8 +1,4 @@
 module.exports = {
   root: true,
-  extends: ['@sulsul/eslint-config/next'],
-  parserOptions: {
-    tsconfigRootDir: __dirname,
-    project: './tsconfig.json',
-  },
-}
+  extends: ['@sulsul/eslint-config/react-ts-noimport', 'plugin:@next/next/recommended'],
+};
