@@ -1,5 +1,5 @@
 body {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 @charset "utf-8";
@@ -331,4 +331,3 @@ textarea,
   clip: rect(0, 0, 0, 0);
   position: absolute;
 }
->>>>>>> 096ee4d2f6e1170348b696c7e9d3fae4ea32cde8
