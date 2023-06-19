@@ -1,3 +1,7 @@
+body {
+  background-color: transparent;
+}
+
 @charset "utf-8";
 @font-face {
   font-family: 'Pretendard';
