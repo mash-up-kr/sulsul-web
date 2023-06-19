@@ -1,9 +1,10 @@
 'use client';
+import Image from 'next/image'
 
 export default function Home() {
   return (
-      <main>
-          <img src={"bubble_wine.svg"} alt={"bubble_wine"}/>
-      </main>
+    <main>
+      <Image src={"bubble_wine.svg"} alt={"bubble_wine"}/>
+    </main>
   );
 }
