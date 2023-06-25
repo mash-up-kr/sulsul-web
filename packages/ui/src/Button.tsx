@@ -10,7 +10,7 @@ type ButtonProps = ComponentPropsWithoutRef<'button'> & {
 };
 
 const contentsStyle = css`
-  border-radius: 4px;
+  border-radius: 16px;
   cursor: pointer;
 
   &:disabled {
