@@ -59,11 +59,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui
       '@suspensive/react':
-        specifier: ^1.9.4
-        version: 1.9.4(react@18.2.0)
+        specifier: ^1.11.2
+        version: 1.11.2(react@18.2.0)
       '@suspensive/react-query':
-        specifier: ^1.9.4
-        version: 1.9.4(@suspensive/react@1.9.4)(@tanstack/react-query@4.29.3)(react@18.2.0)
+        specifier: ^1.11.2
+        version: 1.11.2(@suspensive/react@1.11.2)(@tanstack/react-query@4.29.3)(react@18.2.0)
       '@tanstack/react-query':
         specifier: ^4.29.3
         version: 4.29.3(react-dom@18.2.0)(react@18.2.0)
@@ -150,11 +150,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui
       '@suspensive/react':
-        specifier: ^1.9.4
-        version: 1.9.4(react@18.2.0)
+        specifier: ^1.11.2
+        version: 1.11.2(react@18.2.0)
       '@suspensive/react-query':
-        specifier: ^1.9.4
-        version: 1.9.4(@suspensive/react@1.9.4)(@tanstack/react-query@4.29.3)(react@18.2.0)
+        specifier: ^1.11.2
+        version: 1.11.2(@suspensive/react@1.11.2)(@tanstack/react-query@4.29.3)(react@18.2.0)
       '@tanstack/react-query':
         specifier: ^4.29.3
         version: 4.29.3(react-dom@18.2.0)(react@18.2.0)
@@ -179,6 +179,9 @@ importers:
       react-hook-form:
         specifier: ^7.43.9
         version: 7.43.9(react@18.2.0)
+      react-hook-step:
+        specifier: workspace:*
+        version: link:../../packages/react-hook-step
       zod:
         specifier: ^3.21.4
         version: 3.21.4
@@ -287,6 +290,24 @@ importers:
         version: 8.42.0
 
   configs/tsconfig: {}
+
+  packages/react-hook-step:
+    devDependencies:
+      '@sulsul/eslint-config':
+        specifier: workspace:*
+        version: link:../../configs/eslint-config
+      '@sulsul/tsconfig':
+        specifier: workspace:*
+        version: link:../../configs/tsconfig
+      eslint:
+        specifier: ^8.42.0
+        version: 8.42.0
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      typescript:
+        specifier: ^4.9.5
+        version: 4.9.5
 
   packages/token:
     devDependencies:
@@ -1015,22 +1036,25 @@ packages:
     resolution: {integrity: sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==}
     dev: true
 
-  /@suspensive/react-query@1.9.4(@suspensive/react@1.9.4)(@tanstack/react-query@4.29.3)(react@18.2.0):
-    resolution: {integrity: sha512-F0fVKNsyc0jHIv1n2/uENPxZB3WyWJQgwtTimxY471uGGJJdengT4CnHT9P5jDTPdhLdn0XdEvfa4egTydjwHA==}
+  /@suspensive/react-query@1.11.2(@suspensive/react@1.11.2)(@tanstack/react-query@4.29.3)(react@18.2.0):
+    resolution: {integrity: sha512-1x9Ee5PPaYhJ8/KXJsnp0P0xCWlYI5f+t7EKqdmiJkhkDE3s5Unt8KiNff3CRxniUwbzI4bmeG4V+ZIzta86rw==}
     peerDependencies:
       '@suspensive/react': ^1
       '@tanstack/react-query': ^4
       react: ^16.8 || ^17 || ^18
+    peerDependenciesMeta:
+      '@suspensive/react':
+        optional: true
     dependencies:
-      '@suspensive/react': 1.9.4(react@18.2.0)
+      '@suspensive/react': 1.11.2(react@18.2.0)
       '@tanstack/react-query': 4.29.3(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
     dev: false
     bundledDependencies:
       - tsd
 
-  /@suspensive/react@1.9.4(react@18.2.0):
-    resolution: {integrity: sha512-rcK7cKMgGdoqM2pxU9NJXhpAS/pj6mwwgmwcgJknmsrrDfOmbJ/LnCBlREx9xhm3dXtnqrYk3KES2U4uPb2lGw==}
+  /@suspensive/react@1.11.2(react@18.2.0):
+    resolution: {integrity: sha512-WdSjXu0x4KymU5Q3VNGy4O5Opl4cnbxHH8xsLTS+/GHmeIYVspRwF5EVGiFAFe8ZuBFzDGBOwA7WMA6pclaKuA==}
     peerDependencies:
       react: ^16.8 || ^17 || ^18
     dependencies:

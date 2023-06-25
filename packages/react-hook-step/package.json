@@ -1,0 +1,18 @@
+{
+  "name": "react-hook-step",
+  "main": "./src/index.ts",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\"",
+    "type:check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@sulsul/eslint-config": "workspace:*",
+    "@sulsul/tsconfig": "workspace:*",
+    "eslint": "^8.42.0",
+    "react": "^18.2.0",
+    "typescript": "^4.9.5"
+  },
+  "peerDependencies": {
+    "react": "^16.8 || ^17 || ^18"
+  }
+}

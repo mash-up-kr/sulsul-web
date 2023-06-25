@@ -1,0 +1,4 @@
+{
+  "extends": "@sulsul/tsconfig/react-library.json",
+  "include": ["."]
+}
