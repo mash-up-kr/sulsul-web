@@ -1,5 +1,5 @@
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
-  extends: ['@sulsul/eslint-config-ts'],
+  extends: ['@sulsul/eslint-config-js'],
 };
