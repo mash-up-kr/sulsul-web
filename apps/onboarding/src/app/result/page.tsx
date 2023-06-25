@@ -6,6 +6,7 @@ import { text } from '@sulsul/token/src/text';
 import { Button } from '@sulsul/ui';
 import Image from 'next/image';
 import ImageWrapper from '../components/ImageWrapper';
+import { AlcoholDetails, AlcoholType } from '../constant/alcohol';
 
 const Page = styled.div`
   display: flex;
@@ -91,26 +92,21 @@ const Result = () => (
     </ImageWrapper>
     <Heading3>다른 술은 얼마나 마실 수 있을까?</Heading3>
     <DrinkLists>
-      <ListItem>
-        <DrinkDetail>
-          <Drinks src="/icons/ic-soju-m.svg" />
-          <div>
-            <Heading5>소주</Heading5>
-            <Volumn>16.9도</Volumn>
-          </div>
-        </DrinkDetail>
-        <Heading5>8잔</Heading5>
-      </ListItem>
-      <ListItem>
-        <DrinkDetail>
-          <Drinks src="/icons/ic-soju-m.svg" />
-          <div>
-            <Heading5>소주</Heading5>
-            <Volumn>16.9도</Volumn>
-          </div>
-        </DrinkDetail>
-        <Heading5>8잔</Heading5>
-      </ListItem>
+      {Object.values(AlcoholType).map((alcohol) => {
+        const { name, svg, volumn } = AlcoholDetails[alcohol];
+        return (
+          <ListItem key={alcohol}>
+            <DrinkDetail>
+              <Drinks src={svg} />
+              <div>
+                <Heading5>{name}</Heading5>
+                <Volumn>{volumn}도</Volumn>
+              </div>
+            </DrinkDetail>
+            <Heading5>8잔</Heading5>
+          </ListItem>
+        );
+      })}
     </DrinkLists>
     <ButtonWrapper>
       <Button type="button" css={{ width: '100%' }}>
