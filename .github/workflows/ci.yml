@@ -24,7 +24,7 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: CI commands
         run: ${{ matrix.command }}
