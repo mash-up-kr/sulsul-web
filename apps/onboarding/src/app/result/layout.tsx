@@ -13,7 +13,7 @@ const move1 = keyframes`
         transform: translate(0, 0) scale(1);
     }
     50% { 
-        transform: translate(50px, 150px) scale(1.2);
+        transform: translate(80px, 150px) scale(1.2);
     }
     100% {
         transform: translate(0, 0) scale(1);

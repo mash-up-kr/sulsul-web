@@ -4,9 +4,8 @@ import styled from '@emotion/styled';
 import { colors } from '@sulsul/token/src/colors';
 import { text } from '@sulsul/token/src/text';
 import { Button } from '@sulsul/ui';
-import Image from 'next/image';
-import ImageWrapper from '../components/ImageWrapper';
 import { AlcoholDetails, AlcoholType } from '../constant/alcohol';
+import { ResultCard } from './components/ResultCard';
 
 const Page = styled.div`
   display: flex;
@@ -82,14 +81,7 @@ const Volumn = styled.p`
 const Result = () => (
   <Page>
     <Heading2>당신은...</Heading2>
-    <ImageWrapper width={328} height={365}>
-      <Image
-        src={'/images/result/card/card_1_baby.png'}
-        alt={'baby'}
-        fill
-        quality={100}
-      />
-    </ImageWrapper>
+    <ResultCard result={8} />
     <Heading3>다른 술은 얼마나 마실 수 있을까?</Heading3>
     <DrinkLists>
       {Object.values(AlcoholType).map((alcohol) => {
