@@ -3,6 +3,13 @@
 import { PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
+import { getLevelDetails } from './service';
+import { useSearchParams } from 'next/navigation';
+
+type backgroundColorProps = {
+  color1: string;
+  color2: string;
+};
 
 const Background = styled.div`
   background: url('/icons/grainy.svg') repeat, #1f2229;
@@ -32,7 +39,7 @@ const move2 = keyframes`
     }
 `;
 
-const Section = styled.section`
+const Section = styled.section<backgroundColorProps>`
   position: relative;
   max-width: 700px;
   margin: 0 auto;
@@ -44,9 +51,9 @@ const Section = styled.section`
     left: 0;
     width: 100px;
     height: 100px;
-    background-color: rgba(224, 95, 254, 0.3);
+    background-color: ${({ color1 }) => color1};
     border-radius: 50%;
-    box-shadow: 0px 0px 150px 150px rgba(224, 95, 254, 0.3);
+    box-shadow: 0px 0px 150px 150px ${({ color1 }) => color1};
     animation: ${move1} 3s ease-in-out infinite;
   }
 
@@ -57,9 +64,9 @@ const Section = styled.section`
     right: 0;
     width: 100px;
     height: 100px;
-    background-color: #4c94ff30;
+    background-color: ${({ color2 }) => color2};
     border-radius: 50%;
-    box-shadow: 0px 0px 150px 150px #4c94ff30;
+    box-shadow: 0px 0px 150px 150px ${({ color2 }) => color2};
     animation: ${move2} 3s ease-in-out infinite;
   }
 `;
@@ -69,12 +76,21 @@ const Wrapper = styled.article`
   z-index: 1;
 `;
 
-const Layout = ({ children }: PropsWithChildren) => (
-  <Background>
-    <Section>
-      <Wrapper>{children}</Wrapper>
-    </Section>
-  </Background>
-);
+const Layout = ({ children }: PropsWithChildren) => {
+  const searchParams = useSearchParams();
+  const result = searchParams.get('result');
+
+  if (!result) return null;
+
+  const { color1, color2 } = getLevelDetails(Number(result));
+
+  return (
+    <Background>
+      <Section color1={color1} color2={color2}>
+        <Wrapper>{children}</Wrapper>
+      </Section>
+    </Background>
+  );
+};
 
 export default Layout;

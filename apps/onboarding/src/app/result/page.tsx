@@ -81,7 +81,7 @@ const Volumn = styled.p`
 const Result = () => (
   <Page>
     <Heading2>당신은...</Heading2>
-    <ResultCard result={8} />
+    <ResultCard />
     <Heading3>다른 술은 얼마나 마실 수 있을까?</Heading3>
     <DrinkLists>
       {Object.values(AlcoholType).map((alcohol) => {
