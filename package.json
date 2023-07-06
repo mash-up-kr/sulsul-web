@@ -9,7 +9,8 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo run lint",
     "lint:pack": "packlint sort -R",
-    "postinstall": "husky install && packlint sort -R"
+    "postinstall": "husky install && packlint sort -R",
+    "spec:api": "turbo run spec:api"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.1",
