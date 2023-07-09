@@ -4,7 +4,8 @@ import styled from '@emotion/styled';
 import { colors } from '@sulsul/token/src/colors';
 import { text } from '@sulsul/token/src/text';
 import { Button } from '@sulsul/ui';
-import { AlcoholDetails, AlcoholType } from '../constant/alcohol';
+import { DrinkResDrinkTypeEnum } from '~/api';
+import { AlcoholDetails } from '../constant/alcohol';
 import { ResultCard } from './components/ResultCard';
 
 const Page = styled.div`
@@ -84,7 +85,7 @@ const Result = () => (
     <ResultCard />
     <Heading3>다른 술은 얼마나 마실 수 있을까?</Heading3>
     <DrinkLists>
-      {Object.values(AlcoholType).map((alcohol) => {
+      {Object.values(DrinkResDrinkTypeEnum).map((alcohol) => {
         const { name, svg, volumn } = AlcoholDetails[alcohol];
         return (
           <ListItem key={alcohol}>

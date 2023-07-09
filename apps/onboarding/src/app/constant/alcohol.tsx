@@ -4,41 +4,31 @@ import CardMaster from '~/assets/card/card-master.svg';
 import CardGhost from '~/assets/card/card-ghost.svg';
 import CardHeaven from '~/assets/card/card-heaven.svg';
 import CardGod from '~/assets/card/card-god.svg';
-
-// 술 목록
-export const AlcoholType = {
-  Soju: 'Soju',
-  Beer: 'Beer',
-  Wine: 'Wine',
-  Wiskey: 'Wiskey',
-  Liquor: 'Liquor', // 고량주
-} as const;
-
-export type AlcoholType = typeof AlcoholType[keyof typeof AlcoholType];
+import { DrinkResDrinkTypeEnum } from '~/api';
 
 export const AlcoholDetails = {
-  [AlcoholType.Soju]: {
-    name: '소주',
+  [DrinkResDrinkTypeEnum.소주]: {
+    name: DrinkResDrinkTypeEnum.소주,
     svg: '/icons/ic-soju-m.svg',
     volumn: 16.9,
   },
-  [AlcoholType.Beer]: {
-    name: '맥주',
+  [DrinkResDrinkTypeEnum.맥주]: {
+    name: DrinkResDrinkTypeEnum.맥주,
     svg: '/icons/ic-macju-m.svg',
     volumn: 4.5,
   },
-  [AlcoholType.Wine]: {
-    name: '와인',
+  [DrinkResDrinkTypeEnum.와인]: {
+    name: DrinkResDrinkTypeEnum.와인,
     svg: '/icons/ic-wine-m.svg',
     volumn: 13.5,
   },
-  [AlcoholType.Liquor]: {
-    name: '고량주',
+  [DrinkResDrinkTypeEnum.고량주]: {
+    name: DrinkResDrinkTypeEnum.고량주,
     svg: '/icons/ic-goryanju-m.svg',
     volumn: 40,
   },
-  [AlcoholType.Wiskey]: {
-    name: '위스키',
+  [DrinkResDrinkTypeEnum.위스키]: {
+    name: DrinkResDrinkTypeEnum.위스키,
     svg: '/icons/ic-wine-m.svg',
     volumn: 50,
   },
