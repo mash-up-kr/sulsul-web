@@ -4,8 +4,7 @@ import { PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
 import { getLevelDetails } from './service';
-import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/router';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 type backgroundColorProps = {
   color1: string;

@@ -1,8 +1,14 @@
 import styled from '@emotion/styled';
 import { text } from '@sulsul/token/src/text';
-import { getLevelDetails } from '../service';
 import { colors } from '@sulsul/token/src/colors';
-import { useSearchParams } from 'next/navigation';
+import { css } from '@emotion/react';
+
+interface ResultCardProps {
+  mainColor: string;
+  name: string;
+  description: string;
+  svg: React.ReactNode;
+}
 
 const Heading1 = styled.h1`
   ${text.heading[1]};
@@ -48,14 +54,6 @@ const ResultWrapper = styled.div<{ mainColor: string }>`
   }
 `;
 
-const Badge = styled.span`
-  border-radius: 8px;
-  padding: 4px 8px;
-  margin-bottom: 16px;
-  color: ${colors.purple};
-  background: rgba(187, 182, 255, 0.16);
-`;
-
 const SVGWrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -65,15 +63,22 @@ const SVGWrapper = styled.div`
   }
 `;
 
-export const ResultCard = () => {
-  const searchParams = useSearchParams();
-  const result = Number(searchParams.get('result'));
-  const { name, svg, description, mainColor } = getLevelDetails(result);
+export const ResultCard = ({ mainColor, name, description, svg }: ResultCardProps) => {
   return (
     <BorderWrapper>
       <ResultWrapper mainColor={mainColor}>
         <Heading1>{name}</Heading1>
-        <Badge>{description}</Badge>
+        <span
+          css={css`
+            border-radius: 8px;
+            padding: 4px 8px;
+            margin-bottom: 16px;
+            color: ${colors.purple};
+            background: rgba(187, 182, 255, 0.16);
+          `}
+        >
+          {description}
+        </span>
         <SVGWrapper>{svg}</SVGWrapper>
       </ResultWrapper>
     </BorderWrapper>

@@ -7,6 +7,8 @@ import { Button } from '@sulsul/ui';
 import { DrinkResDrinkTypeEnum } from '~/api';
 import { AlcoholDetails } from '../constant/alcohol';
 import { ResultCard } from './components/ResultCard';
+import { useSearchParams } from 'next/navigation';
+import { getLevelDetails } from './service';
 
 const Page = styled.div`
   display: flex;
@@ -79,37 +81,43 @@ const Volumn = styled.p`
   letter-spacing: -0.1px;
 `;
 
-const Result = () => (
-  <Page>
-    <Heading2>당신은...</Heading2>
-    <ResultCard />
-    <Heading3>다른 술은 얼마나 마실 수 있을까?</Heading3>
-    <DrinkLists>
-      {Object.values(DrinkResDrinkTypeEnum).map((alcohol) => {
-        const { name, svg, volumn } = AlcoholDetails[alcohol];
-        return (
-          <ListItem key={alcohol}>
-            <DrinkDetail>
-              <Drinks src={svg} />
-              <div>
-                <Heading5>{name}</Heading5>
-                <Volumn>{volumn}도</Volumn>
-              </div>
-            </DrinkDetail>
-            <Heading5>8잔</Heading5>
-          </ListItem>
-        );
-      })}
-    </DrinkLists>
-    <ButtonWrapper>
-      <Button type="button" css={{ width: '100%' }}>
-        내 주량 공유하기
-      </Button>
-      <Button type="button" appearance="primary" css={{ width: '100%' }}>
-        술자리에서 측정하기
-      </Button>
-    </ButtonWrapper>
-  </Page>
-);
+const Result = () => {
+  const searchParams = useSearchParams();
+  const glasses = Number(searchParams.get('glasses'));
+  const { name, svg, description, mainColor } = getLevelDetails(glasses);
+
+  return (
+    <Page>
+      <Heading2>당신은...</Heading2>
+      <ResultCard name={name} svg={svg} description={description} mainColor={mainColor} />
+      <Heading3>다른 술은 얼마나 마실 수 있을까?</Heading3>
+      <DrinkLists>
+        {Object.values(DrinkResDrinkTypeEnum).map((alcohol) => {
+          const { name, svg, volumn } = AlcoholDetails[alcohol];
+          return (
+            <ListItem key={alcohol}>
+              <DrinkDetail>
+                <Drinks src={svg} />
+                <div>
+                  <Heading5>{name}</Heading5>
+                  <Volumn>{volumn}도</Volumn>
+                </div>
+              </DrinkDetail>
+              <Heading5>8잔</Heading5>
+            </ListItem>
+          );
+        })}
+      </DrinkLists>
+      <ButtonWrapper>
+        <Button type="button" css={{ width: '100%' }}>
+          내 주량 공유하기
+        </Button>
+        <Button type="button" appearance="primary" css={{ width: '100%' }}>
+          술자리에서 측정하기
+        </Button>
+      </ButtonWrapper>
+    </Page>
+  );
+};
 
 export default Result;
