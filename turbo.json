@@ -9,6 +9,9 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "spec:api": {
+      "cache": false
     }
   }
 }

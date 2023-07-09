@@ -7,7 +7,8 @@
     "dev": "next dev --port 3000",
     "lint": "next lint",
     "start": "next start",
-    "type:check": "tsc --noEmit"
+    "type:check": "tsc --noEmit",
+    "spec:api": "openapi-generator-cli generate -g typescript-axios -i ../../openapispec.json -o ./src/api -c openapi-config.json"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "13.4.6",
+    "@openapitools/openapi-generator-cli": "^2.6.0",
     "@sulsul/eslint-config": "workspace:*",
     "@sulsul/tsconfig": "workspace:*",
     "@svgr/webpack": "^8.0.1",
