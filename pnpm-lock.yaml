@@ -150,11 +150,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui
       '@suspensive/react':
-        specifier: ^1.9.4
-        version: 1.9.4(react@18.2.0)
+        specifier: ^1.11.2
+        version: 1.11.2(react@18.2.0)
       '@suspensive/react-query':
-        specifier: ^1.9.4
-        version: 1.9.4(@suspensive/react@1.9.4)(@tanstack/react-query@4.29.3)(react@18.2.0)
+        specifier: ^1.11.2
+        version: 1.11.2(@suspensive/react@1.11.2)(@tanstack/react-query@4.29.3)(react@18.2.0)
       '@svgr/webpack':
         specifier: ^8.0.1
         version: 8.0.1
@@ -2497,30 +2497,8 @@ packages:
     bundledDependencies:
       - tsd
 
-  /@suspensive/react-query@1.9.4(@suspensive/react@1.9.4)(@tanstack/react-query@4.29.3)(react@18.2.0):
-    resolution: {integrity: sha512-F0fVKNsyc0jHIv1n2/uENPxZB3WyWJQgwtTimxY471uGGJJdengT4CnHT9P5jDTPdhLdn0XdEvfa4egTydjwHA==}
-    peerDependencies:
-      '@suspensive/react': ^1
-      '@tanstack/react-query': ^4
-      react: ^16.8 || ^17 || ^18
-    dependencies:
-      '@suspensive/react': 1.9.4(react@18.2.0)
-      '@tanstack/react-query': 4.29.3(react-dom@18.2.0)(react@18.2.0)
-      react: 18.2.0
-    dev: false
-    bundledDependencies:
-      - tsd
-
   /@suspensive/react@1.11.2(react@18.2.0):
     resolution: {integrity: sha512-WdSjXu0x4KymU5Q3VNGy4O5Opl4cnbxHH8xsLTS+/GHmeIYVspRwF5EVGiFAFe8ZuBFzDGBOwA7WMA6pclaKuA==}
-    peerDependencies:
-      react: ^16.8 || ^17 || ^18
-    dependencies:
-      react: 18.2.0
-    dev: false
-
-  /@suspensive/react@1.9.4(react@18.2.0):
-    resolution: {integrity: sha512-rcK7cKMgGdoqM2pxU9NJXhpAS/pj6mwwgmwcgJknmsrrDfOmbJ/LnCBlREx9xhm3dXtnqrYk3KES2U4uPb2lGw==}
     peerDependencies:
       react: ^16.8 || ^17 || ^18
     dependencies:

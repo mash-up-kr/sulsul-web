@@ -6,9 +6,9 @@
     "build": "next build",
     "dev": "next dev --port 3000",
     "lint": "next lint",
+    "spec:api": "openapi-generator-cli generate -g typescript-axios -i ../../openapispec.json -o ./src/api -c openapi-config.json",
     "start": "next start",
-    "type:check": "tsc --noEmit",
-    "spec:api": "openapi-generator-cli generate -g typescript-axios -i ../../openapispec.json -o ./src/api -c openapi-config.json"
+    "type:check": "tsc --noEmit"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
