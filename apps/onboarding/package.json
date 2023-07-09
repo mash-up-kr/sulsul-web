@@ -33,6 +33,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "^11.11.0",
     "@next/eslint-plugin-next": "13.4.6",
     "@openapitools/openapi-generator-cli": "^2.6.0",
     "@sulsul/eslint-config": "workspace:*",
