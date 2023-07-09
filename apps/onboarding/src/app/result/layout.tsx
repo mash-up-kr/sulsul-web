@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
 import { getLevelDetails } from './service';
 import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 type backgroundColorProps = {
   color1: string;
@@ -77,12 +78,14 @@ const Wrapper = styled.article`
 `;
 
 const Layout = ({ children }: PropsWithChildren) => {
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const result = searchParams.get('result');
+  const glasses = Number(searchParams.get('glasses'));
 
-  if (!result) return null;
+  // if query is not a number, redirect to home
+  if (Number.isNaN(glasses)) router.replace('/');
 
-  const { color1, color2 } = getLevelDetails(Number(result));
+  const { color1, color2 } = getLevelDetails(glasses);
 
   return (
     <Background>
