@@ -7,7 +7,8 @@
     "dev": "next dev --port 3000",
     "lint": "next lint",
     "spec:api": "openapi-generator-cli generate -g typescript-axios -i ../../openapispec.json -o ./src/api -c openapi-config.json",
-    "start": "next start"
+    "start": "next start",
+    "type:check": "tsc --noEmit"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
@@ -19,6 +20,7 @@
     "@sulsul/ui": "workspace:*",
     "@suspensive/react": "^1.11.2",
     "@suspensive/react-query": "^1.11.2",
+    "@svgr/webpack": "^8.0.1",
     "@tanstack/react-query": "^4.29.3",
     "@tanstack/react-query-devtools": "^4.29.3",
     "axios": "^1.3.6",
@@ -31,6 +33,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "^11.11.0",
     "@next/eslint-plugin-next": "13.4.6",
     "@openapitools/openapi-generator-cli": "^2.6.0",
     "@sulsul/eslint-config": "workspace:*",
