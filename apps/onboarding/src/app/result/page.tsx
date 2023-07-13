@@ -4,11 +4,13 @@ import styled from '@emotion/styled';
 import { colors } from '@sulsul/token/src/colors';
 import { text } from '@sulsul/token/src/text';
 import { Button } from '@sulsul/ui';
-import { DrinkResDrinkTypeEnum } from '~/api';
+import { DrinkRes } from '~/api';
 import { AlcoholDetails } from '../constant/alcohol';
 import { ResultCard } from './components/ResultCard';
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { getLevelDetails } from './service';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 const Page = styled.div`
   display: flex;
@@ -82,9 +84,26 @@ const Volumn = styled.p`
 `;
 
 const Result = () => {
+  const pathname = usePathname();
   const searchParams = useSearchParams();
+  const drinkType = searchParams.get('drinkType');
   const glasses = Number(searchParams.get('glasses'));
   const { name, svg, description, mainColor } = getLevelDetails(glasses);
+  const { isLoading, data } = useQuery(['result'], () => {
+    return axios
+      .get(
+        `https://sulsul.app/api/v1/drinkingLimit/share?drinkType=${drinkType}&glass=${glasses}`
+      )
+      .then((response) => response.data);
+  });
+
+  const shareKakao = () => {
+    window.Kakao.Share.sendScrap({
+      requestUrl: `https://sulsul.app${pathname}?glasses=${glasses}`,
+    });
+  };
+
+  if (isLoading) return <div>loading...</div>;
 
   return (
     <Page>
@@ -92,10 +111,12 @@ const Result = () => {
       <ResultCard name={name} svg={svg} description={description} mainColor={mainColor} />
       <Heading3>다른 술은 얼마나 마실 수 있을까?</Heading3>
       <DrinkLists>
-        {Object.values(DrinkResDrinkTypeEnum).map((alcohol) => {
-          const { name, svg, volumn } = AlcoholDetails[alcohol];
+        {data.otherDrinks.map((drink: DrinkRes) => {
+          const { drinkType, glass } = drink;
+          const { name, svg, volumn } =
+            AlcoholDetails[drinkType as keyof typeof AlcoholDetails];
           return (
-            <ListItem key={alcohol}>
+            <ListItem key={drinkType}>
               <DrinkDetail>
                 <Drinks src={svg} />
                 <div>
@@ -103,13 +124,13 @@ const Result = () => {
                   <Volumn>{volumn}도</Volumn>
                 </div>
               </DrinkDetail>
-              <Heading5>8잔</Heading5>
+              <Heading5>{glass}잔</Heading5>
             </ListItem>
           );
         })}
       </DrinkLists>
       <ButtonWrapper>
-        <Button type="button" css={{ width: '100%' }}>
+        <Button type="button" css={{ width: '100%' }} onClick={shareKakao}>
           내 주량 공유하기
         </Button>
         <Button type="button" appearance="primary" css={{ width: '100%' }}>

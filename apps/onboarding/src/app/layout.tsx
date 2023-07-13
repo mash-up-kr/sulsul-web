@@ -9,8 +9,15 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import RootStyleRegistry from '../../emotion';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
+
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,6 +39,22 @@ const suspensiveConfigs = new SuspensiveConfigs({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          src="https://t1.kakaocdn.net/kakao_js_sdk/2.3.0/kakao.min.js"
+          integrity="sha384-70k0rrouSYPWJt7q9rSTKpiTfX6USlMYjZUtr1Du+9o4cGvhPAWxngdtVZDdErlh"
+          crossOrigin="anonymous"
+          defer
+          onLoad={() => {
+            const { Kakao } = window;
+
+            if (Kakao && !Kakao.isInitialized()) {
+              // SDK 초기화 부분, 본인의 API KEY 입력
+              Kakao.init('4bf8da88fcf7aa6af73ba94732e0f52b');
+            }
+          }}
+        />
+      </head>
       <body className={inter.className}>
         <RootStyleRegistry>
           <MediaQueryProvider pxs={[0, 768, 1440]}>
