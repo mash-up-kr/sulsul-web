@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             if (Kakao && !Kakao.isInitialized()) {
               // SDK 초기화 부분, 본인의 API KEY 입력
-              Kakao.init('4bf8da88fcf7aa6af73ba94732e0f52b');
+              Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
             }
           }}
         />

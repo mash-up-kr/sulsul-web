@@ -7,7 +7,7 @@ import { Button } from '@sulsul/ui';
 import { DrinkRes } from '~/api';
 import { AlcoholDetails } from '../constant/alcohol';
 import { ResultCard } from './components/ResultCard';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { getLevelDetails } from './service';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
@@ -84,7 +84,6 @@ const Volumn = styled.p`
 `;
 
 const Result = () => {
-  const pathname = usePathname();
   const searchParams = useSearchParams();
   const drinkType = searchParams.get('drinkType');
   const glasses = Number(searchParams.get('glasses'));
@@ -99,7 +98,7 @@ const Result = () => {
 
   const shareKakao = () => {
     window.Kakao.Share.sendScrap({
-      requestUrl: `https://sulsul.app${pathname}?glasses=${glasses}`,
+      requestUrl: `https://onboarding.sulsul.app/result?drinkType=${drinkType}&glasses=${glasses}`,
     });
   };
 
@@ -111,7 +110,7 @@ const Result = () => {
       <ResultCard name={name} svg={svg} description={description} mainColor={mainColor} />
       <Heading3>다른 술은 얼마나 마실 수 있을까?</Heading3>
       <DrinkLists>
-        {data.otherDrinks.map((drink: DrinkRes) => {
+        {data?.otherDrinks.map((drink: DrinkRes) => {
           const { drinkType, glass } = drink;
           const { name, svg, volumn } =
             AlcoholDetails[drinkType as keyof typeof AlcoholDetails];
