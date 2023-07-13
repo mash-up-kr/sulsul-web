@@ -40,6 +40,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+        <meta charSet="utf-8" />
+        <title>술술</title>
+        <meta name="description" content="즐겁게 술 마시자!" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:title" name="title" content="" />
+        <meta property="og:description" name="description" content="즐겁게 술 마시자!" />
+        <meta
+          property="og:image"
+          name="image"
+          content="/apps/onboarding/public/images/main_image.png"
+        />
         <Script
           src="https://t1.kakaocdn.net/kakao_js_sdk/2.3.0/kakao.min.js"
           integrity="sha384-70k0rrouSYPWJt7q9rSTKpiTfX6USlMYjZUtr1Du+9o4cGvhPAWxngdtVZDdErlh"
