@@ -96,9 +96,17 @@ const ResultPage = () => {
       .then((response) => response.data);
   });
 
-  const shareKakao = () => {
-    window.Kakao.Share.sendScrap({
-      requestUrl: document.location.href,
+  const shareResult = async () => {
+    if (!navigator.canShare) {
+      window.Kakao.Share.sendScrap({
+        requestUrl: document.location.href,
+      });
+      return;
+    }
+    await navigator.share({
+      title: '당신의 술 마시기 레벨은?',
+      text: '당신의 술 마시기 레벨은?',
+      url: document.location.href,
     });
   };
 
@@ -127,7 +135,7 @@ const ResultPage = () => {
         })}
       </DrinkLists>
       <ButtonWrapper>
-        <Button type="button" css={{ width: '100%' }} onClick={shareKakao}>
+        <Button type="button" css={{ width: '100%' }} onClick={shareResult}>
           내 주량 공유하기
         </Button>
         <Button type="button" appearance="primary" css={{ width: '100%' }}>
