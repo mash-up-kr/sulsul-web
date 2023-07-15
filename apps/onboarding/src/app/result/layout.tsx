@@ -13,6 +13,7 @@ type backgroundColorProps = {
 
 const Background = styled.div`
   background: url('/icons/grainy.svg') repeat, #1f2229;
+  background-size: contain;
 `;
 
 const move1 = keyframes`
@@ -20,7 +21,7 @@ const move1 = keyframes`
         transform: translate(0, 0) scale(1);
     }
     50% { 
-        transform: translate(80px, 150px) scale(1.2);
+        transform: translate(80px, 150px) scale(1.2) rotate(45deg);
     }
     100% {
         transform: translate(0, 0) scale(1);
@@ -32,7 +33,7 @@ const move2 = keyframes`
         transform: translate(0, 0) scale(1);
     }
     50% { 
-        transform: translate(-150px, -50px) scale(1.2);
+        transform: translate(-150px, -50px) scale(1.2) rotate(45deg);
     }
     100% {
         transform: translate(0, 0) scale(1);
@@ -54,7 +55,7 @@ const Section = styled.section<backgroundColorProps>`
     background-color: ${({ color1 }) => color1};
     border-radius: 50%;
     box-shadow: 0px 0px 150px 150px ${({ color1 }) => color1};
-    animation: ${move1} 3s ease-in-out infinite;
+    animation: ${move1} 5s ease-in-out infinite;
   }
 
   &::after {
@@ -67,7 +68,7 @@ const Section = styled.section<backgroundColorProps>`
     background-color: ${({ color2 }) => color2};
     border-radius: 50%;
     box-shadow: 0px 0px 150px 150px ${({ color2 }) => color2};
-    animation: ${move2} 3s ease-in-out infinite;
+    animation: ${move2} 5s ease-in-out infinite;
   }
 `;
 
