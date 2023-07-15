@@ -9,10 +9,10 @@ import { AlcoholDetails } from '../constant/alcohol';
 import { ResultCard } from './components/ResultCard';
 import { useSearchParams } from 'next/navigation';
 import { getLevelDetails } from './service';
-import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { useSuspenseQuery } from '@suspensive/react-query';
 
-const Page = styled.div`
+const PageLayout = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -83,12 +83,12 @@ const Volumn = styled.p`
   letter-spacing: -0.1px;
 `;
 
-const Result = () => {
+const ResultPage = () => {
   const searchParams = useSearchParams();
   const drinkType = searchParams.get('drinkType');
   const glasses = Number(searchParams.get('glasses'));
   const { name, svg, description, mainColor } = getLevelDetails(glasses);
-  const { isLoading, data } = useQuery(['result'], () => {
+  const getDrinkingLimitShareQuery = useSuspenseQuery(['result'], () => {
     return axios
       .get(
         `https://sulsul.app/api/v1/drinkingLimit/share?drinkType=${drinkType}&glass=${glasses}`
@@ -98,20 +98,18 @@ const Result = () => {
 
   const shareKakao = () => {
     window.Kakao.Share.sendScrap({
-      requestUrl: `https://onboarding.sulsul.app/result?drinkType=${drinkType}&glasses=${glasses}`,
+      requestUrl: document.location.href,
     });
   };
 
-  if (isLoading) return <div>loading...</div>;
-
   return (
-    <Page>
+    <PageLayout>
       <Heading2>당신은...</Heading2>
       <ResultCard name={name} svg={svg} description={description} mainColor={mainColor} />
       <Heading3>다른 술은 얼마나 마실 수 있을까?</Heading3>
       <DrinkLists>
-        {data?.otherDrinks.map((drink: DrinkRes) => {
-          const { drinkType, glass } = drink;
+        {getDrinkingLimitShareQuery.data?.otherDrinks.map((drinkRes: DrinkRes) => {
+          const { drinkType, glass } = drinkRes;
           const { name, svg, volumn } =
             AlcoholDetails[drinkType as keyof typeof AlcoholDetails];
           return (
@@ -136,8 +134,8 @@ const Result = () => {
           술자리에서 측정하기
         </Button>
       </ButtonWrapper>
-    </Page>
+    </PageLayout>
   );
 };
 
-export default Result;
+export default ResultPage;
