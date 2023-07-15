@@ -4,13 +4,15 @@ import styled from '@emotion/styled';
 import { colors } from '@sulsul/token/src/colors';
 import { text } from '@sulsul/token/src/text';
 import { Button } from '@sulsul/ui';
-import { DrinkResDrinkTypeEnum } from '~/api';
+import { DrinkRes } from '~/api';
 import { AlcoholDetails } from '../constant/alcohol';
 import { ResultCard } from './components/ResultCard';
 import { useSearchParams } from 'next/navigation';
 import { getLevelDetails } from './service';
+import axios from 'axios';
+import { useSuspenseQuery } from '@suspensive/react-query';
 
-const Page = styled.div`
+const PageLayout = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -81,21 +83,45 @@ const Volumn = styled.p`
   letter-spacing: -0.1px;
 `;
 
-const Result = () => {
+const ResultPage = () => {
   const searchParams = useSearchParams();
+  const drinkType = searchParams.get('drinkType');
   const glasses = Number(searchParams.get('glasses'));
   const { name, svg, description, mainColor } = getLevelDetails(glasses);
+  const getDrinkingLimitShareQuery = useSuspenseQuery(['result'], () => {
+    return axios
+      .get(
+        `https://sulsul.app/api/v1/drinkingLimit/share?drinkType=${drinkType}&glass=${glasses}`
+      )
+      .then((response) => response.data);
+  });
+
+  const shareResult = async () => {
+    if (!navigator.canShare) {
+      window.Kakao.Share.sendScrap({
+        requestUrl: document.location.href,
+      });
+      return;
+    }
+    await navigator.share({
+      title: '당신의 술 마시기 레벨은?',
+      text: '당신의 술 마시기 레벨은?',
+      url: document.location.href,
+    });
+  };
 
   return (
-    <Page>
+    <PageLayout>
       <Heading2>당신은...</Heading2>
       <ResultCard name={name} svg={svg} description={description} mainColor={mainColor} />
       <Heading3>다른 술은 얼마나 마실 수 있을까?</Heading3>
       <DrinkLists>
-        {Object.values(DrinkResDrinkTypeEnum).map((alcohol) => {
-          const { name, svg, volumn } = AlcoholDetails[alcohol];
+        {getDrinkingLimitShareQuery.data?.otherDrinks.map((drinkRes: DrinkRes) => {
+          const { drinkType, glass } = drinkRes;
+          const { name, svg, volumn } =
+            AlcoholDetails[drinkType as keyof typeof AlcoholDetails];
           return (
-            <ListItem key={alcohol}>
+            <ListItem key={drinkType}>
               <DrinkDetail>
                 <Drinks src={svg} />
                 <div>
@@ -103,21 +129,21 @@ const Result = () => {
                   <Volumn>{volumn}도</Volumn>
                 </div>
               </DrinkDetail>
-              <Heading5>8잔</Heading5>
+              <Heading5>{glass}잔</Heading5>
             </ListItem>
           );
         })}
       </DrinkLists>
       <ButtonWrapper>
-        <Button type="button" css={{ width: '100%' }}>
+        <Button type="button" css={{ width: '100%' }} onClick={shareResult}>
           내 주량 공유하기
         </Button>
         <Button type="button" appearance="primary" css={{ width: '100%' }}>
           술자리에서 측정하기
         </Button>
       </ButtonWrapper>
-    </Page>
+    </PageLayout>
   );
 };
 
-export default Result;
+export default ResultPage;
