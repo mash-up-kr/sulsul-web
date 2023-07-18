@@ -10,7 +10,7 @@ export default function Home() {
       </Button>
       <Button size="lg">onboarding</Button>
       <Button appearance="minimal">onboarding</Button>
-      <Button css={{ backgroundColor: '#27c583' }}>color test</Button>
+      <Button>color test</Button>
     </div>
   );
 }

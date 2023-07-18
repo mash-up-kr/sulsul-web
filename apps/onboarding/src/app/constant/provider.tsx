@@ -6,8 +6,6 @@ import { token } from '@sulsul/token';
 import { SuspensiveConfigs, SuspensiveProvider } from '@suspensive/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import RootStyleRegistry from '../../../emotion';
-import '../globals.css';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,17 +24,13 @@ const suspensiveConfigs = new SuspensiveConfigs({
   },
 });
 
-export default function Provider({ children }: { children: React.ReactNode }) {
-  return (
-    <RootStyleRegistry>
-      <MediaQueryProvider pxs={[0, 768, 1440]}>
-        <SuspensiveProvider configs={suspensiveConfigs}>
-          <QueryClientProvider client={queryClient}>
-            <ThemeProvider theme={token}>{children}</ThemeProvider>
-            <ReactQueryDevtools initialIsOpen={false} />
-          </QueryClientProvider>
-        </SuspensiveProvider>
-      </MediaQueryProvider>
-    </RootStyleRegistry>
-  );
-}
+export const Provider = ({ children }: React.PropsWithChildren) => (
+  <MediaQueryProvider pxs={[0, 768, 1440]}>
+    <SuspensiveProvider configs={suspensiveConfigs}>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={token}>{children}</ThemeProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </SuspensiveProvider>
+  </MediaQueryProvider>
+);

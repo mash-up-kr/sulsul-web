@@ -1,7 +1,7 @@
+'use client';
+
 import styled from '@emotion/styled';
 import { text } from '@sulsul/token/src/text';
-import { colors } from '@sulsul/token/src/colors';
-import { css } from '@emotion/react';
 
 interface ResultCardProps {
   mainColor: string;
@@ -68,17 +68,7 @@ export const ResultCard = ({ mainColor, name, description, svg }: ResultCardProp
     <BorderWrapper>
       <ResultWrapper mainColor={mainColor}>
         <Heading1>{name}</Heading1>
-        <span
-          css={css`
-            border-radius: 8px;
-            padding: 4px 8px;
-            margin-bottom: 16px;
-            color: ${colors.purple};
-            background: rgba(187, 182, 255, 0.16);
-          `}
-        >
-          {description}
-        </span>
+        <span>{description}</span>
         <SVGWrapper>{svg}</SVGWrapper>
       </ResultWrapper>
     </BorderWrapper>

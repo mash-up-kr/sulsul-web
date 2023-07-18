@@ -30,6 +30,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
     "react-hook-step": "workspace:*",
+    "tss-react": "^4.8.8",
     "zod": "^3.21.4"
   },
   "devDependencies": {

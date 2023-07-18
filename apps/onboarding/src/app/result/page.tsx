@@ -11,6 +11,7 @@ import { useSearchParams } from 'next/navigation';
 import { getLevelDetails } from './service';
 import axios from 'axios';
 import { useSuspenseQuery } from '@suspensive/react-query';
+import { KakaoScript } from '~/KakaoScript';
 
 const PageLayout = styled.div`
   display: flex;
@@ -112,6 +113,7 @@ const ResultPage = () => {
 
   return (
     <PageLayout>
+      <KakaoScript />
       <Heading2>당신은...</Heading2>
       <ResultCard name={name} svg={svg} description={description} mainColor={mainColor} />
       <Heading3>다른 술은 얼마나 마실 수 있을까?</Heading3>
@@ -135,10 +137,10 @@ const ResultPage = () => {
         })}
       </DrinkLists>
       <ButtonWrapper>
-        <Button type="button" css={{ width: '100%' }} onClick={shareResult}>
+        <Button type="button" onClick={shareResult}>
           내 주량 공유하기
         </Button>
-        <Button type="button" appearance="primary" css={{ width: '100%' }}>
+        <Button type="button" appearance="primary">
           술자리에서 측정하기
         </Button>
       </ButtonWrapper>
