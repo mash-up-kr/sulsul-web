@@ -1,5 +1,7 @@
 'use client';
 
+/** @jsxImportSource @emotion/react */
+
 import styled from '@emotion/styled';
 import { colors } from '@sulsul/token/src/colors';
 import { text } from '@sulsul/token/src/text';
@@ -11,7 +13,79 @@ import { useSearchParams } from 'next/navigation';
 import { getLevelDetails } from './service';
 import axios from 'axios';
 import { useSuspenseQuery } from '@suspensive/react-query';
-import { KakaoScript } from '~/KakaoScript';
+import { keyframes } from '@emotion/react';
+import { withSuspense } from '@suspensive/react';
+
+type backgroundColorProps = {
+  color1: string;
+  color2: string;
+};
+
+const Background = styled.div`
+  background: url('/icons/grainy.svg') repeat, #1f2229;
+  background-size: contain;
+`;
+
+const move1 = keyframes`
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% { 
+        transform: translate(80px, 150px) scale(1.2) rotate(45deg);
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+`;
+
+const move2 = keyframes`
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% { 
+        transform: translate(-150px, -50px) scale(1.2) rotate(45deg);
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+`;
+
+const Section = styled.section<backgroundColorProps>`
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 150px;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    background-color: ${({ color1 }) => color1};
+    border-radius: 50%;
+    box-shadow: 0px 0px 150px 150px ${({ color1 }) => color1};
+    animation: ${move1} 5s ease-in-out infinite;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 150px;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background-color: ${({ color2 }) => color2};
+    border-radius: 50%;
+    box-shadow: 0px 0px 150px 150px ${({ color2 }) => color2};
+    animation: ${move2} 5s ease-in-out infinite;
+  }
+`;
+
+const Wrapper = styled.article`
+  position: relative;
+  z-index: 1;
+`;
 
 const PageLayout = styled.div`
   display: flex;
@@ -84,7 +158,7 @@ const Volumn = styled.p`
   letter-spacing: -0.1px;
 `;
 
-const ResultPage = () => {
+const ResultPage = withSuspense(() => {
   const searchParams = useSearchParams();
   const drinkType = searchParams.get('drinkType');
   const glasses = Number(searchParams.get('glasses'));
@@ -111,41 +185,54 @@ const ResultPage = () => {
     });
   };
 
+  const { color1, color2 } = getLevelDetails(glasses);
+
   return (
-    <PageLayout>
-      <KakaoScript />
-      <Heading2>당신은...</Heading2>
-      <ResultCard name={name} svg={svg} description={description} mainColor={mainColor} />
-      <Heading3>다른 술은 얼마나 마실 수 있을까?</Heading3>
-      <DrinkLists>
-        {getDrinkingLimitShareQuery.data?.otherDrinks.map((drinkRes: DrinkRes) => {
-          const { drinkType, glass } = drinkRes;
-          const { name, svg, volumn } =
-            AlcoholDetails[drinkType as keyof typeof AlcoholDetails];
-          return (
-            <ListItem key={drinkType}>
-              <DrinkDetail>
-                <Drinks src={svg} />
-                <div>
-                  <Heading5>{name}</Heading5>
-                  <Volumn>{volumn}도</Volumn>
-                </div>
-              </DrinkDetail>
-              <Heading5>{glass}잔</Heading5>
-            </ListItem>
-          );
-        })}
-      </DrinkLists>
-      <ButtonWrapper>
-        <Button type="button" onClick={shareResult}>
-          내 주량 공유하기
-        </Button>
-        <Button type="button" appearance="primary">
-          술자리에서 측정하기
-        </Button>
-      </ButtonWrapper>
-    </PageLayout>
+    <Background>
+      <Section color1={color1} color2={color2}>
+        <Wrapper>
+          <PageLayout>
+            {/* <KakaoScript /> */}
+            <Heading2>당신은...</Heading2>
+            <ResultCard
+              name={name}
+              svg={svg}
+              description={description}
+              mainColor={mainColor}
+            />
+            <Heading3>다른 술은 얼마나 마실 수 있을까?</Heading3>
+            <DrinkLists>
+              {getDrinkingLimitShareQuery.data?.otherDrinks.map((drinkRes: DrinkRes) => {
+                const { drinkType, glass } = drinkRes;
+                const { name, svg, volumn } =
+                  AlcoholDetails[drinkType as keyof typeof AlcoholDetails];
+                return (
+                  <ListItem key={drinkType}>
+                    <DrinkDetail>
+                      <Drinks src={svg} />
+                      <div>
+                        <Heading5>{name}</Heading5>
+                        <Volumn>{volumn}도</Volumn>
+                      </div>
+                    </DrinkDetail>
+                    <Heading5>{glass}잔</Heading5>
+                  </ListItem>
+                );
+              })}
+            </DrinkLists>
+            <ButtonWrapper>
+              <Button type="button" onClick={shareResult}>
+                내 주량 공유하기
+              </Button>
+              <Button type="button" appearance="primary">
+                술자리에서 측정하기
+              </Button>
+            </ButtonWrapper>
+          </PageLayout>
+        </Wrapper>
+      </Section>
+    </Background>
   );
-};
+});
 
 export default ResultPage;
