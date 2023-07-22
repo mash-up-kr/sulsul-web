@@ -6,25 +6,24 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export function generateMetadata({ searchParams }: Props): Metadata {
+export const dynamic = 'force-dynamic';
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const glasses = Number(searchParams?.glasses);
-  const { name, description, image } = getLevelDetails(glasses);
+  const levelDetails = getLevelDetails(glasses);
 
   return {
-    title: name,
+    title: levelDetails.name,
     openGraph: {
-      title: name,
-      description,
+      title: levelDetails.name,
+      description: levelDetails.description,
       images:
         process.env.NODE_ENV === 'development'
-          ? image
-          : `${process.env.NEXT_PUBLIC_DOMAIN}${image}`,
+          ? levelDetails.image
+          : `${process.env.NEXT_PUBLIC_DOMAIN}${levelDetails.image}`,
     },
   };
 }
 
-const ResultPage = () => {
+export default function ResultPage() {
   return <ResultContents />;
-};
-
-export default ResultPage;
+}

@@ -3,7 +3,6 @@
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { css } from '@emotion/react';
 import { token } from '@sulsul/token';
-import '../global.css';
 
 type ButtonProps = ComponentPropsWithoutRef<'button'> & {
   appearance?: 'primary' | 'default' | 'minimal';

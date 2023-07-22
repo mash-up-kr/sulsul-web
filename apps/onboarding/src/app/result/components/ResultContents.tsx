@@ -1,7 +1,5 @@
 'use client';
 
-/** @jsxImportSource @emotion/react */
-
 import styled from '@emotion/styled';
 import { colors } from '@sulsul/token/src/colors';
 import { text } from '@sulsul/token/src/text';

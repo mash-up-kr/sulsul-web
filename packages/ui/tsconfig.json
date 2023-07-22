@@ -1,4 +1,7 @@
 {
   "extends": "@sulsul/tsconfig/react-library.json",
+  "compilerOptions": {
+    "jsxImportSource": "@emotion/react"
+  },
   "include": ["."]
 }
