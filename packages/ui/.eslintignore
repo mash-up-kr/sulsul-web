@@ -1,6 +1,4 @@
-.vscode
 .eslintrc.js
-packlint.config.mjs
 node_modules
 esm
 dist

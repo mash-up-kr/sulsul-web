@@ -34,3 +34,9 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# bundled
+dist
+esm
+
+stats.html

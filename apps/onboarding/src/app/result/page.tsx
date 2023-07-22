@@ -6,7 +6,8 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export function generateMetadata({ searchParams }: Props): Metadata {
+export const dynamic = 'force-dynamic';
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const glasses = Number(searchParams?.glasses);
   const { name, description, image } = getLevelDetails(glasses);
 
@@ -20,8 +21,6 @@ export function generateMetadata({ searchParams }: Props): Metadata {
   };
 }
 
-const ResultPage = () => {
+export default function ResultPage() {
   return <ResultContents />;
-};
-
-export default ResultPage;
+}

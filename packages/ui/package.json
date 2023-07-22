@@ -1,7 +1,22 @@
 {
   "name": "@sulsul/ui",
-  "main": "./src/index.ts",
+  "private": true,
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "require": "./src/index.ts",
+      "import": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "esm"
+  ],
   "scripts": {
+    "build": "rm -rf dist esm && tsc -p tsconfig.build.json --declaration --emitDeclarationOnly --declarationDir dist && rollup -c rollup.config.js",
     "lint": "eslint \"**/*.ts*\"",
     "type:check": "tsc --noEmit"
   },
@@ -12,18 +27,36 @@
   "devDependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
+    "@sulsul/babel": "workspace:*",
     "@sulsul/eslint-config": "workspace:*",
+    "@sulsul/rollup": "workspace:*",
     "@sulsul/tsconfig": "workspace:*",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
     "eslint": "^8.42.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "rollup": "^3.21.0",
     "typescript": "^4.9.5"
   },
   "peerDependencies": {
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "react": "^16.8 || ^17 || ^18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "main": "dist/index.js",
+    "module": "esm/index.mjs",
+    "exports": {
+      ".": {
+        "require": "./dist/index.js",
+        "import": "./esm/index.mjs",
+        "types": "./dist/index.d.ts"
+      },
+      "./package.json": "./package.json"
+    },
+    "types": "dist/index.d.ts",
+    "import": "esm/index.mjs"
   }
 }

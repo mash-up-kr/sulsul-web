@@ -1,7 +1,5 @@
-/** @jsxImportSource @emotion/react */
 'use client';
-
-import { Button } from './components/Button';
+import { Button } from '@sulsul/ui';
 
 export default function Home() {
   return (
