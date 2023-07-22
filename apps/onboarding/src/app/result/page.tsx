@@ -15,10 +15,7 @@ export function generateMetadata({ searchParams }: Props): Metadata {
     openGraph: {
       title: name,
       description,
-      images:
-        process.env.NODE_ENV === 'development'
-          ? image
-          : `${process.env.NEXT_PUBLIC_DOMAIN}${image}`,
+      images: image,
     },
   };
 }
