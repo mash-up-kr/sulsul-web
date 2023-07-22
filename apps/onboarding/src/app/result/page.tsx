@@ -6,7 +6,7 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+export function generateMetadata({ searchParams }: Props): Metadata {
   const glasses = Number(searchParams?.glasses);
   const { name, description, image } = getLevelDetails(glasses);
 
