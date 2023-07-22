@@ -6,6 +6,9 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
+
 export function generateMetadata({ searchParams }: Props): Metadata {
   const glasses = Number(searchParams?.glasses);
   const { name, description, image } = getLevelDetails(glasses);
