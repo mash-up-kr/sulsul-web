@@ -188,7 +188,6 @@ const ResultPage = withSuspense(() => {
       <Section color1={color1} color2={color2}>
         <Wrapper>
           <PageLayout>
-            {/* <KakaoScript /> */}
             <Heading2>당신은...</Heading2>
             <ResultCard
               name={name}
