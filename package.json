@@ -6,6 +6,8 @@
     "build": "turbo run build",
     "commit": "cz",
     "dev": "turbo run dev",
+    "dev:falling": "turbo run dev --filter=falling",
+    "dev:onboarding": "turbo run dev --filter=onboarding",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo run lint",
     "lint:pack": "packlint sort -R",
