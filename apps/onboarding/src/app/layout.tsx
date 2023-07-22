@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { NextAppDirEmotionCacheProvider } from 'tss-react/next/appDir';
 import { Provider } from './constant/provider';
 import { GlobalCSS } from '~/GlobalCSS';
+import { KakaoScript } from '~/KakaoScript';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
         <GlobalCSS />
         <NextAppDirEmotionCacheProvider options={{ key: 'css' }}>
           <Provider>{children}</Provider>
+          <KakaoScript />
         </NextAppDirEmotionCacheProvider>
       </body>
     </html>

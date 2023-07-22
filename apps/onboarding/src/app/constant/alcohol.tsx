@@ -50,6 +50,7 @@ export const AlcoholResultDetails = {
   [AlcoholResultType.Baby]: {
     name: '술요미',
     svg: <CardBaby />,
+    image: '/metadata/images/baby.png',
     description: '귀엽네',
     mainColor: '#FF884533',
     color1: '#F97C7280',
@@ -58,6 +59,7 @@ export const AlcoholResultDetails = {
   [AlcoholResultType.Common]: {
     name: '술반인',
     svg: <CardCommon />,
+    image: '/metadata/images/common.png',
     description: '가자~',
     mainColor: '#FFEDE333',
     color1: '#F97C7280',
@@ -66,6 +68,7 @@ export const AlcoholResultDetails = {
   [AlcoholResultType.Master]: {
     name: '이쯤되면 술잘알',
     svg: <CardMaster />,
+    image: '/metadata/images/master.png',
     description: '술 좀 치네',
     mainColor: '#FFD02C33',
     color1: '#4C94FF80',
@@ -74,6 +77,7 @@ export const AlcoholResultDetails = {
   [AlcoholResultType.Ghost]: {
     name: '알코올이 낳은 괴물',
     svg: <CardGhost />,
+    image: '/metadata/images/monster.png',
     description: '미쳤다..',
     mainColor: '#FF2C2C33',
     color1: '#E05FFE80',
@@ -82,6 +86,7 @@ export const AlcoholResultDetails = {
   [AlcoholResultType.Heaven]: {
     name: '음주가무 천상계',
     svg: <CardHeaven />,
+    image: '/metadata/images/heaven.png',
     description: '알콜 마스터',
     mainColor: '#4C94FF80',
     color1: '#4C94FF80',
@@ -90,6 +95,7 @@ export const AlcoholResultDetails = {
   [AlcoholResultType.God]: {
     name: 'Alcohol God',
     svg: <CardGod />,
+    image: '/metadata/images/god.png',
     description: '무서울 게 없다',
     mainColor: '#68D69780',
     color1: '#68D69780',
