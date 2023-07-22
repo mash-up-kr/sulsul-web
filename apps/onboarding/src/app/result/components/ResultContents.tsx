@@ -10,9 +10,8 @@ import { ResultCard } from './ResultCard';
 import { useSearchParams } from 'next/navigation';
 import { getLevelDetails } from '../service';
 import axios from 'axios';
-import { useSuspenseQuery } from '@suspensive/react-query';
 import { keyframes } from '@emotion/react';
-import { withSuspense } from '@suspensive/react';
+import { useQuery } from '@tanstack/react-query';
 
 type backgroundColorProps = {
   color1: string;
@@ -152,12 +151,12 @@ const Volumn = styled.p`
   letter-spacing: -0.1px;
 `;
 
-export const ResultContents = withSuspense(() => {
+export const ResultContents = () => {
   const searchParams = useSearchParams();
   const drinkType = searchParams?.get('drinkType');
   const glasses = Number(searchParams?.get('glasses'));
   const { name, svg, description, mainColor } = getLevelDetails(glasses);
-  const getDrinkingLimitShareQuery = useSuspenseQuery(['result'], () => {
+  const getDrinkingLimitShareQuery = useQuery(['result'], () => {
     return axios
       .get(
         `https://sulsul.app/api/v1/drinkingLimit/share?drinkType=${drinkType}&glass=${glasses}`
@@ -226,4 +225,4 @@ export const ResultContents = withSuspense(() => {
       </Section>
     </Background>
   );
-});
+};
