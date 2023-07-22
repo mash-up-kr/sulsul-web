@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { css } from '@emotion/react';
 import { token } from '@sulsul/token';

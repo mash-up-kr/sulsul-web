@@ -1,5 +1,3 @@
-'use client';
-
 import CardBaby from '~/assets/card/card-baby.svg';
 import CardCommon from '~/assets/card/card-common.svg';
 import CardMaster from '~/assets/card/card-master.svg';

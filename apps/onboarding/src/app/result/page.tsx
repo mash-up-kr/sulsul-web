@@ -160,8 +160,8 @@ const Volumn = styled.p`
 
 const ResultPage = withSuspense(() => {
   const searchParams = useSearchParams();
-  const drinkType = searchParams.get('drinkType');
-  const glasses = Number(searchParams.get('glasses'));
+  const drinkType = searchParams?.get('drinkType');
+  const glasses = Number(searchParams?.get('glasses'));
   const { name, svg, description, mainColor } = getLevelDetails(glasses);
   const getDrinkingLimitShareQuery = useSuspenseQuery(['result'], () => {
     return axios
