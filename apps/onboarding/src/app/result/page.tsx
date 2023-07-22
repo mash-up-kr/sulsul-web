@@ -60,8 +60,6 @@ const Section = styled.section<backgroundColorProps>`
     position: absolute;
     top: 150px;
     left: 0;
-    width: 100px;
-    height: 100px;
     background-color: ${({ color1 }) => color1};
     border-radius: 50%;
     box-shadow: 0px 0px 150px 150px ${({ color1 }) => color1};
@@ -73,8 +71,6 @@ const Section = styled.section<backgroundColorProps>`
     position: absolute;
     bottom: 150px;
     right: 0;
-    width: 100px;
-    height: 100px;
     background-color: ${({ color2 }) => color2};
     border-radius: 50%;
     box-shadow: 0px 0px 150px 150px ${({ color2 }) => color2};
