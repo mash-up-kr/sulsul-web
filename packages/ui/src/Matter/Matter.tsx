@@ -6,17 +6,18 @@ import { MatterStep } from './MatterStep';
 
 type MatterProps = ComponentPropsWithoutRef<'div'> & {
   list: string[];
+  drinkImage: string;
 };
 
 export const Matter = forwardRef<HTMLDivElement, MatterProps>(function Button(
   props,
   ref
 ) {
-  const { ...restProps } = props;
+  const { drinkImage, ...restProps } = props;
 
   return (
     <div ref={ref} {...restProps}>
-      <MatterStep />
+      <MatterStep drinkImage={drinkImage} />
     </div>
   );
 });

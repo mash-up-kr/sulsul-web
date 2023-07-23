@@ -8,11 +8,11 @@ const STATIC_DENSITY = 15;
 const PARTICLE_SIZE = 6;
 const PARTICLE_BOUNCYNESS = 0.9;
 
-// interface MatterStepProps {
-//   drinkImage: string;
-// }
+interface MatterStepProps {
+  drinkImage: string;
+}
 
-export const MatterStep = () => {
+export const MatterStep = ({ drinkImage }: MatterStepProps) => {
   const boxRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -162,13 +162,13 @@ export const MatterStep = () => {
         scene.engine.world,
         Matter.Bodies.circle(randomX, -PARTICLE_SIZE, PARTICLE_SIZE * 10, {
           restitution: PARTICLE_BOUNCYNESS,
-          // render: {
-          //   sprite: {
-          //     texture: drinkImage,
-          //     xScale: 0.5,
-          //     yScale: 0.5,
-          //   },
-          // },
+          render: {
+            sprite: {
+              texture: drinkImage,
+              xScale: 0.5,
+              yScale: 0.5,
+            },
+          },
         })
       );
     }
