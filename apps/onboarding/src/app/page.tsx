@@ -10,11 +10,13 @@ import { shareResult } from './utils/share';
 const Heading1 = styled.h1`
   ${token.text.heading[1]};
   color: ${token.colors.white};
+  z-index: 1;
 `;
 
 const Description = styled.p`
   ${token.text.subtitle[2]};
   color: ${token.colors.grey['700']};
+  z-index: 1;
 `;
 
 const ButtonWrapper = styled.div`
@@ -22,6 +24,16 @@ const ButtonWrapper = styled.div`
   flex-direction: column;
   gap: 8px;
   width: 100%;
+  z-index: 1;
+`;
+
+const GrainyOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/icons/grainy.svg') repeat;
 `;
 
 export default function Home() {
@@ -34,7 +46,8 @@ export default function Home() {
   return (
     <div
       style={{
-        background: token.colors.grey['000'],
+        position: 'relative',
+        background: '#1f2229',
         padding: '100px 0 32px',
         textAlign: 'center',
       }}
@@ -57,6 +70,7 @@ export default function Home() {
           height="16"
           viewBox="0 0 82 16"
           fill="none"
+          style={{ zIndex: 1 }}
         >
           <path
             d="M9.232 4.66665C9.09916 3.4301 8.09184 2.70967 6.46461 2.70967C4.78204 2.70967 3.84113 3.46235 3.83006 4.49461C3.81899 5.62364 5.0145 6.12901 6.39819 6.43009L7.83723 6.77417C10.5825 7.38707 12.6303 8.74191 12.6414 11.3333C12.6303 14.1828 10.35 16.0107 6.44247 16C2.56813 16.0107 0.0996259 14.2688 0 10.9247H3.23231C3.343 12.4946 4.62707 13.2903 6.39819 13.2903C8.14718 13.2903 9.27628 12.4946 9.27628 11.3333C9.27628 10.2688 8.28002 9.77416 6.53103 9.35481L4.78204 8.94621C2.08107 8.30105 0.420643 6.98923 0.420643 4.70966C0.409573 1.88171 2.97771 0 6.48675 0C10.0401 0 12.3757 1.91397 12.42 4.66665H9.232Z"
@@ -92,6 +106,7 @@ export default function Home() {
           }}
         >
           <MainImage />
+          <GrainyOverlay />
         </SVGWrapper>
         <ButtonWrapper>
           <Button type="button" appearance="primary" size="lg" onClick={moveNextPage}>
