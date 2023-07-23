@@ -12,6 +12,7 @@ import { getLevelDetails } from '../service';
 import axios from 'axios';
 import { keyframes } from '@emotion/react';
 import { useQuery } from '@tanstack/react-query';
+import { shareResult } from '~/app/utils/share';
 
 type backgroundColorProps = {
   color1: string;
@@ -164,20 +165,6 @@ export const ResultContents = () => {
       .then((response) => response.data);
   });
 
-  const shareResult = async () => {
-    if (!navigator.canShare) {
-      window.Kakao.Share.sendScrap({
-        requestUrl: document.location.href,
-      });
-      return;
-    }
-    await navigator.share({
-      title: '당신의 술 마시기 레벨은?',
-      text: '당신의 술 마시기 레벨은?',
-      url: document.location.href,
-    });
-  };
-
   const { color1, color2 } = getLevelDetails(glasses);
 
   return (
@@ -213,10 +200,10 @@ export const ResultContents = () => {
               })}
             </DrinkLists>
             <ButtonWrapper>
-              <Button type="button" onClick={shareResult}>
+              <Button type="button" onClick={shareResult} size="lg">
                 내 주량 공유하기
               </Button>
-              <Button type="button" appearance="primary">
+              <Button type="button" appearance="primary" size="lg">
                 술자리에서 측정하기
               </Button>
             </ButtonWrapper>

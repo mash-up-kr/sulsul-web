@@ -2,8 +2,10 @@
 import styled from '@emotion/styled';
 import { token } from '@sulsul/token';
 import { Button } from '@sulsul/ui';
+import { useRouter } from 'next/navigation';
 import MainImage from '../../public/icons/main.svg';
 import { SVGWrapper } from './components/SVGWrapper';
+import { shareResult } from './utils/share';
 
 const Heading1 = styled.h1`
   ${token.text.heading[1]};
@@ -23,6 +25,12 @@ const ButtonWrapper = styled.div`
 `;
 
 export default function Home() {
+  const router = useRouter();
+
+  const moveNextPage = () => {
+    router.push('/measure');
+  };
+
   return (
     <div
       style={{
@@ -77,14 +85,19 @@ export default function Home() {
         </svg>
         <Heading1>내 술 능력치는 얼만큼?</Heading1>
         <Description>내 주량, 어디까지 갈 수 있을까?</Description>
-        <SVGWrapper style={{ maxWidth: '540px', padding: '32px' }}>
+        <SVGWrapper
+          style={{
+            maxWidth: '540px',
+            padding: '32px',
+          }}
+        >
           <MainImage />
         </SVGWrapper>
         <ButtonWrapper>
-          <Button type="button" appearance="primary" size="lg">
+          <Button type="button" appearance="primary" size="lg" onClick={moveNextPage}>
             시작하기
           </Button>
-          <Button type="button" size="lg">
+          <Button type="button" size="lg" onClick={shareResult}>
             친구에게 공유하기
           </Button>
         </ButtonWrapper>
