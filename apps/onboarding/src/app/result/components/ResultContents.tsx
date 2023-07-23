@@ -13,6 +13,7 @@ import axios from 'axios';
 import { keyframes } from '@emotion/react';
 import { useQuery } from '@tanstack/react-query';
 import { shareResult } from '~/app/utils/share';
+import { Flex } from '@jsxcss/emotion';
 
 type backgroundColorProps = {
   color1: string;
@@ -20,7 +21,7 @@ type backgroundColorProps = {
 };
 
 const Background = styled.div`
-  background: url('/icons/grainy.svg') repeat, #1f2229;
+  background: url('/svgs/grainy.svg') repeat, #1f2229;
   background-size: contain;
 `;
 
@@ -125,16 +126,6 @@ const ListItem = styled.li`
   }
 `;
 
-const Drinks = styled.div<{ src: string }>`
-  width: 40px;
-  height: 40px;
-  background: ${colors.grey[200]};
-  background-image: url(${(props) => props.src});
-  background-repeat: no-repeat;
-  background-position: center;
-  border-radius: 8px;
-`;
-
 const DrinkDetail = styled.div`
   display: flex;
   gap: 8px;
@@ -157,12 +148,14 @@ export const ResultContents = () => {
   const drinkType = searchParams?.get('drinkType');
   const glasses = Number(searchParams?.get('glasses'));
   const { name, svg, description, mainColor } = getLevelDetails(glasses);
-  const getDrinkingLimitShareQuery = useQuery(['result'], () => {
-    return axios
-      .get(
-        `https://sulsul.app/api/v1/drinkingLimit/share?drinkType=${drinkType}&glass=${glasses}`
-      )
-      .then((response) => response.data);
+  const getDrinkingLimitShareQuery = useQuery({
+    queryKey: ['result'],
+    queryFn: () =>
+      axios
+        .get<{ otherDrinks: DrinkRes[] }>(
+          `https://sulsul.app/api/v1/drinkingLimit/share?drinkType=${drinkType}&glass=${glasses}`
+        )
+        .then((response) => response.data),
   });
 
   const { color1, color2 } = getLevelDetails(glasses);
@@ -181,14 +174,20 @@ export const ResultContents = () => {
             />
             <Heading3>다른 술은 얼마나 마실 수 있을까?</Heading3>
             <DrinkLists>
-              {getDrinkingLimitShareQuery.data?.otherDrinks.map((drinkRes: DrinkRes) => {
+              {getDrinkingLimitShareQuery.data?.otherDrinks.map((drinkRes) => {
                 const { drinkType, glass } = drinkRes;
-                const { name, svg, volumn } =
-                  AlcoholDetails[drinkType as keyof typeof AlcoholDetails];
+                const { name, SvgrIcon, volumn } = AlcoholDetails[drinkType];
                 return (
                   <ListItem key={drinkType}>
                     <DrinkDetail>
-                      <Drinks src={svg} />
+                      <Flex.Center
+                        backgroundColor={colors.grey[200]}
+                        width={40}
+                        height={40}
+                        borderRadius={8}
+                      >
+                        <SvgrIcon />
+                      </Flex.Center>
                       <div>
                         <Heading5>{name}</Heading5>
                         <Volumn>{volumn}도</Volumn>

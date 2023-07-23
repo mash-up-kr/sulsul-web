@@ -40,7 +40,7 @@ const ResultWrapper = styled.div<{ mainColor: string }>`
   justify-content: center;
   align-items: center;
   color: white;
-  background: url('/icons/grainy.svg') center center / contain;
+  background: url('/svgs/grainy.svg') center center / contain;
 
   &::after {
     content: '';

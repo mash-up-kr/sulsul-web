@@ -1,3 +1,9 @@
+import Icon소주 from '~/assets/icons/ic-soju-m.svg';
+import Icon맥주 from '~/assets/icons/ic-macju-m.svg';
+import Icon와인 from '~/assets/icons/ic-wine-m.svg';
+import Icon고량주 from '~/assets/icons/ic-goryanju-m.svg';
+import Icon위스키 from '~/assets/icons/ic-whisky-m.svg';
+
 import CardBaby from '~/assets/card/card-baby.svg';
 import CardCommon from '~/assets/card/card-common.svg';
 import CardMaster from '~/assets/card/card-master.svg';
@@ -9,30 +15,30 @@ import { DrinkResDrinkTypeEnum } from '~/api';
 export const AlcoholDetails = {
   [DrinkResDrinkTypeEnum.소주]: {
     name: DrinkResDrinkTypeEnum.소주,
-    svg: '/icons/ic-soju-m.svg',
+    SvgrIcon: Icon소주,
     volumn: 16.9,
   },
   [DrinkResDrinkTypeEnum.맥주]: {
     name: DrinkResDrinkTypeEnum.맥주,
-    svg: '/icons/ic-macju-m.svg',
+    SvgrIcon: Icon맥주,
     volumn: 4.5,
   },
   [DrinkResDrinkTypeEnum.와인]: {
     name: DrinkResDrinkTypeEnum.와인,
-    svg: '/icons/ic-wine-m.svg',
+    SvgrIcon: Icon와인,
     volumn: 13.5,
   },
   [DrinkResDrinkTypeEnum.고량주]: {
     name: DrinkResDrinkTypeEnum.고량주,
-    svg: '/icons/ic-goryanju-m.svg',
+    SvgrIcon: Icon고량주,
     volumn: 40,
   },
   [DrinkResDrinkTypeEnum.위스키]: {
     name: DrinkResDrinkTypeEnum.위스키,
-    svg: '/icons/ic-whisky-m.svg',
+    SvgrIcon: Icon위스키,
     volumn: 50,
   },
-};
+} as const;
 
 // 술 결과 목록
 export const AlcoholResultType = {

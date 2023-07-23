@@ -7,5 +7,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
     'react/no-unescaped-entities': 'off',
+    'react/jsx-curly-brace-presence': ['warn', { props: 'never', children: 'never' }],
   },
 };
