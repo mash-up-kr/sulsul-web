@@ -1,7 +1,7 @@
 'use client';
 /** @jsxImportSource @emotion/react */
 
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Matter from 'matter-js';
 
 const STATIC_DENSITY = 15;
@@ -175,14 +175,17 @@ export const MatterStep = ({ drinkImage }: MatterStepProps) => {
   }, [scene, someStateValue]);
   /*eslint-enable */
 
+  const removeBall = () => {
+    if (scene) {
+      Matter.World.remove(scene.engine.world, scene.engine.world.bodies[4]);
+    }
+  };
+
   return (
     <div
       style={{
         position: 'relative',
         background: 'black',
-        width: '920px',
-
-        height: '100vh',
         padding: '8px',
       }}
     >
@@ -199,6 +202,21 @@ export const MatterStep = ({ drinkImage }: MatterStepProps) => {
       >
         Checkout
       </button>
+
+      <button
+        style={{
+          cursor: 'pointer',
+          display: 'block',
+          textAlign: 'center',
+          marginBottom: '16px',
+          width: '100%',
+          color: 'red',
+        }}
+        onClick={() => removeBall()}
+      >
+        Remove
+      </button>
+
       <div
         ref={boxRef}
         style={{
