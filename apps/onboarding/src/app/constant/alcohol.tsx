@@ -29,7 +29,7 @@ export const AlcoholDetails = {
   },
   [DrinkResDrinkTypeEnum.위스키]: {
     name: DrinkResDrinkTypeEnum.위스키,
-    svg: '/icons/ic-wine-m.svg',
+    svg: '/icons/ic-whisky-m.svg',
     volumn: 50,
   },
 };
