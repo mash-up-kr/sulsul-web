@@ -1,7 +1,7 @@
 'use client';
 /** @jsxImportSource @emotion/react */
 
-import { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Matter from 'matter-js';
 
 const STATIC_DENSITY = 15;
@@ -17,6 +17,8 @@ export const MatterStep = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   const [constraints, setContraints] = useState<{ width: number; height: number }>();
+  const w = constraints?.width ?? 0;
+  const h = constraints?.height ?? 0;
   const [scene, setScene] = useState<any>();
 
   const [someStateValue, setSomeStateValue] = useState(false);
@@ -44,21 +46,26 @@ export const MatterStep = () => {
       engine: engine,
       canvas: canvasRef.current ?? undefined,
       options: {
-        width: constraints?.width,
-        height: constraints?.height,
+        width: w,
+        height: h,
         background: 'transparent',
         wireframes: false,
       },
     });
 
-    const floor = Bodies.rectangle(0, 0, 0, STATIC_DENSITY, {
+    const wallOptions = {
       isStatic: true,
       render: {
-        fillStyle: 'blue',
+        fillStyle: 'transparent',
       },
-    });
+    };
 
-    World.add(engine.world, [floor]);
+    const ground = Bodies.rectangle(0, h + 50, w + 100, 100, wallOptions);
+    const ceiling = Bodies.rectangle(0, -50, w + 100, 100, wallOptions);
+    const leftWall = Bodies.rectangle(-50, 0, 100, h + 100, wallOptions);
+    const rightWall = Bodies.rectangle(w + 50, 0, 100, h + 100, wallOptions);
+
+    World.add(engine.world, [ground, ceiling, leftWall, rightWall]);
 
     Engine.run(engine);
     Render.run(render);
@@ -91,6 +98,9 @@ export const MatterStep = () => {
 
       // Dynamically update floor
       const floor = scene.engine.world.bodies[0];
+      const ceiling = scene.engine.world.bodies[1];
+      const leftWall = scene.engine.world.bodies[2];
+      const rightWall = scene.engine.world.bodies[3];
 
       Matter.Body.setPosition(floor, {
         x: width / 2,
@@ -102,6 +112,42 @@ export const MatterStep = () => {
         { x: width, y: height },
         { x: width, y: height + STATIC_DENSITY },
         { x: 0, y: height + STATIC_DENSITY },
+      ]);
+
+      Matter.Body.setPosition(ceiling, {
+        x: width / 2,
+        y: -STATIC_DENSITY / 2,
+      });
+
+      Matter.Body.setVertices(ceiling, [
+        { x: 0, y: -STATIC_DENSITY },
+        { x: width, y: -STATIC_DENSITY },
+        { x: width, y: 0 },
+        { x: 0, y: 0 },
+      ]);
+
+      Matter.Body.setPosition(leftWall, {
+        x: -STATIC_DENSITY / 2,
+        y: height / 2,
+      });
+
+      Matter.Body.setVertices(leftWall, [
+        { x: -STATIC_DENSITY, y: 0 },
+        { x: 0, y: 0 },
+        { x: 0, y: height },
+        { x: -STATIC_DENSITY, y: height },
+      ]);
+
+      Matter.Body.setPosition(rightWall, {
+        x: width + STATIC_DENSITY / 2,
+        y: height / 2,
+      });
+
+      Matter.Body.setVertices(rightWall, [
+        { x: width, y: 0 },
+        { x: width + STATIC_DENSITY, y: 0 },
+        { x: width + STATIC_DENSITY, y: height },
+        { x: width, y: height },
       ]);
     }
   }, [scene, constraints]);
