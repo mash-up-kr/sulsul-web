@@ -3,6 +3,7 @@
 import styled from '@emotion/styled';
 import { colors } from '@sulsul/token/src/colors';
 import { text } from '@sulsul/token/src/text';
+import { SVGWrapper } from '~/app/components/SVGWrapper';
 
 interface ResultCardProps {
   mainColor: string;
@@ -61,15 +62,6 @@ const Description = styled.span`
   margin-bottom: 16px;
   color: ${colors.purple};
   background: rgba(187, 182, 255, 0.16);
-`;
-
-const SVGWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  & svg {
-    width: auto;
-    height: auto;
-  }
 `;
 
 export const ResultCard = ({ mainColor, name, description, svg }: ResultCardProps) => {
