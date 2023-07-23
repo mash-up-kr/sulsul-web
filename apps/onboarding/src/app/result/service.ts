@@ -1,4 +1,4 @@
-import { AlcoholResultDetails } from '../constant/alcohol';
+import { AlcoholResultDetails } from '~/constants/alcohol';
 
 export const getLevelDetails = (glasses: number) => {
   if (glasses <= 7) {

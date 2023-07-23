@@ -5,7 +5,7 @@ import { colors } from '@sulsul/token/src/colors';
 import { text } from '@sulsul/token/src/text';
 import { Button } from '@sulsul/ui';
 import { DrinkRes } from '~/api';
-import { AlcoholDetails } from '../../constant/alcohol';
+import { AlcoholDetails } from '~/constants/alcohol';
 import { ResultCard } from './ResultCard';
 import { useSearchParams } from 'next/navigation';
 import { getLevelDetails } from '../service';

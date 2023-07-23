@@ -5,7 +5,7 @@ import { Button } from '@sulsul/ui';
 import { useRouter } from 'next/navigation';
 import SulsulText from '../../public/icons/sulsul-text.svg';
 import MainImage from '../../public/icons/main.svg';
-import { SVGWrapper } from './components/SVGWrapper';
+import { SVGWrapper } from '../components/SVGWrapper';
 import { shareResult } from './utils/share';
 
 const Heading1 = styled.h1`

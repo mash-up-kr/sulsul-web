@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google';
 import { Metadata } from 'next';
 import { NextAppDirEmotionCacheProvider } from 'tss-react/next/appDir';
-import { Provider } from './constant/provider';
+import { Provider } from '~/constants/provider';
 import { GlobalCSS } from '~/GlobalCSS';
 import { KakaoScript } from '~/KakaoScript';
 
@@ -14,14 +14,14 @@ declare global {
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_DOMAIN || 'https://onboarding.sulsul.app'
+  ),
   description: '당신의 주량은?',
   openGraph: {
     title: '술술',
     description: '당신의 주량은?',
-    images:
-      process.env.NODE_ENV === 'development'
-        ? `/metadata/main_image.png`
-        : `${process.env.NEXT_PUBLIC_DOMAIN}/metadata/main_image.png`,
+    images: `/metadata/main_image.png`,
   },
 };
 

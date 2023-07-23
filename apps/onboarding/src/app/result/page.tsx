@@ -14,9 +14,6 @@ export function generateMetadata({ searchParams }: Props): Metadata {
   const { name, description, image } = getLevelDetails(glasses);
 
   return {
-    metadataBase: new URL(
-      process.env.NEXT_PUBLIC_DOMAIN || 'https://onboarding.sulsul.app'
-    ),
     title: name,
     openGraph: {
       title: name,

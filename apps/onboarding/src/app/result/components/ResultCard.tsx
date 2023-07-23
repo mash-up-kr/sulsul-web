@@ -3,7 +3,7 @@
 import styled from '@emotion/styled';
 import { colors } from '@sulsul/token/src/colors';
 import { text } from '@sulsul/token/src/text';
-import { SVGWrapper } from '~/app/components/SVGWrapper';
+import { SVGWrapper } from '~/components/SVGWrapper';
 
 interface ResultCardProps {
   mainColor: string;
