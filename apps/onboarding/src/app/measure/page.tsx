@@ -4,7 +4,7 @@
 import { css } from '@emotion/react';
 import { Stack, Box, Flex } from '@jsxcss/emotion';
 import { token } from '@sulsul/token';
-import { Button } from '@sulsul/ui';
+import { Button, StackView, useStackBall } from '@sulsul/ui';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
@@ -35,6 +35,7 @@ type MeasurePageFormValues = z.infer<typeof measurePageSchema>;
 export default function MeasurePage() {
   const router = useRouter();
   const constraintsRef = useRef<HTMLDivElement>(null);
+  const { addBall, removeBall, boxRef, canvasRef } = useStackBall();
   const { setValue, watch } = useForm<MeasurePageFormValues>({
     defaultValues: {
       drinkType: '고량주',
@@ -47,8 +48,14 @@ export default function MeasurePage() {
   const [drinkType, drinks] = watch(['drinkType', 'drinks']);
   const activeDrinkIndex = drinkTypes.findIndex((item) => item === drinkType);
 
-  const addDrink = () => setValue('drinks', [...drinks, drinkType]);
-  const removeDrink = () => setValue('drinks', drinks.slice(0, -1));
+  const addDrink = () => {
+    setValue('drinks', [...drinks, drinkType]);
+    addBall('/metadata/main_image.png');
+  };
+  const removeDrink = () => {
+    setValue('drinks', drinks.slice(0, -1));
+    removeBall();
+  };
 
   return (
     <Stack.Vertical
@@ -169,8 +176,9 @@ export default function MeasurePage() {
             <IcDoublechevronRight />
           </Box>
         </Flex>
-
-        <Box flex={1}>웹뷰</Box>
+        <Box flex={1}>
+          <StackView boxRef={boxRef} canvasRef={canvasRef} />
+        </Box>
         {drinks}
 
         <Stack.Vertical spacing={16} padding="0 16px 40px 16px">

@@ -1,18 +1,11 @@
-'use client';
-/** @jsxImportSource @emotion/react */
-
-import { useEffect, useState, useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Matter from 'matter-js';
 
 const STATIC_DENSITY = 15;
 const PARTICLE_SIZE = 6;
 const PARTICLE_BOUNCYNESS = 0.9;
 
-interface MatterStepProps {
-  drinkImage: string;
-}
-
-export const MatterStep = ({ drinkImage }: MatterStepProps) => {
+export const useStackBall = () => {
   const boxRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -21,16 +14,10 @@ export const MatterStep = ({ drinkImage }: MatterStepProps) => {
   const h = constraints?.height ?? 0;
   const [scene, setScene] = useState<any>();
 
-  const [someStateValue, setSomeStateValue] = useState(false);
-
   const handleResize = () => {
     const size = boxRef.current?.getBoundingClientRect() as DOMRect;
 
     setContraints(size);
-  };
-
-  const handleClick = () => {
-    setSomeStateValue(!someStateValue);
   };
 
   useEffect(() => {
@@ -152,12 +139,10 @@ export const MatterStep = ({ drinkImage }: MatterStepProps) => {
     }
   }, [scene, constraints]);
 
-  /*eslint-disable */
-  useEffect(() => {
-    // Add a new "ball" everytime `someStateValue` changes
+  const addBall = (drinkImage: string) => {
     if (scene && constraints) {
-      let { width } = constraints;
-      let randomX = Math.floor(Math.random() * -width) + width;
+      const { width } = constraints;
+      const randomX = Math.floor(Math.random() * -width) + width;
       Matter.World.add(
         scene.engine.world,
         Matter.Bodies.circle(randomX, -PARTICLE_SIZE, PARTICLE_SIZE * 10, {
@@ -172,8 +157,7 @@ export const MatterStep = ({ drinkImage }: MatterStepProps) => {
         })
       );
     }
-  }, [scene, someStateValue]);
-  /*eslint-enable */
+  };
 
   const removeBall = () => {
     if (scene) {
@@ -181,55 +165,10 @@ export const MatterStep = ({ drinkImage }: MatterStepProps) => {
     }
   };
 
-  return (
-    <div
-      style={{
-        position: 'relative',
-        background: 'black',
-        padding: '8px',
-      }}
-    >
-      <button
-        style={{
-          cursor: 'pointer',
-          display: 'block',
-          textAlign: 'center',
-          marginBottom: '16px',
-          width: '100%',
-          color: 'red',
-        }}
-        onClick={() => handleClick()}
-      >
-        Checkout
-      </button>
-
-      <button
-        style={{
-          cursor: 'pointer',
-          display: 'block',
-          textAlign: 'center',
-          marginBottom: '16px',
-          width: '100%',
-          color: 'red',
-        }}
-        onClick={() => removeBall()}
-      >
-        Remove
-      </button>
-
-      <div
-        ref={boxRef}
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          pointerEvents: 'none',
-        }}
-      >
-        <canvas ref={canvasRef} />
-      </div>
-    </div>
-  );
+  return {
+    boxRef,
+    canvasRef,
+    addBall,
+    removeBall,
+  };
 };

@@ -1,2 +1,2 @@
 export { Button } from './Button';
-export { Matter } from './Matter';
+export { StackView, useStackBall } from './StackView';
