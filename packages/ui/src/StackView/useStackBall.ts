@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import Matter from 'matter-js';
 
 const STATIC_DENSITY = 15;
@@ -139,31 +139,34 @@ export const useStackBall = () => {
     }
   }, [scene, constraints]);
 
-  const addBall = (drinkImage: string) => {
-    if (scene && constraints) {
-      const { width } = constraints;
-      const randomX = Math.floor(Math.random() * -width) + width;
-      Matter.World.add(
-        scene.engine.world,
-        Matter.Bodies.circle(randomX, -PARTICLE_SIZE, PARTICLE_SIZE * 10, {
-          restitution: PARTICLE_BOUNCYNESS,
-          render: {
-            sprite: {
-              texture: drinkImage,
-              xScale: 0.5,
-              yScale: 0.5,
+  const addBall = useCallback(
+    (drinkImage: string, size: number) => {
+      if (scene && constraints) {
+        const { width } = constraints;
+        const randomX = Math.floor(Math.random() * -width) + width;
+        Matter.World.add(
+          scene.engine.world,
+          Matter.Bodies.circle(randomX, -PARTICLE_SIZE, size / 5, {
+            restitution: PARTICLE_BOUNCYNESS,
+            render: {
+              sprite: {
+                texture: drinkImage,
+                xScale: 0.5,
+                yScale: 0.5,
+              },
             },
-          },
-        })
-      );
-    }
-  };
+          })
+        );
+      }
+    },
+    [constraints, scene]
+  );
 
-  const removeBall = () => {
+  const removeBall = useCallback(() => {
     if (scene) {
       Matter.World.remove(scene.engine.world, scene.engine.world.bodies[4]);
     }
-  };
+  }, [scene]);
 
   return {
     boxRef,

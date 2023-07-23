@@ -15,6 +15,7 @@ import IcDoublechevronLeft from '~/assets/icons/ic_doublechevron_left.svg';
 import IcDoublechevronRight from '~/assets/icons/ic_doublechevron_right.svg';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRef } from 'react';
+import { drinkImage } from '~/constants/alcohol';
 // import IcRefresh from '~/assets/icons/navigations/ic-refresh.svg';
 
 const drinkTypes = [
@@ -49,8 +50,9 @@ export default function MeasurePage() {
   const activeDrinkIndex = drinkTypes.findIndex((item) => item === drinkType);
 
   const addDrink = () => {
+    const { image, size } = drinkImage[watch('drinkType')];
     setValue('drinks', [...drinks, drinkType]);
-    addBall('/metadata/main_image.png');
+    addBall(image, size);
   };
   const removeDrink = () => {
     setValue('drinks', drinks.slice(0, -1));
