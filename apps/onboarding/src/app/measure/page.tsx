@@ -50,7 +50,9 @@ export default function MeasurePage() {
   const activeDrinkIndex = drinkTypes.findIndex((item) => item === drinkType);
 
   const addDrink = () => {
-    const { image, size } = drinkImage[watch('drinkType')];
+    const { image, size } = drinkImage[drinkTypes[activeDrinkIndex]];
+
+    console.log(image, size);
     setValue('drinks', [...drinks, drinkType]);
     addBall(image, size);
   };
@@ -181,8 +183,6 @@ export default function MeasurePage() {
         <Box flex={1}>
           <StackView boxRef={boxRef} canvasRef={canvasRef} />
         </Box>
-        {drinks}
-
         <Stack.Vertical spacing={16} padding="0 16px 40px 16px">
           <Flex.Center>
             <Stack.Vertical>

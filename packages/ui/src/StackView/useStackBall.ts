@@ -146,13 +146,13 @@ export const useStackBall = () => {
         const randomX = Math.floor(Math.random() * -width) + width;
         Matter.World.add(
           scene.engine.world,
-          Matter.Bodies.circle(randomX, -PARTICLE_SIZE, size / 5, {
+          Matter.Bodies.circle(randomX, -PARTICLE_SIZE, size / 2, {
             restitution: PARTICLE_BOUNCYNESS,
             render: {
               sprite: {
                 texture: drinkImage,
-                xScale: 0.5,
-                yScale: 0.5,
+                xScale: 1,
+                yScale: 1,
               },
             },
           })
