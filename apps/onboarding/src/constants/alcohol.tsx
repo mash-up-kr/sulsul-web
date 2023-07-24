@@ -108,3 +108,26 @@ export const AlcoholResultDetails = {
     color2: '#4C94FF80',
   },
 };
+
+export const drinkImage = {
+  [DrinkResDrinkTypeEnum.소주]: {
+    image: '/images/bubble-soju.png',
+    size: 80,
+  },
+  [DrinkResDrinkTypeEnum.맥주]: {
+    image: '/images/bubble-beer.png',
+    size: 100,
+  },
+  [DrinkResDrinkTypeEnum.와인]: {
+    image: '/images/bubble-wine.png',
+    size: 92,
+  },
+  [DrinkResDrinkTypeEnum.고량주]: {
+    image: '/images/bubble-goryanju.png',
+    size: 68,
+  },
+  [DrinkResDrinkTypeEnum.위스키]: {
+    image: '/images/bubble-whisky.png',
+    size: 68,
+  },
+} as const;

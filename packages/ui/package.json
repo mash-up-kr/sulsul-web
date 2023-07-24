@@ -22,7 +22,9 @@
   },
   "dependencies": {
     "@sulsul/token": "workspace:*",
-    "framer-motion": "^10.12.4"
+    "@types/matter-js": "^0.18.5",
+    "framer-motion": "^10.12.4",
+    "matter-js": "^0.19.0"
   },
   "devDependencies": {
     "@emotion/react": "^11.11.0",
