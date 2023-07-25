@@ -11,5 +11,10 @@ export const Falling = () => {
   }, []);
 
   const { boxRef, canvasRef } = useStackBall();
-  return <StackView boxRef={boxRef} canvasRef={canvasRef} />;
+  return (
+    <div>
+      <h1>HI</h1>
+      <StackView boxRef={boxRef} canvasRef={canvasRef} />
+    </div>
+  );
 };
