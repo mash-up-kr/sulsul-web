@@ -18,6 +18,8 @@ import { useRef } from 'react';
 import { drinkImage } from '~/constants/alcohol';
 // import IcRefresh from '~/assets/icons/navigations/ic-refresh.svg';
 
+const DRINK_TYPE_SELECTOR_WIDTH = 200;
+
 const drinkTypes = [
   DrinkResDrinkTypeEnum.고량주,
   DrinkResDrinkTypeEnum.맥주,
@@ -80,106 +82,97 @@ export default function MeasurePage() {
           <IcBack onClick={() => router.push('/')} />
           <div>{/* <IcRefresh /> */}</div>
         </Stack.Horizontal>
-        <Stack.Vertical textAlign="center">
-          <Box
-            as="h1"
-            css={{
-              ...token.text.subtitle[3],
-              color: token.colors.primary[300],
-            }}
-          >
-            주량 등록하기
-          </Box>
-          <Stack.Vertical
-            justify="center"
-            spacing={4}
-            css={{
-              ...token.text.heading[4],
-            }}
-          >
-            <div>평소에 즐겨마시는 술로</div>
-            <div>주량을 알려주세요</div>
-            <div>{drinkType}</div>
-          </Stack.Vertical>
-        </Stack.Vertical>
-        <Flex direction="row" width={400 + 40 + 40} margin="auto">
-          <Box
-            as={motion.button}
-            height={40}
-            width={40}
-            onClick={() => {
-              const nextDrinkType = drinkTypes[activeDrinkIndex - 1];
-
-              if (nextDrinkType) {
-                setValue('drinkType', nextDrinkType);
-              }
-            }}
-          >
-            <IcDoublechevronLeft />
-          </Box>
-          <Flex.Center
-            position="relative"
-            overflow="hidden"
-            ref={constraintsRef}
-            width={400}
-            height={40}
-            margin="auto"
-          >
-            <Stack.Horizontal
-              as={motion.div}
-              onDragEnd={(_, info) => {
-                const offset = info.offset.x;
-                if (Math.abs(offset) > 20) {
-                  const direction = offset < 0 ? 1 : -1;
-
-                  const nextDrinkType = drinkTypes[activeDrinkIndex + direction];
-                  if (nextDrinkType) {
-                    setValue('drinkType', nextDrinkType);
-                  }
-                }
-              }}
-              dragConstraints={constraintsRef}
-              drag="x"
-              css={css`
-                height: 40px;
-                display: flex;
-                flex-direction: row;
-              `}
-              animate={{
-                x:
-                  -1 *
-                    activeDrinkIndex *
-                    ((constraintsRef.current?.offsetWidth || 400) / 2) +
-                  (constraintsRef.current?.offsetWidth || 400),
+        <Stack.Vertical spacing={20}>
+          <Stack.Vertical textAlign="center">
+            <Box
+              as="h1"
+              css={{
+                ...token.text.subtitle[3],
+                color: token.colors.primary[300],
               }}
             >
-              {drinkTypes.map((drinkType) => (
-                <Flex.Center
-                  key={drinkType}
-                  width={(constraintsRef.current?.offsetWidth ?? 400) / 2}
-                  height={40}
-                  {...token.text.heading[1]}
-                >
-                  {drinkType}
-                </Flex.Center>
-              ))}
-            </Stack.Horizontal>
-          </Flex.Center>
-          <Box
-            as={motion.button}
-            height={40}
-            width={40}
-            onClick={() => {
-              const nextDrinkType = drinkTypes[activeDrinkIndex + 1];
-              if (nextDrinkType) {
-                console.log(nextDrinkType);
-                setValue('drinkType', nextDrinkType);
-              }
-            }}
-          >
-            <IcDoublechevronRight />
-          </Box>
-        </Flex>
+              주량 등록하기
+            </Box>
+            <Stack.Vertical
+              justify="center"
+              spacing={4}
+              css={{
+                ...token.text.heading[4],
+              }}
+            >
+              <div>평소에 즐겨마시는 술로</div>
+              <div>주량을 알려주세요</div>
+            </Stack.Vertical>
+          </Stack.Vertical>
+          <Flex direction="row" width={DRINK_TYPE_SELECTOR_WIDTH + 40 + 40} margin="auto">
+            <Box as={motion.button} height={40} minWidth={40} whileTap={{ scale: 0.8 }}>
+              {drinkTypes[activeDrinkIndex - 1] && (
+                <IcDoublechevronLeft
+                  onClick={() => setValue('drinkType', drinkTypes[activeDrinkIndex - 1])}
+                />
+              )}
+            </Box>
+            <Flex.Center
+              overflow="hidden"
+              ref={constraintsRef}
+              width={400}
+              height={40}
+              margin="auto"
+            >
+              <Stack.Horizontal
+                as={motion.div}
+                onDragEnd={(_, info) => {
+                  const offset = info.offset.x;
+                  if (Math.abs(offset) > 20) {
+                    const direction = offset < 0 ? 1 : -1;
+
+                    const nextDrinkType = drinkTypes[activeDrinkIndex + direction];
+                    if (nextDrinkType) {
+                      setValue('drinkType', nextDrinkType);
+                    }
+                  }
+                }}
+                dragConstraints={constraintsRef}
+                drag="x"
+                css={css`
+                  height: 40px;
+                  display: flex;
+                  flex-direction: row;
+                `}
+                animate={{
+                  x:
+                    -1 *
+                      activeDrinkIndex *
+                      ((constraintsRef.current?.offsetWidth ||
+                        DRINK_TYPE_SELECTOR_WIDTH) /
+                        2) +
+                    (constraintsRef.current?.offsetWidth || DRINK_TYPE_SELECTOR_WIDTH),
+                }}
+              >
+                {drinkTypes.map((drinkType) => (
+                  <Flex.Center
+                    key={drinkType}
+                    width={
+                      (constraintsRef.current?.offsetWidth ?? DRINK_TYPE_SELECTOR_WIDTH) /
+                      2
+                    }
+                    height={40}
+                    {...token.text.heading[1]}
+                  >
+                    {drinkType}
+                  </Flex.Center>
+                ))}
+              </Stack.Horizontal>
+            </Flex.Center>
+            <Box as={motion.button} height={40} minWidth={40} whileTap={{ scale: 0.8 }}>
+              {drinkTypes[activeDrinkIndex + 1] && (
+                <IcDoublechevronRight
+                  onClick={() => setValue('drinkType', drinkTypes[activeDrinkIndex + 1])}
+                />
+              )}
+            </Box>
+          </Flex>
+        </Stack.Vertical>
         <Box flex={1}>
           <StackView boxRef={boxRef} canvasRef={canvasRef} />
         </Box>
