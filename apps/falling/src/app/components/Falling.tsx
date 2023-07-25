@@ -14,8 +14,8 @@ export const Falling = () => {
 
     window.addEventListener('javascriptFunction', eventFromAndroid);
 
-    if (window.android) {
-      window.android.callJavaScriptFunction();
+    if (window.sulsulBridge) {
+      window.sulsulBridge.callJavaScriptFunction();
     }
 
     return () => {
@@ -34,7 +34,7 @@ export const Falling = () => {
     <div style={{ width: '100%', height: '600px', color: '#f542b6' }}>
       <h1>HI</h1>
       <h2>{counts}</h2>
-      <h2>{messageFromAndroid}</h2>
+      <h2>message : {messageFromAndroid}</h2>
       <button onClick={addDrink}>Add Drink</button>
       <StackView boxRef={boxRef} canvasRef={canvasRef} />
     </div>

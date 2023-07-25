@@ -13,7 +13,7 @@ import './globals.css';
 
 declare global {
   interface Window {
-    android: any;
+    sulsulBridge: any;
   }
 }
 
