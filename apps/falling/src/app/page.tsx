@@ -1,5 +1,7 @@
 'use client';
 
+import { Falling } from './components/Falling';
+
 export default function Home() {
-  return <main>explore amplify test</main>;
+  return <Falling />;
 }
