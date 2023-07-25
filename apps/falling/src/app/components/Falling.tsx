@@ -5,18 +5,14 @@ import { useEffect } from 'react';
 
 export const Falling = () => {
   useEffect(() => {
-    const eventFromAndroid = async () => {
+    const addItem = async () => {
       addBall('/images/bubble-beer.png', 100);
     };
 
-    window.addEventListener('javascriptFunction', eventFromAndroid);
-
-    if (window.sulsulBridge) {
-      window.sulsulBridge.callJavaScriptFunction();
-    }
+    window.addEventListener('javascriptFunction', addItem);
 
     return () => {
-      window.removeEventListener('javascriptFunction', eventFromAndroid);
+      window.removeEventListener('javascriptFunction', addItem);
     };
   }, []);
 
