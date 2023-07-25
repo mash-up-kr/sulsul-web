@@ -11,6 +11,12 @@ import RootStyleRegistry from '../../emotion';
 
 import './globals.css';
 
+declare global {
+  interface Window {
+    android: any;
+  }
+}
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
