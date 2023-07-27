@@ -2,7 +2,7 @@
 
 import { StackView, useStackBall } from '@sulsul/ui';
 import { useEffect } from 'react';
-import { drinks, drink_images } from '../constants/drinks';
+import { drinkImage, drinks } from '../constants/drinks';
 
 export const Falling = () => {
   const { addBall, boxRef, canvasRef } = useStackBall();
@@ -10,10 +10,12 @@ export const Falling = () => {
   useEffect(() => {
     const addItem = (event: any) => {
       if (event.detail.data === undefined) {
-        addBall(drink_images['소주'], 100);
+        const { image, size } = drinkImage['소주'];
+        addBall(image, size);
         return;
       }
-      addBall(drink_images[event.detail.data as drinks], 100);
+      const { image, size } = drinkImage[event.detail.data as drinks];
+      addBall(image, size);
     };
     window.addEventListener('addBall', addItem);
 
