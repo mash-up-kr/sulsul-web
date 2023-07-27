@@ -4,6 +4,8 @@ import { StackView, useStackBall } from '@sulsul/ui';
 import { useEffect } from 'react';
 
 export const Falling = () => {
+  const { addBall, boxRef, canvasRef } = useStackBall();
+
   useEffect(() => {
     const addItem = async () => {
       addBall('/images/bubble-beer.png', 100);
@@ -14,9 +16,7 @@ export const Falling = () => {
     return () => {
       window.removeEventListener('javascriptFunction', addItem);
     };
-  }, []);
-
-  const { addBall, boxRef, canvasRef } = useStackBall();
+  }, [addBall]);
 
   return (
     <div style={{ width: '100%', height: '100vh' }}>
