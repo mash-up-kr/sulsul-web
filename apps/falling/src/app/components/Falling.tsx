@@ -10,10 +10,10 @@ export const Falling = () => {
       addBall('/images/bubble-beer.png', 100);
     };
 
-    window.addEventListener('javascriptFunction', addItem);
+    window.addEventListener('addBall', addItem);
 
     return () => {
-      window.removeEventListener('javascriptFunction', addItem);
+      window.removeEventListener('addBall', addItem);
     };
   }, [addBall]);
 
