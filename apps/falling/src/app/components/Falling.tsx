@@ -1,9 +1,10 @@
 'use client';
 
 import { StackView, useStackBall } from '@sulsul/ui';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export const Falling = () => {
+  const [test, setTest] = useState(0);
   const { addBall, boxRef, canvasRef } = useStackBall();
 
   useEffect(() => {
@@ -11,7 +12,8 @@ export const Falling = () => {
       addBall('/images/bubble-beer.png', 100);
     };
 
-    if (window.sulsulBridge && addBall) {
+    if (window.sulsulBridge) {
+      setTest(test + 1);
       window.addEventListener('addBall', addItem);
     }
 
@@ -26,6 +28,7 @@ export const Falling = () => {
 
   return (
     <div style={{ width: '100%', height: '100vh' }}>
+      <div>{test}</div>
       <StackView boxRef={boxRef} canvasRef={canvasRef} />
     </div>
   );
