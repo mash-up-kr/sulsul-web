@@ -9,6 +9,10 @@ export const Falling = () => {
 
   useEffect(() => {
     const addItem = (event: any) => {
+      if (event.detail.data === undefined) {
+        addBall(drink_images['소주'], 100);
+        return;
+      }
       addBall(drink_images[event.detail.data as drinks], 100);
     };
     window.addEventListener('addBall', addItem);
