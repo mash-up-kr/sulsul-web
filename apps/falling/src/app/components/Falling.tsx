@@ -12,19 +12,17 @@ export const Falling = () => {
       addBall('/images/bubble-beer.png', 100);
     };
 
-    if (window.sulsulBridge) {
+    if (window && window.sulsulBridge) {
       setTest(test + 1);
       window.addEventListener('addBall', addItem);
     }
 
     return () => {
-      window.removeEventListener('addBall', addItem);
+      if (window) {
+        window.removeEventListener('addBall', addItem);
+      }
     };
-  }, [addBall]);
-
-  if (!window.sulsulBridge) {
-    return <div>loading...</div>;
-  }
+  }, [addBall, test]);
 
   return (
     <div style={{ width: '100%', height: '100vh' }}>
