@@ -14,7 +14,7 @@ import IcBack from '~/assets/icons/navigations/ic-back.svg';
 import IcDoublechevronLeft from '~/assets/icons/ic_doublechevron_left.svg';
 import IcDoublechevronRight from '~/assets/icons/ic_doublechevron_right.svg';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { drinkImage } from '~/constants/alcohol';
 // import IcRefresh from '~/assets/icons/navigations/ic-refresh.svg';
 
@@ -36,6 +36,7 @@ type MeasurePageFormValues = z.infer<typeof measurePageSchema>;
 export default function MeasurePage() {
   const router = useRouter();
   const constraintsRef = useRef<HTMLDivElement>(null);
+  const [isTouch, setIsTouch] = useState(false);
   const { addBall, removeBall, boxRef, canvasRef } = useStackBall();
   const { setValue, watch } = useForm<MeasurePageFormValues>({
     defaultValues: {
@@ -220,42 +221,44 @@ export default function MeasurePage() {
             )}
           </Flex>
         </Stack.Vertical>
-        <Box flex={1}>
-          <StackView boxRef={boxRef} canvasRef={canvasRef} />
+        <Box flex={1} onClick={() => setIsTouch(true)}>
+          <StackView boxRef={boxRef} canvasRef={canvasRef} isTouch={isTouch} />
         </Box>
         <Stack.Vertical spacing={16} padding="0 16px 40px 16px">
-          <Flex.Center>
-            <Stack.Vertical>
-              <Stack.Horizontal spacing={10} justify="center">
-                <Box
-                  as="button"
-                  css={{
-                    ...token.text.heading[2],
-                    color: token.colors.white,
-                    '&:hover': { cursor: 'pointer' },
-                  }}
-                  onClick={removeDrink}
-                >
-                  -
-                </Box>
-                <Box as="p" css={{ ...token.text.heading[2] }}>
-                  {drinks.length}잔
-                </Box>
-                <Box
-                  as="button"
-                  css={{
-                    ...token.text.heading[2],
-                    color: token.colors.white,
-                    '&:hover': { cursor: 'pointer' },
-                  }}
-                  onClick={addDrink}
-                >
-                  +
-                </Box>
-              </Stack.Horizontal>
-              <p>350ml, 0.3병</p>
-            </Stack.Vertical>
-          </Flex.Center>
+          {isTouch && (
+            <Flex.Center>
+              <Stack.Vertical>
+                <Stack.Horizontal spacing={10} justify="center">
+                  <Box
+                    as="button"
+                    css={{
+                      ...token.text.heading[2],
+                      color: token.colors.white,
+                      '&:hover': { cursor: 'pointer' },
+                    }}
+                    onClick={removeDrink}
+                  >
+                    -
+                  </Box>
+                  <Box as="p" css={{ ...token.text.heading[2] }}>
+                    {drinks.length}잔
+                  </Box>
+                  <Box
+                    as="button"
+                    css={{
+                      ...token.text.heading[2],
+                      color: token.colors.white,
+                      '&:hover': { cursor: 'pointer' },
+                    }}
+                    onClick={addDrink}
+                  >
+                    +
+                  </Box>
+                </Stack.Horizontal>
+                <p>350ml, 0.3병</p>
+              </Stack.Vertical>
+            </Flex.Center>
+          )}
           <Button type="button" appearance="primary" size="lg" onClick={sendResult}>
             다 입력했어요
           </Button>
