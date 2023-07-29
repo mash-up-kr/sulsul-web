@@ -63,6 +63,10 @@ export default function MeasurePage() {
     removeBall();
   };
 
+  const sendResult = () => {
+    router.push(`/result?drinkType=${drinkType}&glasses=${drinks.length}`);
+  };
+
   return (
     <Stack.Vertical
       color="white"
@@ -201,7 +205,7 @@ export default function MeasurePage() {
               <p>350ml, 0.3병</p>
             </Stack.Vertical>
           </Flex.Center>
-          <Button type="button" appearance="primary">
+          <Button type="button" appearance="primary" size="lg" onClick={sendResult}>
             다 입력했어요
           </Button>
         </Stack.Vertical>
