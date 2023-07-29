@@ -91,6 +91,7 @@ export default function MeasurePage() {
         onClick={() => setIsTouched(true)}
         cursor={isTouched ? undefined : 'pointer'}
       >
+        <div css={circleGradientsCss} />
         <Box
           position="absolute"
           top={0}
@@ -296,7 +297,9 @@ const sectionCss = css`
   width: 100vw;
   margin: 0 auto;
   height: 100%;
+`;
 
+const circleGradientsCss = css`
   &::before {
     content: '';
     position: absolute;
