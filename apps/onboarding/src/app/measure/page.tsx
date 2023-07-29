@@ -54,7 +54,6 @@ export default function MeasurePage() {
   const addDrink = () => {
     const { image, size } = drinkImage[drinkTypes[activeDrinkIndex]];
 
-    console.log(image, size);
     setValue('drinks', [...drinks, drinkType]);
     addBall(image, size);
   };
@@ -83,7 +82,10 @@ export default function MeasurePage() {
     >
       <Box as="section" css={sectionCss}>
         <Stack.Horizontal justify="space-between" align="center" padding="8px 16px">
-          <IcBack onClick={() => router.push('/')} />
+          <IcBack
+            onClick={() => router.push('/')}
+            css={{ '&:hover': { cursor: 'pointer' } }}
+          />
           <div>{/* <IcRefresh /> */}</div>
         </Stack.Horizontal>
         <Stack.Vertical spacing={20}>
@@ -109,7 +111,13 @@ export default function MeasurePage() {
             </Stack.Vertical>
           </Stack.Vertical>
           <Flex direction="row" width={DRINK_TYPE_SELECTOR_WIDTH + 40 + 40} margin="auto">
-            <Box as={motion.button} height={40} minWidth={40} whileTap={{ scale: 0.8 }}>
+            <Box
+              as={motion.button}
+              height={40}
+              minWidth={40}
+              whileTap={{ scale: 0.8 }}
+              css={{ '&:hover': { cursor: 'pointer' } }}
+            >
               {drinkTypes[activeDrinkIndex - 1] && (
                 <IcDoublechevronLeft
                   onClick={() => setValue('drinkType', drinkTypes[activeDrinkIndex - 1])}
@@ -168,7 +176,13 @@ export default function MeasurePage() {
                 ))}
               </Stack.Horizontal>
             </Flex.Center>
-            <Box as={motion.button} height={40} minWidth={40} whileTap={{ scale: 0.8 }}>
+            <Box
+              as={motion.button}
+              height={40}
+              minWidth={40}
+              whileTap={{ scale: 0.8 }}
+              css={{ '&:hover': { cursor: 'pointer' } }}
+            >
               {drinkTypes[activeDrinkIndex + 1] && (
                 <IcDoublechevronRight
                   onClick={() => setValue('drinkType', drinkTypes[activeDrinkIndex + 1])}
@@ -186,7 +200,11 @@ export default function MeasurePage() {
               <Stack.Horizontal spacing={10} justify="center">
                 <Box
                   as="button"
-                  css={{ ...token.text.heading[2], color: token.colors.white }}
+                  css={{
+                    ...token.text.heading[2],
+                    color: token.colors.white,
+                    '&:hover': { cursor: 'pointer' },
+                  }}
                   onClick={removeDrink}
                 >
                   -
@@ -196,7 +214,11 @@ export default function MeasurePage() {
                 </Box>
                 <Box
                   as="button"
-                  css={{ ...token.text.heading[2], color: token.colors.white }}
+                  css={{
+                    ...token.text.heading[2],
+                    color: token.colors.white,
+                    '&:hover': { cursor: 'pointer' },
+                  }}
                   onClick={addDrink}
                 >
                   +
