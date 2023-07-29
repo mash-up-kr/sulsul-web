@@ -1,5 +1,5 @@
-/** @jsxImportSource @emotion/react */
 'use client';
+/** @jsxImportSource @emotion/react */
 
 import { css } from '@emotion/react';
 import { token } from '@sulsul/token';
