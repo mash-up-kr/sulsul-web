@@ -1,3 +1,4 @@
+import { Suspense } from '@suspensive/react';
 import { Metadata } from 'next';
 import { ResultContents } from './components/ResultContents';
 import { getLevelDetails } from './service';
@@ -24,5 +25,9 @@ export function generateMetadata({ searchParams }: Props): Metadata {
 }
 
 export default function ResultPage() {
-  return <ResultContents />;
+  return (
+    <Suspense fallback={<div>loading..</div>}>
+      <ResultContents />
+    </Suspense>
+  );
 }

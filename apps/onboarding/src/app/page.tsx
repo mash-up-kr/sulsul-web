@@ -34,7 +34,7 @@ const GrainyOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('/icons/grainy.svg') repeat;
+  background: url('/svgs/grainy.svg') repeat;
 `;
 
 export default function Home() {

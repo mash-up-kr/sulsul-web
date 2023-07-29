@@ -11,9 +11,9 @@ import { useSearchParams } from 'next/navigation';
 import { getLevelDetails } from '../service';
 import axios from 'axios';
 import { keyframes } from '@emotion/react';
-import { useQuery } from '@tanstack/react-query';
 import { shareResult } from '~/app/utils/share';
 import { Flex } from '@jsxcss/emotion';
+import { useSuspenseQuery } from '@suspensive/react-query';
 
 type backgroundColorProps = {
   color1: string;
@@ -148,7 +148,8 @@ export const ResultContents = () => {
   const drinkType = searchParams?.get('drinkType');
   const glasses = Number(searchParams?.get('glasses'));
   const { name, svg, description, mainColor } = getLevelDetails(glasses);
-  const getDrinkingLimitShareQuery = useQuery({
+
+  const getDrinkingLimitShareQuery = useSuspenseQuery({
     queryKey: ['result'],
     queryFn: () =>
       axios
