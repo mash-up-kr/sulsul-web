@@ -58,7 +58,7 @@ export interface DrinkDto {
    */
   bottleCapacity: number;
   /**
-   * 술잔에 포함된 알코올 양. 단위는 g
+   * 술잔에 포함된 알코올 양. 단위는 mg
    * @type {number}
    * @memberof DrinkDto
    */
@@ -69,6 +69,57 @@ export interface DrinkDto {
    * @memberof DrinkDto
    */
   glassCapacity: number;
+}
+/**
+ *
+ * @export
+ * @interface DrinkLimit
+ */
+export interface DrinkLimit {
+  /**
+   *
+   * @type {string}
+   * @memberof DrinkLimit
+   */
+  type: string;
+  /**
+   *
+   * @type {number}
+   * @memberof DrinkLimit
+   */
+  glass: number;
+}
+/**
+ *
+ * @export
+ * @interface DrinkListReq
+ */
+export interface DrinkListReq {
+  /**
+   *
+   * @type {Array<DrinkReq>}
+   * @memberof DrinkListReq
+   */
+  drinks: Array<DrinkReq>;
+}
+/**
+ *
+ * @export
+ * @interface DrinkReq
+ */
+export interface DrinkReq {
+  /**
+   *
+   * @type {string}
+   * @memberof DrinkReq
+   */
+  drinkType: string;
+  /**
+   *
+   * @type {number}
+   * @memberof DrinkReq
+   */
+  glass: number;
 }
 /**
  * 주종, 주량을 나타내는 객체
@@ -176,7 +227,7 @@ export interface DrinkingLimitDto {
    */
   glass: number;
   /**
-   * 유저의 주량을 알코올 양으로 표현하는 필드 (단위 g)
+   * 유저의 주량을 알코올 양으로 표현하는 필드 (단위 mg)
    * @type {number}
    * @memberof DrinkingLimitDto
    */
@@ -206,7 +257,19 @@ export interface DrinkingLimitRes {
    * @type {DrinkRes}
    * @memberof DrinkingLimitRes
    */
-  myDrink: DrinkRes;
+  drink: DrinkRes;
+  /**
+   * 내 칭호 타이틀
+   * @type {string}
+   * @memberof DrinkingLimitRes
+   */
+  title: string;
+  /**
+   * 칭호 이미지 URL
+   * @type {string}
+   * @memberof DrinkingLimitRes
+   */
+  titleImageUrl: string;
   /**
    * 다른 주종에 대한 주량정보
    * @type {Array<DrinkRes>}
@@ -214,11 +277,43 @@ export interface DrinkingLimitRes {
    */
   otherDrinks: Array<DrinkRes>;
   /**
-   * 유저의 주량을 알코올 양으로 표현하는 필드 (단위 g)
+   * 유저의 주량을 알코올 양으로 표현하는 필드 (단위 mg)
    * @type {number}
    * @memberof DrinkingLimitRes
    */
   totalAlcoholAmount: number;
+}
+/**
+ *
+ * @export
+ * @interface DrinkingMeasurementByClickRes
+ */
+export interface DrinkingMeasurementByClickRes {
+  /**
+   *
+   * @type {DrinkingMeasurementTitleRes}
+   * @memberof DrinkingMeasurementByClickRes
+   */
+  title: DrinkingMeasurementTitleRes;
+  /**
+   *
+   * @type {boolean}
+   * @memberof DrinkingMeasurementByClickRes
+   */
+  isDrunken: boolean;
+}
+/**
+ *
+ * @export
+ * @interface DrinkingMeasurementListRes
+ */
+export interface DrinkingMeasurementListRes {
+  /**
+   * 주량 측정 결과 리스트
+   * @type {Array<DrinkingMeasurementSummaryRes>}
+   * @memberof DrinkingMeasurementListRes
+   */
+  cards: Array<DrinkingMeasurementSummaryRes>;
 }
 /**
  *
@@ -270,11 +365,23 @@ export interface DrinkingMeasurementRes {
    */
   totalDrinkGlasses: number;
   /**
+   * 칭호
+   * @type {string}
+   * @memberof DrinkingMeasurementRes
+   */
+  title: string;
+  /**
    * 유저가 마신 술의 평균 알콜 도수
    * @type {number}
    * @memberof DrinkingMeasurementRes
    */
-  averageAlcoholContent: number;
+  averageAlcoholPercent: number;
+  /**
+   * 평균 주량보다 몇 잔 더 마셨는지 나타내는 필드
+   * @type {number}
+   * @memberof DrinkingMeasurementRes
+   */
+  extraGlasses: number;
   /**
    * 유저가 술을 마신 시간
    * @type {string}
@@ -299,6 +406,62 @@ export interface DrinkingMeasurementRes {
    * @memberof DrinkingMeasurementRes
    */
   drinks: Array<Drinks>;
+}
+/**
+ * 주량 측정 결과 리스트
+ * @export
+ * @interface DrinkingMeasurementSummaryRes
+ */
+export interface DrinkingMeasurementSummaryRes {
+  /**
+   * 식별 id
+   * @type {string}
+   * @memberof DrinkingMeasurementSummaryRes
+   */
+  id: string;
+  /**
+   * 유저가 총 마신 알코올 양
+   * @type {number}
+   * @memberof DrinkingMeasurementSummaryRes
+   */
+  totalAlcoholAmount: number;
+  /**
+   * 유저가 총 마신 술의 잔
+   * @type {number}
+   * @memberof DrinkingMeasurementSummaryRes
+   */
+  totalDrinkGlasses: number;
+  /**
+   * 유저가 마신 날짜
+   * @type {string}
+   * @memberof DrinkingMeasurementSummaryRes
+   */
+  drankAt: string;
+  /**
+   * 유저가 마신 술의 종류와 잔 수
+   * @type {Array<Drinks>}
+   * @memberof DrinkingMeasurementSummaryRes
+   */
+  drinks: Array<Drinks>;
+}
+/**
+ *
+ * @export
+ * @interface DrinkingMeasurementTitleRes
+ */
+export interface DrinkingMeasurementTitleRes {
+  /**
+   *
+   * @type {string}
+   * @memberof DrinkingMeasurementTitleRes
+   */
+  text: string;
+  /**
+   *
+   * @type {string}
+   * @memberof DrinkingMeasurementTitleRes
+   */
+  imageUrl: string;
 }
 /**
  *
@@ -365,25 +528,6 @@ export interface GetDrinkingCardsDto {
   cards: Array<DrinkingCardDto>;
 }
 /**
- * 주량등록 시, 보내야하는 Request Body
- * @export
- * @interface GetDrinkingLimitReq
- */
-export interface GetDrinkingLimitReq {
-  /**
-   * 주종 이름
-   * @type {string}
-   * @memberof GetDrinkingLimitReq
-   */
-  drinkType: string;
-  /**
-   * 해당 주종을 몇 잔 마실 수 있는지 나타내는 필드
-   * @type {number}
-   * @memberof GetDrinkingLimitReq
-   */
-  glass: number;
-}
-/**
  *
  * @export
  * @interface GetTitleRes
@@ -395,6 +539,31 @@ export interface GetTitleRes {
    * @memberof GetTitleRes
    */
   titles: Array<TitleDto>;
+}
+/**
+ *
+ * @export
+ * @interface MeRes
+ */
+export interface MeRes {
+  /**
+   *
+   * @type {string}
+   * @memberof MeRes
+   */
+  nickname: string;
+  /**
+   *
+   * @type {Array<DrinkLimit>}
+   * @memberof MeRes
+   */
+  drinkingLimits?: Array<DrinkLimit>;
+  /**
+   *
+   * @type {TitleRes}
+   * @memberof MeRes
+   */
+  title?: TitleRes;
 }
 /**
  * 주량등록 시, 보내야하는 Request Body
@@ -450,7 +619,44 @@ export interface TitleDto {
    * @type {number}
    * @memberof TitleDto
    */
-  alcoholAmount: number;
+  minAlcoholAmount: number;
+  /**
+   *
+   * @type {number}
+   * @memberof TitleDto
+   */
+  maxAlcoholAmount: number;
+}
+/**
+ *
+ * @export
+ * @interface TitleRes
+ */
+export interface TitleRes {
+  /**
+   *
+   * @type {string}
+   * @memberof TitleRes
+   */
+  title: string;
+  /**
+   *
+   * @type {string}
+   * @memberof TitleRes
+   */
+  subTitle: string;
+  /**
+   *
+   * @type {string}
+   * @memberof TitleRes
+   */
+  cardImageUrl: string;
+  /**
+   *
+   * @type {string}
+   * @memberof TitleRes
+   */
+  badgeImageUrl: string;
 }
 
 /**
@@ -776,6 +982,121 @@ export class MockAPI컨트롤러Api extends BaseAPI {
 }
 
 /**
+ * UserControllerApi - axios parameter creator
+ * @export
+ */
+export const UserControllerApiAxiosParamCreator = function (
+  configuration?: Configuration
+) {
+  return {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    me: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+      const localVarPath = `/api/v1/user/me`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication Authorization required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
+};
+
+/**
+ * UserControllerApi - functional programming interface
+ * @export
+ */
+export const UserControllerApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = UserControllerApiAxiosParamCreator(configuration);
+  return {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async me(
+      options?: AxiosRequestConfig
+    ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MeRes>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.me(options);
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+  };
+};
+
+/**
+ * UserControllerApi - factory interface
+ * @export
+ */
+export const UserControllerApiFactory = function (
+  configuration?: Configuration,
+  basePath?: string,
+  axios?: AxiosInstance
+) {
+  const localVarFp = UserControllerApiFp(configuration);
+  return {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    me(options?: any): AxiosPromise<MeRes> {
+      return localVarFp.me(options).then((request) => request(axios, basePath));
+    },
+  };
+};
+
+/**
+ * UserControllerApi - object-oriented interface
+ * @export
+ * @class UserControllerApi
+ * @extends {BaseAPI}
+ */
+export class UserControllerApi extends BaseAPI {
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof UserControllerApi
+   */
+  public me(options?: AxiosRequestConfig) {
+    return UserControllerApiFp(this.configuration)
+      .me(options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+}
+
+/**
  * 주량등록컨트롤러Api - axios parameter creator
  * @export
  */
@@ -823,16 +1144,20 @@ export const 주량등록컨트롤러ApiAxiosParamCreator = function (
     /**
      * 로그인 없이, 주량을 등록할 때 호출하는 API. 해당 API 는 DB에 저장하지 않고 클라이언트로부터 받은 값으로 바로 값 계산해서 보여주는 프로세스를 가진다
      * @summary (공유) 주량 조회 API
-     * @param {GetDrinkingLimitReq} body
+     * @param {string} drinkType
+     * @param {number} glass
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     getInShareMode: async (
-      body: GetDrinkingLimitReq,
+      drinkType: string,
+      glass: number,
       options: AxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
-      // verify required parameter 'body' is not null or undefined
-      assertParamExists('getInShareMode', 'body', body);
+      // verify required parameter 'drinkType' is not null or undefined
+      assertParamExists('getInShareMode', 'drinkType', drinkType);
+      // verify required parameter 'glass' is not null or undefined
+      assertParamExists('getInShareMode', 'glass', glass);
       const localVarPath = `/api/v1/drinkingLimit/share`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -849,8 +1174,12 @@ export const 주량등록컨트롤러ApiAxiosParamCreator = function (
       // http bearer authentication required
       await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      if (body !== undefined) {
-        localVarQueryParameter['body'] = body;
+      if (drinkType !== undefined) {
+        localVarQueryParameter['drinkType'] = drinkType;
+      }
+
+      if (glass !== undefined) {
+        localVarQueryParameter['glass'] = glass;
       }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -949,18 +1278,21 @@ export const 주량등록컨트롤러ApiFp = function (configuration?: Configura
     /**
      * 로그인 없이, 주량을 등록할 때 호출하는 API. 해당 API 는 DB에 저장하지 않고 클라이언트로부터 받은 값으로 바로 값 계산해서 보여주는 프로세스를 가진다
      * @summary (공유) 주량 조회 API
-     * @param {GetDrinkingLimitReq} body
+     * @param {string} drinkType
+     * @param {number} glass
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async getInShareMode(
-      body: GetDrinkingLimitReq,
+      drinkType: string,
+      glass: number,
       options?: AxiosRequestConfig
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<DrinkingLimitRes>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getInShareMode(
-        body,
+        drinkType,
+        glass,
         options
       );
       return createRequestFunction(
@@ -1020,16 +1352,18 @@ export const 주량등록컨트롤러ApiFactory = function (
     /**
      * 로그인 없이, 주량을 등록할 때 호출하는 API. 해당 API 는 DB에 저장하지 않고 클라이언트로부터 받은 값으로 바로 값 계산해서 보여주는 프로세스를 가진다
      * @summary (공유) 주량 조회 API
-     * @param {GetDrinkingLimitReq} body
+     * @param {string} drinkType
+     * @param {number} glass
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     getInShareMode(
-      body: GetDrinkingLimitReq,
+      drinkType: string,
+      glass: number,
       options?: any
     ): AxiosPromise<DrinkingLimitRes> {
       return localVarFp
-        .getInShareMode(body, options)
+        .getInShareMode(drinkType, glass, options)
         .then((request) => request(axios, basePath));
     },
     /**
@@ -1073,14 +1407,15 @@ export class 주량등록컨트롤러Api extends BaseAPI {
   /**
    * 로그인 없이, 주량을 등록할 때 호출하는 API. 해당 API 는 DB에 저장하지 않고 클라이언트로부터 받은 값으로 바로 값 계산해서 보여주는 프로세스를 가진다
    * @summary (공유) 주량 조회 API
-   * @param {GetDrinkingLimitReq} body
+   * @param {string} drinkType
+   * @param {number} glass
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof 주량등록컨트롤러Api
    */
-  public getInShareMode(body: GetDrinkingLimitReq, options?: AxiosRequestConfig) {
+  public getInShareMode(drinkType: string, glass: number, options?: AxiosRequestConfig) {
     return 주량등록컨트롤러ApiFp(this.configuration)
-      .getInShareMode(body, options)
+      .getInShareMode(drinkType, glass, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -1109,6 +1444,56 @@ export const 주량측정컨트롤러ApiAxiosParamCreator = function (
   return {
     /**
      *
+     * @summary 주량측정 시, 클릭할 때마다 호출하는 API
+     * @param {DrinkListReq} drinkListReq
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createTemporaryReport: async (
+      drinkListReq: DrinkListReq,
+      options: AxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'drinkListReq' is not null or undefined
+      assertParamExists('createTemporaryReport', 'drinkListReq', drinkListReq);
+      const localVarPath = `/api/v1/drinkingReport/click-event`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication Authorization required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        drinkListReq,
+        localVarRequestOptions,
+        configuration
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
      * @summary 주량 측정 결과 조회 API
      * @param {string} reportId
      * @param {*} [options] Override http request option.
@@ -1124,6 +1509,43 @@ export const 주량측정컨트롤러ApiAxiosParamCreator = function (
         `{${'reportId'}}`,
         encodeURIComponent(String(reportId))
       );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication Authorization required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary 주량 측정 결과 리스트 조회 API
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getReportList: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+      const localVarPath = `/api/v1/drinkingReport`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;
@@ -1215,6 +1637,33 @@ export const 주량측정컨트롤러ApiFp = function (configuration?: Configura
   return {
     /**
      *
+     * @summary 주량측정 시, 클릭할 때마다 호출하는 API
+     * @param {DrinkListReq} drinkListReq
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async createTemporaryReport(
+      drinkListReq: DrinkListReq,
+      options?: AxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<DrinkingMeasurementByClickRes>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.createTemporaryReport(
+        drinkListReq,
+        options
+      );
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+    /**
+     *
      * @summary 주량 측정 결과 조회 API
      * @param {string} reportId
      * @param {*} [options] Override http request option.
@@ -1230,6 +1679,28 @@ export const 주량측정컨트롤러ApiFp = function (configuration?: Configura
         reportId,
         options
       );
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration
+      );
+    },
+    /**
+     *
+     * @summary 주량 측정 결과 리스트 조회 API
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getReportList(
+      options?: AxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<DrinkingMeasurementListRes>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getReportList(options);
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
@@ -1277,6 +1748,21 @@ export const 주량측정컨트롤러ApiFactory = function (
   return {
     /**
      *
+     * @summary 주량측정 시, 클릭할 때마다 호출하는 API
+     * @param {DrinkListReq} drinkListReq
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createTemporaryReport(
+      drinkListReq: DrinkListReq,
+      options?: any
+    ): AxiosPromise<DrinkingMeasurementByClickRes> {
+      return localVarFp
+        .createTemporaryReport(drinkListReq, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
      * @summary 주량 측정 결과 조회 API
      * @param {string} reportId
      * @param {*} [options] Override http request option.
@@ -1285,6 +1771,17 @@ export const 주량측정컨트롤러ApiFactory = function (
     getReport(reportId: string, options?: any): AxiosPromise<DrinkingMeasurementRes> {
       return localVarFp
         .getReport(reportId, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary 주량 측정 결과 리스트 조회 API
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getReportList(options?: any): AxiosPromise<DrinkingMeasurementListRes> {
+      return localVarFp
+        .getReportList(options)
         .then((request) => request(axios, basePath));
     },
     /**
@@ -1314,6 +1811,20 @@ export const 주량측정컨트롤러ApiFactory = function (
 export class 주량측정컨트롤러Api extends BaseAPI {
   /**
    *
+   * @summary 주량측정 시, 클릭할 때마다 호출하는 API
+   * @param {DrinkListReq} drinkListReq
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof 주량측정컨트롤러Api
+   */
+  public createTemporaryReport(drinkListReq: DrinkListReq, options?: AxiosRequestConfig) {
+    return 주량측정컨트롤러ApiFp(this.configuration)
+      .createTemporaryReport(drinkListReq, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
    * @summary 주량 측정 결과 조회 API
    * @param {string} reportId
    * @param {*} [options] Override http request option.
@@ -1323,6 +1834,19 @@ export class 주량측정컨트롤러Api extends BaseAPI {
   public getReport(reportId: string, options?: AxiosRequestConfig) {
     return 주량측정컨트롤러ApiFp(this.configuration)
       .getReport(reportId, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary 주량 측정 결과 리스트 조회 API
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof 주량측정컨트롤러Api
+   */
+  public getReportList(options?: AxiosRequestConfig) {
+    return 주량측정컨트롤러ApiFp(this.configuration)
+      .getReportList(options)
       .then((request) => request(this.axios, this.basePath));
   }
 
