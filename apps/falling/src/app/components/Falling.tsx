@@ -10,7 +10,10 @@ export const Falling = () => {
 
   useEffect(() => {
     const addItem = (event: any) => {
-      if (!isFirstTouch) return;
+      if (!isFirstTouch) {
+        setIsFirstTouch(true);
+        return;
+      }
 
       if (event.detail.data === undefined) {
         throw new Error('event.detail.data is undefined');
@@ -29,10 +32,7 @@ export const Falling = () => {
   }, [addBall, isFirstTouch]);
 
   return (
-    <div
-      style={{ width: '100%', height: '100dvh' }}
-      onClick={() => setIsFirstTouch(true)}
-    >
+    <div style={{ width: '100%', height: '100dvh' }}>
       <StackView boxRef={boxRef} canvasRef={canvasRef} isTouched={isFirstTouch} />
     </div>
   );
