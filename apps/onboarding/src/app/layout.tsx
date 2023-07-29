@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ['latin'] });
 declare global {
   interface Window {
     Kakao: any;
+    sulsulBridge: any;
   }
 }
 

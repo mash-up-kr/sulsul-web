@@ -62,6 +62,11 @@ export default function MeasurePage() {
   };
 
   const sendResult = () => {
+    if (window.sulsulBridge) {
+      window.sulsulBridge.onRegisterSuccess(drinkType, drinks.length);
+      return;
+    }
+
     router.push(`/result?drinkType=${drinkType}&glasses=${drinks.length}`);
   };
 
