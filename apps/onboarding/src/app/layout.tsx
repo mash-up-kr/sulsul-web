@@ -17,12 +17,14 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_DOMAIN || 'https://onboarding.sulsul.app'
   ),
+  title: '술술',
   description: '당신의 주량은?',
   openGraph: {
     title: '술술',
     description: '당신의 주량은?',
     images: `/metadata/main_image.png`,
   },
+  manifest: './site.webmanifest',
 };
 
 export default function RootLayout({ children }: React.PropsWithChildren) {

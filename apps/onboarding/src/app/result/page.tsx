@@ -15,7 +15,7 @@ export function generateMetadata({ searchParams }: Props): Metadata {
   const { name, description, image } = getLevelDetails(glasses);
 
   return {
-    title: name,
+    title: `당신은 ${name} 🍻`,
     openGraph: {
       title: name,
       description,
