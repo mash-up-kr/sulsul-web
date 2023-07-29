@@ -3,13 +3,13 @@
 
 import { css } from '@emotion/react';
 import { token } from '@sulsul/token';
-import { forwardRef, useState } from 'react';
+import { forwardRef } from 'react';
 import { TouchButton } from './TouchButton';
 
 interface StackViewProps {
   boxRef: React.RefObject<HTMLDivElement>;
   canvasRef: React.RefObject<HTMLCanvasElement>;
-  isTouch?: boolean;
+  isTouched?: boolean;
 }
 
 const firstTouchDescription = css`
@@ -32,12 +32,11 @@ const touchOverlay = css`
 
   &:hover {
     cursor: pointer;
-  },
+  }
 `;
 
 export const StackView = forwardRef<HTMLDivElement, StackViewProps>((props, ref) => {
-  const { boxRef, canvasRef, isTouch = false, ...restProps } = props;
-  const [isTouched, setIsTouched] = useState(isTouch);
+  const { boxRef, canvasRef, isTouched = false, ...restProps } = props;
 
   return (
     <div
@@ -49,7 +48,7 @@ export const StackView = forwardRef<HTMLDivElement, StackViewProps>((props, ref)
       }}
     >
       {!isTouched && (
-        <div onClick={() => setIsTouched(true)} css={[touchOverlay]}>
+        <div css={[touchOverlay]}>
           <TouchButton />
           <p css={[firstTouchDescription]}>
             원하는 주종을 선택 후<br /> 터치해서 주량 등록을 시작해주세요

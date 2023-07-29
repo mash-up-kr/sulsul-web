@@ -36,7 +36,7 @@ type MeasurePageFormValues = z.infer<typeof measurePageSchema>;
 export default function MeasurePage() {
   const router = useRouter();
   const constraintsRef = useRef<HTMLDivElement>(null);
-  const [isTouch, setIsTouch] = useState(false);
+  const [isTouched, setIsTouched] = useState(false);
   const { addBall, removeBall, boxRef, canvasRef } = useStackBall();
   const { setValue, watch } = useForm<MeasurePageFormValues>({
     defaultValues: {
@@ -79,7 +79,23 @@ export default function MeasurePage() {
         background-size: contain;
       `}
     >
-      <Box as="section" css={sectionCss}>
+      <Box
+        position="relative"
+        as="section"
+        css={sectionCss}
+        onClick={() => setIsTouched(true)}
+        cursor={isTouched ? undefined : 'pointer'}
+      >
+        <Box
+          position="absolute"
+          top={0}
+          left={0}
+          right={0}
+          bottom={0}
+          pointerEvents="none"
+        >
+          <StackView boxRef={boxRef} canvasRef={canvasRef} isTouched={isTouched} />
+        </Box>
         <Stack.Horizontal justify="space-between" align="center" padding="8px 16px">
           <IcBack
             onClick={() => router.push('/')}
@@ -221,11 +237,9 @@ export default function MeasurePage() {
             )}
           </Flex>
         </Stack.Vertical>
-        <Box flex={1} onClick={() => setIsTouch(true)}>
-          <StackView boxRef={boxRef} canvasRef={canvasRef} isTouch={isTouch} />
-        </Box>
+        <Box flex={1} pointerEvents="none" />
         <Stack.Vertical spacing={16} padding="0 16px 40px 16px">
-          {isTouch && (
+          {isTouched && (
             <Flex.Center>
               <Stack.Vertical>
                 <Stack.Horizontal spacing={10} justify="center">
