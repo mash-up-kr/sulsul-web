@@ -164,7 +164,10 @@ export const useStackBall = () => {
 
   const removeBall = useCallback(() => {
     if (scene) {
-      Matter.World.remove(scene.engine.world, scene.engine.world.bodies[4]);
+      if ((scene.engine.world.bodies as Array<any>).length > 4) {
+        const lastItem = scene.engine.world.bodies.at(-1);
+        Matter.World.remove(scene.engine.world, lastItem);
+      }
     }
   }, [scene]);
 

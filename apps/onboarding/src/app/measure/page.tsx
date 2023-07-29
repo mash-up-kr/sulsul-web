@@ -97,7 +97,8 @@ export default function MeasurePage() {
           left={0}
           right={0}
           bottom={0}
-          pointerEvents="none"
+          onClick={addDrink}
+          cursor="pointer"
         >
           <StackView boxRef={boxRef} canvasRef={canvasRef} isTouched={isTouched} />
         </Box>
@@ -109,7 +110,7 @@ export default function MeasurePage() {
           <div>{/* <IcRefresh /> */}</div>
         </Stack.Horizontal>
         <Stack.Vertical spacing={20}>
-          <Stack.Vertical textAlign="center">
+          <Stack.Vertical textAlign="center" zIndex={1}>
             <Box
               as="h1"
               css={{
@@ -243,7 +244,7 @@ export default function MeasurePage() {
           </Flex>
         </Stack.Vertical>
         <Box flex={1} pointerEvents="none" />
-        <Stack.Vertical spacing={16} padding="0 16px 40px 16px">
+        <Stack.Vertical spacing={16} padding="0 16px 40px 16px" zIndex={1}>
           {isTouched && (
             <Flex.Center>
               <Stack.Vertical>
