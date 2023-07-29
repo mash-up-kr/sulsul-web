@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     description: '당신의 주량은?',
     images: `/metadata/main_image.png`,
   },
-  manifest: './site.webmanifest',
+  manifest: '/favicons/site.webmanifest',
 };
 
 export default function RootLayout({ children }: React.PropsWithChildren) {
