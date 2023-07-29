@@ -13,12 +13,13 @@ export const Falling = () => {
       if (!isFirstTouch) return;
 
       if (event.detail.data === undefined) {
-        const { image, size } = drinkImage['소주'];
-        addBall(image, size);
-        return;
+        throw new Error('event.detail.data is undefined');
       }
+
       const { image, size } = drinkImage[event.detail.data as drinks];
       addBall(image, size);
+
+      window.sulsulBridge.onAddBallSuccess(event.detail.data as drinks);
     };
     window.addEventListener('addBall', addItem);
 
