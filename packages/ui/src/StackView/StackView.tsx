@@ -1,43 +1,16 @@
-/** @jsxImportSource @emotion/react */
 'use client';
 
-import { css } from '@emotion/react';
-import { token } from '@sulsul/token';
-import { forwardRef, useState } from 'react';
-import { TouchButton } from './TouchButton';
+import { forwardRef } from 'react';
+
+/** @jsxImportSource @emotion/react */
 
 interface StackViewProps {
   boxRef: React.RefObject<HTMLDivElement>;
   canvasRef: React.RefObject<HTMLCanvasElement>;
-  isTouch?: boolean;
 }
 
-const firstTouchDescription = css`
-  background-color: ${token.text.subtitle[3]};
-  color: ${token.colors.white};
-`;
-
-const touchOverlay = css`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-
-  &:hover {
-    cursor: pointer;
-  },
-`;
-
 export const StackView = forwardRef<HTMLDivElement, StackViewProps>((props, ref) => {
-  const { boxRef, canvasRef, isTouch = false, ...restProps } = props;
-  const [isTouched, setIsTouched] = useState(isTouch);
+  const { boxRef, canvasRef, ...restProps } = props;
 
   return (
     <div
@@ -48,17 +21,12 @@ export const StackView = forwardRef<HTMLDivElement, StackViewProps>((props, ref)
         height: '100%',
       }}
     >
-      {!isTouched && (
-        <div onClick={() => setIsTouched(true)} css={[touchOverlay]}>
-          <TouchButton />
-          <p css={[firstTouchDescription]}>
-            원하는 주종을 선택 후<br /> 터치해서 주량 등록을 시작해주세요
-          </p>
-        </div>
-      )}
       <div
         ref={boxRef}
         style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
           width: '100%',
           height: '100%',
           pointerEvents: 'none',
