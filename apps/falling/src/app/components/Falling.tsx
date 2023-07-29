@@ -33,7 +33,7 @@ export const Falling = () => {
       style={{ width: '100%', height: '100dvh' }}
       onClick={() => setIsFirstTouch(true)}
     >
-      <StackView boxRef={boxRef} canvasRef={canvasRef} />
+      <StackView boxRef={boxRef} canvasRef={canvasRef} isTouched={isFirstTouch} />
     </div>
   );
 };
