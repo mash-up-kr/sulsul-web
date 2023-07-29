@@ -18,8 +18,6 @@ import { useRef } from 'react';
 import { drinkImage } from '~/constants/alcohol';
 // import IcRefresh from '~/assets/icons/navigations/ic-refresh.svg';
 
-const DRINK_TYPE_SELECTOR_WIDTH = 200;
-
 const drinkTypes = [
   DrinkResDrinkTypeEnum.고량주,
   DrinkResDrinkTypeEnum.맥주,
@@ -110,85 +108,116 @@ export default function MeasurePage() {
               <div>주량을 알려주세요</div>
             </Stack.Vertical>
           </Stack.Vertical>
-          <Flex direction="row" width={DRINK_TYPE_SELECTOR_WIDTH + 40 + 40} margin="auto">
-            <Box
-              as={motion.button}
-              height={40}
-              minWidth={40}
-              whileTap={{ scale: 0.8 }}
-              css={{ '&:hover': { cursor: 'pointer' } }}
-            >
-              {drinkTypes[activeDrinkIndex - 1] && (
-                <IcDoublechevronLeft
-                  onClick={() => setValue('drinkType', drinkTypes[activeDrinkIndex - 1])}
-                />
-              )}
-            </Box>
+          <Flex
+            position="relative"
+            direction="row"
+            width="stretch"
+            margin={16}
+            backgroundColor={token.colors.grey[100]}
+            padding="12px 34px"
+            borderRadius={16}
+            border={`1px solid ${token.colors.grey[300]}`}
+          >
             <Flex.Center
               overflow="hidden"
               ref={constraintsRef}
-              width={400}
+              width="stretch"
+              margin="0 40px"
               height={40}
-              margin="auto"
             >
-              <Stack.Horizontal
-                as={motion.div}
-                onDragEnd={(_, info) => {
-                  const offset = info.offset.x;
-                  if (Math.abs(offset) > 20) {
-                    const direction = offset < 0 ? 1 : -1;
+              {constraintsRef.current && (
+                <Stack.Horizontal
+                  as={motion.div}
+                  onDragEnd={(_, info) => {
+                    const offset = info.offset.x;
+                    if (Math.abs(offset) > 20) {
+                      const direction = offset < 0 ? 1 : -1;
 
-                    const nextDrinkType = drinkTypes[activeDrinkIndex + direction];
-                    if (nextDrinkType) {
-                      setValue('drinkType', nextDrinkType);
+                      const nextDrinkType = drinkTypes[activeDrinkIndex + direction];
+                      if (nextDrinkType) {
+                        setValue('drinkType', nextDrinkType);
+                      }
                     }
-                  }
-                }}
-                dragConstraints={constraintsRef}
-                drag="x"
-                css={css`
-                  height: 40px;
-                  display: flex;
-                  flex-direction: row;
-                `}
-                animate={{
-                  x:
-                    -1 *
-                      activeDrinkIndex *
-                      ((constraintsRef.current?.offsetWidth ||
-                        DRINK_TYPE_SELECTOR_WIDTH) /
-                        2) +
-                    (constraintsRef.current?.offsetWidth || DRINK_TYPE_SELECTOR_WIDTH),
-                }}
-              >
-                {drinkTypes.map((drinkType) => (
-                  <Flex.Center
-                    key={drinkType}
-                    width={
-                      (constraintsRef.current?.offsetWidth ?? DRINK_TYPE_SELECTOR_WIDTH) /
-                      2
-                    }
-                    height={40}
-                    {...token.text.heading[1]}
-                  >
-                    {drinkType}
-                  </Flex.Center>
-                ))}
-              </Stack.Horizontal>
-            </Flex.Center>
-            <Box
-              as={motion.button}
-              height={40}
-              minWidth={40}
-              whileTap={{ scale: 0.8 }}
-              css={{ '&:hover': { cursor: 'pointer' } }}
-            >
-              {drinkTypes[activeDrinkIndex + 1] && (
-                <IcDoublechevronRight
-                  onClick={() => setValue('drinkType', drinkTypes[activeDrinkIndex + 1])}
-                />
+                  }}
+                  dragConstraints={constraintsRef}
+                  drag="x"
+                  css={css`
+                    height: 40px;
+                    display: flex;
+                    flex-direction: row;
+                  `}
+                  animate={{
+                    x:
+                      -1 * activeDrinkIndex * (constraintsRef.current.offsetWidth / 2) +
+                      constraintsRef.current.offsetWidth,
+                  }}
+                >
+                  {drinkTypes.map((drinkType) => (
+                    <>
+                      {constraintsRef.current && (
+                        <Flex.Center
+                          cursor="grab"
+                          key={drinkType}
+                          width={constraintsRef.current.offsetWidth / 2}
+                          height={40}
+                          {...token.text.heading[1]}
+                          wordBreak="keep-all"
+                        >
+                          {drinkType}
+                        </Flex.Center>
+                      )}
+                    </>
+                  ))}
+                </Stack.Horizontal>
               )}
-            </Box>
+            </Flex.Center>
+
+            {/* gradient */}
+            <Flex.CenterHorizontal
+              position="absolute"
+              top={12}
+              right={32}
+              left={32}
+              bottom={12}
+              padding="0 40px"
+              pointerEvents="none"
+              justify="space-between"
+            >
+              <Box
+                background={`linear-gradient(to left, transparent, ${token.colors.grey[100]})`}
+                width={80}
+                height="strech"
+              />
+              <Box
+                background={`linear-gradient(to right, transparent, ${token.colors.grey[100]})`}
+                width={80}
+                height="strech"
+              />
+            </Flex.CenterHorizontal>
+
+            {/* arrows */}
+            {drinkTypes[activeDrinkIndex - 1] && (
+              <Box
+                as={IcDoublechevronLeft}
+                onClick={() => setValue('drinkType', drinkTypes[activeDrinkIndex - 1])}
+                position="absolute"
+                top={12}
+                left={32}
+                bottom={12}
+                cursor="pointer"
+              />
+            )}
+            {drinkTypes[activeDrinkIndex + 1] && (
+              <Box
+                onClick={() => setValue('drinkType', drinkTypes[activeDrinkIndex + 1])}
+                as={IcDoublechevronRight}
+                position="absolute"
+                top={12}
+                right={32}
+                bottom={12}
+                cursor="pointer"
+              />
+            )}
           </Flex>
         </Stack.Vertical>
         <Box flex={1}>
