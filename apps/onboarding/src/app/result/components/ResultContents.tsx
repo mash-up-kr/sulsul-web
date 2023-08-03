@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { colors } from '@sulsul/token/src/colors';
 import { text } from '@sulsul/token/src/text';
 import { Button } from '@sulsul/ui';
-import { DrinkRes } from '~/api';
+import { DrinkReq, TitleDto } from '~/api';
 import { AlcoholDetails } from '~/constants/alcohol';
 import { ResultCard } from './ResultCard';
 import { useSearchParams } from 'next/navigation';
@@ -67,7 +67,7 @@ export const ResultContents = () => {
   const searchParams = useSearchParams();
   const drinkType = searchParams?.get('drinkType');
   const glasses = Number(searchParams?.get('glasses'));
-  const { name, svg, description, mainColor } = getLevelDetails(glasses);
+  const { svg, mainColor } = getLevelDetails(glasses);
 
   const { color1, color2 } = getLevelDetails(glasses);
 
@@ -157,12 +157,30 @@ export const ResultContents = () => {
               `}
             >
               <Heading2>당신은...</Heading2>
-              <ResultCard
-                name={name}
-                svg={svg}
-                description={description}
-                mainColor={mainColor}
-              />
+              <SuspenseQuery
+                options={{
+                  queryKey: ['result'],
+                  queryFn: () =>
+                    axios
+                      .get<{ title: TitleDto }>(
+                        `https://sulsul.app/api/v1/drinkingLimit?drinkType=${drinkType}&glass=${glasses}`
+                      )
+                      .then((response) => response.data),
+                }}
+              >
+                {(query) => {
+                  const { title } = query.data;
+                  return (
+                    <ResultCard
+                      name={title.title}
+                      svg={svg}
+                      description={title.subTitle}
+                      mainColor={mainColor}
+                    />
+                  );
+                }}
+              </SuspenseQuery>
+
               <Heading3>다른 술은 얼마나 마실 수 있을까?</Heading3>
               <DrinkLists>
                 <SuspenseQuery
@@ -170,14 +188,14 @@ export const ResultContents = () => {
                     queryKey: ['result'],
                     queryFn: () =>
                       axios
-                        .get<{ otherDrinks: DrinkRes[] }>(
-                          `https://sulsul.app/api/v1/drinkingLimit/share?drinkType=${drinkType}&glass=${glasses}`
+                        .get<{ drinks: DrinkReq[] }>(
+                          `https://sulsul.app/api/v1/drinkingLimit?drinkType=${drinkType}&glass=${glasses}`
                         )
                         .then((response) => response.data),
                   }}
                 >
                   {(query) =>
-                    query.data.otherDrinks.map((drinkRes) => {
+                    query.data.drinks.map((drinkRes) => {
                       const { drinkType, glass } = drinkRes;
                       const { name, SvgrIcon, volumn } = AlcoholDetails[drinkType];
                       return (

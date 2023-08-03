@@ -10,31 +10,31 @@ import CardMaster from '~/assets/card/card-master.svg';
 import CardGhost from '~/assets/card/card-ghost.svg';
 import CardHeaven from '~/assets/card/card-heaven.svg';
 import CardGod from '~/assets/card/card-god.svg';
-import { DrinkResDrinkTypeEnum } from '~/api';
+import { PostDrinkingLimitReqDrinkTypeEnum } from '~/api';
 
 export const AlcoholDetails = {
-  [DrinkResDrinkTypeEnum.소주]: {
-    name: DrinkResDrinkTypeEnum.소주,
+  [PostDrinkingLimitReqDrinkTypeEnum.소주]: {
+    name: PostDrinkingLimitReqDrinkTypeEnum.소주,
     SvgrIcon: Icon소주,
     volumn: 16.9,
   },
-  [DrinkResDrinkTypeEnum.맥주]: {
-    name: DrinkResDrinkTypeEnum.맥주,
+  [PostDrinkingLimitReqDrinkTypeEnum.맥주]: {
+    name: PostDrinkingLimitReqDrinkTypeEnum.맥주,
     SvgrIcon: Icon맥주,
     volumn: 4.5,
   },
-  [DrinkResDrinkTypeEnum.와인]: {
-    name: DrinkResDrinkTypeEnum.와인,
+  [PostDrinkingLimitReqDrinkTypeEnum.와인]: {
+    name: PostDrinkingLimitReqDrinkTypeEnum.와인,
     SvgrIcon: Icon와인,
     volumn: 13.5,
   },
-  [DrinkResDrinkTypeEnum.고량주]: {
-    name: DrinkResDrinkTypeEnum.고량주,
+  [PostDrinkingLimitReqDrinkTypeEnum.고량주]: {
+    name: PostDrinkingLimitReqDrinkTypeEnum.고량주,
     SvgrIcon: Icon고량주,
     volumn: 40,
   },
-  [DrinkResDrinkTypeEnum.위스키]: {
-    name: DrinkResDrinkTypeEnum.위스키,
+  [PostDrinkingLimitReqDrinkTypeEnum.위스키]: {
+    name: PostDrinkingLimitReqDrinkTypeEnum.위스키,
     SvgrIcon: Icon위스키,
     volumn: 50,
   },
@@ -110,23 +110,23 @@ export const AlcoholResultDetails = {
 };
 
 export const drinkImage = {
-  [DrinkResDrinkTypeEnum.소주]: {
+  [PostDrinkingLimitReqDrinkTypeEnum.소주]: {
     image: '/images/bubble-soju.png',
     size: 80,
   },
-  [DrinkResDrinkTypeEnum.맥주]: {
+  [PostDrinkingLimitReqDrinkTypeEnum.맥주]: {
     image: '/images/bubble-beer.png',
     size: 100,
   },
-  [DrinkResDrinkTypeEnum.와인]: {
+  [PostDrinkingLimitReqDrinkTypeEnum.와인]: {
     image: '/images/bubble-wine.png',
     size: 92,
   },
-  [DrinkResDrinkTypeEnum.고량주]: {
+  [PostDrinkingLimitReqDrinkTypeEnum.고량주]: {
     image: '/images/bubble-goryanju.png',
     size: 68,
   },
-  [DrinkResDrinkTypeEnum.위스키]: {
+  [PostDrinkingLimitReqDrinkTypeEnum.위스키]: {
     image: '/images/bubble-whisky.png',
     size: 68,
   },

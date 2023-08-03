@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { DrinkResDrinkTypeEnum } from '~/api';
+import { PostDrinkingLimitReqDrinkTypeEnum } from '~/api';
 import IcBack from '~/assets/icons/navigations/ic-back.svg';
 import IcDoublechevronLeft from '~/assets/icons/ic_doublechevron_left.svg';
 import IcDoublechevronRight from '~/assets/icons/ic_doublechevron_right.svg';
@@ -19,11 +19,11 @@ import { drinkImage } from '~/constants/alcohol';
 // import IcRefresh from '~/assets/icons/navigations/ic-refresh.svg';
 
 const drinkTypes = [
-  DrinkResDrinkTypeEnum.고량주,
-  DrinkResDrinkTypeEnum.맥주,
-  DrinkResDrinkTypeEnum.소주,
-  DrinkResDrinkTypeEnum.와인,
-  DrinkResDrinkTypeEnum.위스키,
+  PostDrinkingLimitReqDrinkTypeEnum.고량주,
+  PostDrinkingLimitReqDrinkTypeEnum.맥주,
+  PostDrinkingLimitReqDrinkTypeEnum.소주,
+  PostDrinkingLimitReqDrinkTypeEnum.와인,
+  PostDrinkingLimitReqDrinkTypeEnum.위스키,
 ] as const;
 
 const measurePageSchema = z.object({
@@ -106,10 +106,12 @@ export default function MeasurePage() {
           <StackView boxRef={boxRef} canvasRef={canvasRef} isTouched={isTouched} />
         </Box>
         <Stack.Horizontal justify="space-between" align="center" padding="8px 16px">
-          <IcBack
-            onClick={() => router.push('/')}
-            css={{ '&:hover': { cursor: 'pointer' } }}
-          />
+          {!globalThis.window?.sulsulBridge && (
+            <IcBack
+              onClick={() => router.push('/')}
+              css={{ '&:hover': { cursor: 'pointer' } }}
+            />
+          )}
           <div>{/* <IcRefresh /> */}</div>
         </Stack.Horizontal>
         <Stack.Vertical spacing={20}>

@@ -1,8 +1,9 @@
 import { Suspense } from '@suspensive/react';
+import axios from 'axios';
 import { Metadata } from 'next';
+import { TitleDto } from '~/api';
 import { ResultContents } from './components/ResultContents';
 import { ResultFallback } from './components/ResultFallback';
-import { getLevelDetails } from './service';
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -10,16 +11,24 @@ type Props = {
 
 export const dynamic = 'force-dynamic';
 
-export function generateMetadata({ searchParams }: Props): Metadata {
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const drinkType = searchParams?.drinkType;
   const glasses = Number(searchParams?.glasses);
-  const { name, description, image } = getLevelDetails(glasses);
+
+  const resultQuery = await axios
+    .get<{ title: TitleDto }>(
+      `https://sulsul.app/api/v1/drinkingLimit?drinkType=${drinkType}&glass=${glasses}`
+    )
+    .then((response) => response.data);
+
+  const metadata = resultQuery.title;
 
   return {
-    title: `당신은 ${name} 🍻`,
+    title: `당신은 ${metadata.title} 🍻`,
     openGraph: {
-      title: name,
-      description,
-      images: image,
+      title: metadata.title,
+      description: metadata.subTitle,
+      images: metadata.cardImageUrl,
     },
   };
 }
