@@ -10,7 +10,7 @@ import CardMaster from '~/assets/card/card-master.svg';
 import CardGhost from '~/assets/card/card-ghost.svg';
 import CardHeaven from '~/assets/card/card-heaven.svg';
 import CardGod from '~/assets/card/card-god.svg';
-import { PostDrinkingLimitReqDrinkTypeEnum } from '~/api';
+import { PostDrinkingLimitReqDrinkTypeEnum, TitleDtoTitleEnum } from '~/api';
 
 export const AlcoholDetails = {
   [PostDrinkingLimitReqDrinkTypeEnum.소주]: {
@@ -40,21 +40,9 @@ export const AlcoholDetails = {
   },
 } as const;
 
-// 술 결과 목록
-export const AlcoholResultType = {
-  Baby: 'Baby',
-  Common: 'Common',
-  Master: 'Master',
-  Ghost: 'Ghost',
-  Heaven: 'Heaven',
-  God: 'God',
-} as const;
-
-export type AlcoholResultType = typeof AlcoholResultType[keyof typeof AlcoholResultType];
-
 export const AlcoholResultDetails = {
-  [AlcoholResultType.Baby]: {
-    name: '술요미',
+  [TitleDtoTitleEnum.술요미]: {
+    name: TitleDtoTitleEnum.술요미,
     svg: <CardBaby />,
     image: '/metadata/images/baby.png',
     description: '귀엽네',
@@ -62,8 +50,8 @@ export const AlcoholResultDetails = {
     color1: '#F97C7280',
     color2: '#4C94FF80',
   },
-  [AlcoholResultType.Common]: {
-    name: '술반인',
+  [TitleDtoTitleEnum.술반인]: {
+    name: TitleDtoTitleEnum.술반인,
     svg: <CardCommon />,
     image: '/metadata/images/common.png',
     description: '가자~',
@@ -71,8 +59,8 @@ export const AlcoholResultDetails = {
     color1: '#F97C7280',
     color2: '#4C94FF80',
   },
-  [AlcoholResultType.Master]: {
-    name: '이쯤되면 술잘알',
+  [TitleDtoTitleEnum.이쯤되면술잘알]: {
+    name: TitleDtoTitleEnum.이쯤되면술잘알,
     svg: <CardMaster />,
     image: '/metadata/images/master.png',
     description: '술 좀 치네',
@@ -80,8 +68,8 @@ export const AlcoholResultDetails = {
     color1: '#4C94FF80',
     color2: '#F97C7280',
   },
-  [AlcoholResultType.Ghost]: {
-    name: '알코올이 낳은 괴물',
+  [TitleDtoTitleEnum.알낳괴]: {
+    name: TitleDtoTitleEnum.알낳괴,
     svg: <CardGhost />,
     image: '/metadata/images/monster.png',
     description: '미쳤다..',
@@ -89,8 +77,8 @@ export const AlcoholResultDetails = {
     color1: '#E05FFE80',
     color2: '#F97C7280',
   },
-  [AlcoholResultType.Heaven]: {
-    name: '음주가무 천상계',
+  [TitleDtoTitleEnum.음주가무천상계]: {
+    name: TitleDtoTitleEnum.음주가무천상계,
     svg: <CardHeaven />,
     image: '/metadata/images/heaven.png',
     description: '알콜 마스터',
@@ -98,8 +86,8 @@ export const AlcoholResultDetails = {
     color1: '#4C94FF80',
     color2: '#E05FFE80',
   },
-  [AlcoholResultType.God]: {
-    name: 'Alcohol God',
+  [TitleDtoTitleEnum.AlcoholGod]: {
+    name: TitleDtoTitleEnum.AlcoholGod,
     svg: <CardGod />,
     image: '/metadata/images/god.png',
     description: '무서울 게 없다',

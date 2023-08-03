@@ -5,11 +5,10 @@ import styled from '@emotion/styled';
 import { colors } from '@sulsul/token/src/colors';
 import { text } from '@sulsul/token/src/text';
 import { Button } from '@sulsul/ui';
-import { DrinkReq, TitleDto } from '~/api';
-import { AlcoholDetails } from '~/constants/alcohol';
+import { DrinkReq, TitleDto, TitleDtoTitleEnum } from '~/api';
+import { AlcoholDetails, AlcoholResultDetails } from '~/constants/alcohol';
 import { ResultCard } from './ResultCard';
 import { useSearchParams } from 'next/navigation';
-import { getLevelDetails } from '../service';
 import axios from 'axios';
 import { css } from '@emotion/react';
 import { shareResult } from '~/app/utils/share';
@@ -23,6 +22,7 @@ import {
   useTransform,
 } from 'framer-motion';
 import { useRef } from 'react';
+import { useSuspenseQuery } from '@suspensive/react-query';
 
 const Heading2 = styled.h2`
   ${text.heading[2]}
@@ -89,7 +89,18 @@ export const ResultContents = () => {
     );
   });
 
-  const { svg, mainColor, color1, color2 } = getLevelDetails(glasses);
+  const resultQuery = useSuspenseQuery(['result', { drinkType, glasses }], () =>
+    axios
+      .get<{ title: TitleDto }>(
+        `https://sulsul.app/api/v1/drinkingLimit?drinkType=${drinkType}&glass=${glasses}`
+      )
+      .then((response) => response.data)
+  );
+
+  const resultTitleData = resultQuery.data?.title;
+  const resultTitle = resultTitleData?.title as TitleDtoTitleEnum;
+  const resultSubTitle = resultTitleData?.subTitle;
+  const { svg, mainColor, color1, color2 } = AlcoholResultDetails[resultTitle];
 
   return (
     <Stack.Vertical
@@ -175,35 +186,17 @@ export const ResultContents = () => {
               `}
             >
               <Heading2>당신은...</Heading2>
-              <SuspenseQuery
-                options={{
-                  queryKey: ['result'],
-                  queryFn: () =>
-                    axios
-                      .get<{ title: TitleDto }>(
-                        `https://sulsul.app/api/v1/drinkingLimit?drinkType=${drinkType}&glass=${glasses}`
-                      )
-                      .then((response) => response.data),
-                }}
-              >
-                {(query) => {
-                  const { title } = query.data;
-                  return (
-                    <ResultCard
-                      name={title.title}
-                      svg={svg}
-                      description={title.subTitle}
-                      mainColor={mainColor}
-                    />
-                  );
-                }}
-              </SuspenseQuery>
-
+              <ResultCard
+                name={resultTitle}
+                svg={svg}
+                description={resultSubTitle}
+                mainColor={mainColor}
+              />
               <Heading3>다른 술은 얼마나 마실 수 있을까?</Heading3>
               <DrinkLists>
                 <SuspenseQuery
                   options={{
-                    queryKey: ['result'],
+                    queryKey: ['result', { drinkType, glasses }],
                     queryFn: () =>
                       axios
                         .get<{ drinks: DrinkReq[] }>(
