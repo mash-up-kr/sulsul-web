@@ -15,6 +15,14 @@ import { css } from '@emotion/react';
 import { shareResult } from '~/app/utils/share';
 import { Box, Flex, Stack } from '@jsxcss/emotion';
 import { SuspenseQuery } from '~/components/SuspenseQuery';
+import {
+  motion,
+  useMotionValue,
+  useMotionValueEvent,
+  useScroll,
+  useTransform,
+} from 'framer-motion';
+import { useRef } from 'react';
 
 const Heading2 = styled.h2`
   ${text.heading[2]}
@@ -67,15 +75,28 @@ export const ResultContents = () => {
   const searchParams = useSearchParams();
   const drinkType = searchParams?.get('drinkType');
   const glasses = Number(searchParams?.get('glasses'));
-  const { svg, mainColor } = getLevelDetails(glasses);
+  const baseY = useMotionValue(0);
+  const backgroundRef = useRef<HTMLDivElement>(null);
+  const opacityOfY = useTransform(baseY, (v) => `${Math.max(30 * (v / 30), 30)}`);
+  const { scrollY } = useScroll();
 
-  const { color1, color2 } = getLevelDetails(glasses);
+  // make background opacity change when body scroll
+  useMotionValueEvent(scrollY, 'change', (latestScrollY) => {
+    baseY.set(latestScrollY);
+    backgroundRef.current?.style.setProperty(
+      'background',
+      `linear-gradient(to bottom, transparent 0%, #0008 ${opacityOfY.get()}%)`
+    );
+  });
+
+  const { svg, mainColor, color1, color2 } = getLevelDetails(glasses);
 
   return (
     <Stack.Vertical
       color="white"
       css={css`
-        height: 100vh;
+        position: relative;
+        min-height: 100vh;
         background: url('/svgs/grainy.svg') repeat, #1f2229;
         background-size: contain;
       `}
@@ -144,9 +165,6 @@ export const ResultContents = () => {
           direction="column"
           css={css`
             position: relative;
-            z-index: 1;
-            overflow: scroll;
-            flex: 1;
           `}
         >
           <Stack.Vertical flex={1}>
@@ -222,25 +240,28 @@ export const ResultContents = () => {
                 </SuspenseQuery>
               </DrinkLists>
             </div>
-
-            <Stack.Vertical
-              position="sticky"
-              bottom={0}
-              spacing={8}
-              padding="32px 16px 16px 16px"
-              width="100%"
-              background="linear-gradient(to bottom, transparent, #00000090, #00000090, #00000090, #00000090, #00000090, #00000090)"
-            >
-              <Button type="button" onClick={shareResult} size="lg">
-                내 주량 공유하기
-              </Button>
-              <Button type="button" appearance="primary" size="lg">
-                술자리에서 측정하기
-              </Button>
-            </Stack.Vertical>
           </Stack.Vertical>
         </Flex>
       </Box>
+      <motion.div
+        style={{
+          position: 'sticky',
+          bottom: 0,
+          padding: '60px 16px 16px 16px',
+          width: '100%',
+          background: 'linear-gradient(to bottom, transparent 0%, #0008 30%)',
+        }}
+        ref={backgroundRef}
+      >
+        <Stack.Vertical spacing={8} width="100%" margin="0 auto" maxWidth={700}>
+          <Button type="button" onClick={shareResult} size="lg">
+            내 주량 공유하기
+          </Button>
+          <Button type="button" appearance="primary" size="lg">
+            술자리에서 측정하기
+          </Button>
+        </Stack.Vertical>
+      </motion.div>
     </Stack.Vertical>
   );
 };
