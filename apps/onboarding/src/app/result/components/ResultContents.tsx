@@ -107,14 +107,17 @@ export const ResultContents = () => {
       color="white"
       css={css`
         position: relative;
+        height: 100%;
         min-height: 100vh;
         background: url('/svgs/grainy.svg') repeat, #1f2229;
         background-size: contain;
+        ${globalThis.window?.sulsulBridge ? 'padding-top: 20px;' : ''}
       `}
     >
       <Box
         css={css`
-          height: 100vh;
+          height: 100%;
+          minheight: 100vh;
           display: flex;
           flex-direction: column;
           position: relative;
