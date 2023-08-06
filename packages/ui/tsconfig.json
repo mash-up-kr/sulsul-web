@@ -1,7 +1,8 @@
 {
   "extends": "@sulsul/tsconfig/react-library.json",
-  "include": ["."],
   "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
     "jsxImportSource": "@emotion/react"
-  }
+  },
+  "include": ["."]
 }

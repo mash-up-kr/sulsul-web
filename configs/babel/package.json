@@ -1,0 +1,16 @@
+{
+  "name": "@sulsul/babel",
+  "version": "0.0.0-development",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.21.4"
+  },
+  "devDependencies": {
+    "@sulsul/eslint-config-js": "workspace:*",
+    "eslint": "^8.42.0"
+  }
+}

@@ -1,7 +1,8 @@
+/** @jsxImportSource @emotion/react */
+
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { css } from '@emotion/react';
 import { token } from '@sulsul/token';
-import '../global.css';
 
 type ButtonProps = ComponentPropsWithoutRef<'button'> & {
   appearance?: 'primary' | 'default' | 'minimal';
@@ -10,7 +11,7 @@ type ButtonProps = ComponentPropsWithoutRef<'button'> & {
 };
 
 const contentsStyle = css`
-  border-radius: 4px;
+  border-radius: 16px;
   cursor: pointer;
 
   &:disabled {

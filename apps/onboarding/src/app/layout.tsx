@@ -1,48 +1,46 @@
-'use client';
-
-import { ThemeProvider } from '@emotion/react';
-import { Flex, MediaQueryProvider } from '@jsxcss/emotion';
-import { token } from '@sulsul/token';
-import { SuspensiveConfigs, SuspensiveProvider } from '@suspensive/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Inter } from 'next/font/google';
-import './globals.css';
-import RootStyleRegistry from '../../emotion';
+import { Metadata } from 'next';
+import { NextAppDirEmotionCacheProvider } from 'tss-react/next/appDir';
+import { Provider } from '~/constants/provider';
+import { GlobalCSS } from '~/GlobalCSS';
+import { KakaoScript } from '~/KakaoScript';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 0,
-    },
-  },
-});
+declare global {
+  interface Window {
+    Kakao: any;
+    sulsulBridge: any;
+  }
+}
 
-const suspensiveConfigs = new SuspensiveConfigs({
-  defaultOptions: {
-    delay: { ms: 200 },
-    suspense: {
-      fallback: <Flex.Center>loading... Spinner</Flex.Center>,
-    },
+export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_DOMAIN || 'https://onboarding.sulsul.app'
+  ),
+  title: '술술',
+  description: '당신의 주량은?',
+  openGraph: {
+    title: '술술',
+    description: '당신의 주량은?',
+    images: `/metadata/main_image.png`,
   },
-});
+  manifest: '/favicons/site.webmanifest',
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <link rel="icon" href="/favicon/favicon-16x16.png" sizes="any" />
+      </head>
       <body className={inter.className}>
-        <RootStyleRegistry>
-          <MediaQueryProvider pxs={[0, 768, 1440]}>
-            <SuspensiveProvider configs={suspensiveConfigs}>
-              <QueryClientProvider client={queryClient}>
-                <ThemeProvider theme={token}>{children}</ThemeProvider>
-                <ReactQueryDevtools initialIsOpen={false} />
-              </QueryClientProvider>
-            </SuspensiveProvider>
-          </MediaQueryProvider>
-        </RootStyleRegistry>
+        <GlobalCSS />
+        <NextAppDirEmotionCacheProvider options={{ key: 'css' }}>
+          <Provider>{children}</Provider>
+          <KakaoScript />
+        </NextAppDirEmotionCacheProvider>
       </body>
     </html>
   );

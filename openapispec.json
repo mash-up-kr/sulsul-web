@@ -1,0 +1,823 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "sulsul API",
+    "description": "sulsul API Restdocs",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "https://sulsul.app"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ],
+  "paths": {
+    "/api/v1/drinkingReport": {
+      "get": {
+        "tags": ["주량 측정 컨트롤러"],
+        "summary": "주량 측정 결과 리스트 조회 API",
+        "operationId": "getReportList",
+        "responses": {
+          "200": {
+            "description": "주량 측정 결과 조회 성공",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DrinkingMeasurementListRes"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "토큰 정보 없거나 만료됨",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "레포트가 존재하지 않음",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "서버 에러",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["주량 측정 컨트롤러"],
+        "summary": "추량 측정 보고서 생성 API",
+        "operationId": "save",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DrinkingMeasurementReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "주량 측정 성공",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DrinkingMeasurementRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "잘못된 요청 값",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "토큰 정보 없거나 만료됨",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "서버 에러",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/drinkingReport/click-event": {
+      "post": {
+        "tags": ["주량 측정 컨트롤러"],
+        "summary": "주량측정 시, 클릭할 때마다 호출하는 API",
+        "operationId": "createTemporaryReport",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DrinkListReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "현재 섭취한 주량에 대한 타이틀 조회 성공",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DrinkingMeasurementByClickRes"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "토큰 정보 없거나 만료됨",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "서버 에러",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/drinkingLimit": {
+      "get": {
+        "tags": ["주량등록 컨트롤러"],
+        "summary": "주량 조회 API",
+        "description": "주량 조회할 때 호출하는 API",
+        "operationId": "get",
+        "parameters": [
+          {
+            "name": "drinkType",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "glass",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "주량 조회 성공",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostDrinkingLimitResDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "잘못된 요청 값",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "토큰 정보 없거나 만료됨",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "등록된 주량이 없을 경우, 404 반환",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "서버 에러",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["주량등록 컨트롤러"],
+        "summary": "주량 등록 API",
+        "description": "로그인 한 뒤, 토큰 정보와 같이 주량을 등록할 때 호출하는 API",
+        "operationId": "save_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostDrinkingLimitReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "주량 등록 성공",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostDrinkingLimitResDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "잘못된 요청 값",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "토큰 정보 없거나 만료됨",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "서버 에러",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/me": {
+      "get": {
+        "tags": ["유저 컨트롤러"],
+        "operationId": "me",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MeRes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/drinkingReport/{reportId}": {
+      "get": {
+        "tags": ["주량 측정 컨트롤러"],
+        "summary": "주량 측정 결과 조회 API",
+        "operationId": "getReport",
+        "parameters": [
+          {
+            "name": "reportId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "주량 측정 결과 조회 성공",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DrinkingMeasurementRes"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "토큰 정보 없거나 만료됨",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "레포트가 존재하지 않음",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "서버 에러",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/drink": {
+      "get": {
+        "tags": ["주종 컨트롤러"],
+        "summary": "주종 조회 API",
+        "description": "drink amount 단위: ml, alcohol amount 단위: g. 하단에 Schemas DrinkDto 참고",
+        "operationId": "drink",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDrinkRes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/admin/me": {
+      "delete": {
+        "tags": ["admin-controller"],
+        "operationId": "removeDrinkingLimit",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DrinkingAmountVO": {
+        "required": ["drinkType", "glasses"],
+        "type": "object",
+        "properties": {
+          "drinkType": {
+            "type": "string"
+          },
+          "glasses": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "description": "술 종류와 잔 수",
+        "example": [
+          {
+            "drinkType": "소주",
+            "glasses": 4
+          }
+        ]
+      },
+      "DrinkingMeasurementReq": {
+        "required": [
+          "drinkingEndTime",
+          "drinkingStartTime",
+          "drinks",
+          "totalDrinkGlasses"
+        ],
+        "type": "object",
+        "properties": {
+          "drinks": {
+            "type": "array",
+            "description": "술 종류와 잔 수",
+            "example": [
+              {
+                "drinkType": "소주",
+                "glasses": 4
+              }
+            ],
+            "items": {
+              "$ref": "#/components/schemas/DrinkingAmountVO"
+            }
+          },
+          "drinkingStartTime": {
+            "type": "string",
+            "description": "술을 마신 시작 시간",
+            "format": "date-time"
+          },
+          "drinkingEndTime": {
+            "type": "string",
+            "description": "술을 마신 종료 시간",
+            "format": "date-time"
+          },
+          "totalDrinkGlasses": {
+            "type": "integer",
+            "description": "총 마신 잔 수",
+            "format": "int32",
+            "example": 4
+          }
+        }
+      },
+      "DrinkingMeasurementRes": {
+        "required": [
+          "alcoholCalorie",
+          "averageAlcoholPercent",
+          "drankAt",
+          "drinkCardImageUrl",
+          "drinkingDuration",
+          "drinks",
+          "extraGlasses",
+          "id",
+          "title",
+          "totalDrinkGlasses"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "식별 id",
+            "example": "6481c97405e8335a58bc4337"
+          },
+          "totalDrinkGlasses": {
+            "type": "integer",
+            "description": "유저가 총 마신 술의 잔",
+            "format": "int32",
+            "example": 4
+          },
+          "title": {
+            "type": "string",
+            "description": "칭호",
+            "example": "미쳤다"
+          },
+          "drinkCardImageUrl": {
+            "type": "string",
+            "description": "카드 이미지 url",
+            "example": "https://sulsul-backend.s3.ap-northeast-2.amazonaws.com/static/image/drink/card_soju.png"
+          },
+          "averageAlcoholPercent": {
+            "type": "integer",
+            "description": "유저가 마신 술의 평균 알콜 도수",
+            "format": "int32",
+            "example": 16
+          },
+          "extraGlasses": {
+            "type": "integer",
+            "description": "평균 주량보다 몇 잔 더 마셨는지 나타내는 필드",
+            "format": "int32",
+            "example": 4
+          },
+          "drinkingDuration": {
+            "type": "string",
+            "description": "유저가 술을 마신 시간",
+            "example": "3시간 20분"
+          },
+          "alcoholCalorie": {
+            "type": "integer",
+            "description": "유저가 마신 술의 칼로리",
+            "format": "int32",
+            "example": 399
+          },
+          "drankAt": {
+            "type": "string",
+            "description": "유저가 마신 날짜",
+            "format": "date-time"
+          },
+          "drinks": {
+            "type": "array",
+            "description": "유저가 마신 술의 종류와 잔 수",
+            "example": [
+              {
+                "drinkType": "소주",
+                "glasses": 4
+              }
+            ],
+            "items": {
+              "$ref": "#/components/schemas/Drinks"
+            }
+          }
+        }
+      },
+      "Drinks": {
+        "required": ["drinkType", "glasses"],
+        "type": "object",
+        "properties": {
+          "drinkType": {
+            "type": "string"
+          },
+          "glasses": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "description": "유저가 마신 술의 종류와 잔 수",
+        "example": [
+          {
+            "drinkType": "소주",
+            "glasses": 4
+          }
+        ]
+      },
+      "DrinkListReq": {
+        "required": ["drinks"],
+        "type": "object",
+        "properties": {
+          "drinks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DrinkReq"
+            }
+          }
+        }
+      },
+      "DrinkReq": {
+        "required": ["drinkType", "glass"],
+        "type": "object",
+        "properties": {
+          "drinkType": {
+            "type": "string",
+            "description": "술의 종류",
+            "enum": ["소주", "와인", "맥주", "위스키", "고량주"]
+          },
+          "glass": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "DrinkingMeasurementByClickRes": {
+        "required": ["isDrunken", "title"],
+        "type": "object",
+        "properties": {
+          "title": {
+            "$ref": "#/components/schemas/DrinkingMeasurementTitleRes"
+          },
+          "isDrunken": {
+            "type": "boolean"
+          }
+        }
+      },
+      "DrinkingMeasurementTitleRes": {
+        "required": ["imageUrl", "text"],
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "PostDrinkingLimitReq": {
+        "required": ["drinkType", "glass"],
+        "type": "object",
+        "properties": {
+          "drinkType": {
+            "type": "string",
+            "description": "술의 종류",
+            "enum": ["소주", "와인", "맥주", "위스키", "고량주"]
+          },
+          "glass": {
+            "type": "integer",
+            "description": "해당 주종을 몇 잔 마실 수 있는지 나타내는 필드",
+            "format": "int32"
+          }
+        },
+        "description": "주량등록 시, 보내야하는 Request Body"
+      },
+      "DrinkingLimitDto": {
+        "required": ["drinkType", "glass"],
+        "type": "object",
+        "properties": {
+          "drinkType": {
+            "type": "string",
+            "description": "술의 종류",
+            "enum": ["소주", "와인", "맥주", "위스키", "고량주"]
+          },
+          "glass": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "PostDrinkingLimitResDto": {
+        "required": ["drinks", "title"],
+        "type": "object",
+        "properties": {
+          "drinks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DrinkingLimitDto"
+            }
+          },
+          "title": {
+            "$ref": "#/components/schemas/TitleDto"
+          }
+        }
+      },
+      "TitleDto": {
+        "required": ["badgeImageUrl", "cardImageUrl", "subTitle", "title"],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "enum": [
+              "술요미",
+              "술반인",
+              "이쯤되면 술잘알",
+              "알낳괴",
+              "음주가무 천상계",
+              "Alcohol God"
+            ]
+          },
+          "subTitle": {
+            "type": "string",
+            "enum": [
+              "귀엽네",
+              "가자~",
+              "술 좀 치네",
+              "미쳤다",
+              "알콜 마스터",
+              "무서울 게 없다"
+            ]
+          },
+          "badgeImageUrl": {
+            "type": "string"
+          },
+          "cardImageUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "MeRes": {
+        "required": ["nickname"],
+        "type": "object",
+        "properties": {
+          "nickname": {
+            "type": "string"
+          },
+          "drinkingLimits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DrinkingLimitDto"
+            }
+          },
+          "title": {
+            "$ref": "#/components/schemas/TitleDto"
+          }
+        }
+      },
+      "DrinkingMeasurementListRes": {
+        "required": ["cards"],
+        "type": "object",
+        "properties": {
+          "cards": {
+            "type": "array",
+            "description": "주량 측정 결과 리스트",
+            "items": {
+              "$ref": "#/components/schemas/DrinkingMeasurementSummaryRes"
+            }
+          }
+        }
+      },
+      "DrinkingMeasurementSummaryRes": {
+        "required": [
+          "drankAt",
+          "drinks",
+          "id",
+          "subTitle",
+          "totalAlcoholAmount",
+          "totalDrinkGlasses"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "식별 id",
+            "example": "6481c97405e8335a58bc4337"
+          },
+          "totalAlcoholAmount": {
+            "type": "number",
+            "description": "유저가 총 마신 알코올 양",
+            "format": "double",
+            "example": 152.5
+          },
+          "totalDrinkGlasses": {
+            "type": "integer",
+            "description": "유저가 총 마신 술의 잔",
+            "format": "int32",
+            "example": 4
+          },
+          "drankAt": {
+            "type": "string",
+            "description": "유저가 마신 날짜",
+            "format": "date-time"
+          },
+          "drinks": {
+            "type": "array",
+            "description": "유저가 마신 술의 종류와 잔 수",
+            "example": [
+              {
+                "drinkType": "소주",
+                "glasses": 4
+              }
+            ],
+            "items": {
+              "$ref": "#/components/schemas/Drinks"
+            }
+          },
+          "subTitle": {
+            "type": "string",
+            "description": "칭호 이름",
+            "example": "미쳤다"
+          }
+        },
+        "description": "주량 측정 결과 리스트"
+      },
+      "GetDrinkRes": {
+        "required": ["drinks"],
+        "type": "object",
+        "properties": {
+          "drinks": {
+            "type": "array",
+            "description": "술의 종류",
+            "example": ["소주", "와인", "맥주", "위스키", "고량주"],
+            "items": {
+              "type": "string",
+              "description": "술의 종류",
+              "example": "[\"소주\",\"와인\",\"맥주\",\"위스키\",\"고량주\"]"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

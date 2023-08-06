@@ -4,12 +4,19 @@
   "packageManager": "pnpm@8.5.1",
   "scripts": {
     "build": "turbo run build",
+    "build:falling": "turbo run build --filter=falling",
+    "build:onboarding": "turbo run build --filter=onboarding",
     "commit": "cz",
     "dev": "turbo run dev",
+    "dev:falling": "turbo run dev --filter=falling",
+    "dev:onboarding": "turbo run dev --filter=onboarding",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo run lint",
     "lint:pack": "packlint sort -R",
-    "postinstall": "husky install && packlint sort -R"
+    "postinstall": "husky install && packlint sort -R",
+    "spec:api": "turbo run spec:api",
+    "start:falling": "turbo run start --filter=falling",
+    "start:onboarding": "turbo run start --filter=onboarding"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.1",
