@@ -77,7 +77,12 @@ export const ResultContents = () => {
   const glasses = Number(searchParams?.get('glasses'));
   const baseY = useMotionValue(0);
   const backgroundRef = useRef<HTMLDivElement>(null);
-  const opacityOfY = useTransform(baseY, (v) => `${Math.max(30 * (v / 30), 30)}`);
+  
+  const scrollHeight = backgroundRef.current?.scrollHeight ?? 0;
+  const opacityOfY = useTransform(
+    baseY,
+    (v) => `${Math.max((v / scrollHeight) * 100, 30)}`
+  );
   const { scrollY } = useScroll();
 
   // make background opacity change when body scroll
@@ -111,13 +116,13 @@ export const ResultContents = () => {
         min-height: 100vh;
         background: url('/svgs/grainy.svg') repeat, #1f2229;
         background-size: contain;
-        ${globalThis.window?.sulsulBridge ? 'padding-top: 20px;' : ''}
+        padding-top: 50px;
       `}
     >
       <Box
         css={css`
           height: 100%;
-          minheight: 100vh;
+          min-height: 100vh;
           display: flex;
           flex-direction: column;
           position: relative;
@@ -243,7 +248,7 @@ export const ResultContents = () => {
         style={{
           position: 'sticky',
           bottom: 0,
-          padding: '60px 16px 16px 16px',
+          padding: '100px 16px 16px 16px',
           width: '100%',
           background: 'linear-gradient(to bottom, transparent 0%, #0008 30%)',
         }}
