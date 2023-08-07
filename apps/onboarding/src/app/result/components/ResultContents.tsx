@@ -8,7 +8,7 @@ import { Button } from '@sulsul/ui';
 import { DrinkReq, TitleDto, TitleDtoTitleEnum } from '~/api';
 import { AlcoholDetails, AlcoholResultDetails } from '~/constants/alcohol';
 import { ResultCard } from './ResultCard';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import axios from 'axios';
 import { css } from '@emotion/react';
 import { shareResult } from '~/app/utils/share';
@@ -72,6 +72,7 @@ const Volumn = styled.p`
 `;
 
 export const ResultContents = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const drinkType = searchParams?.get('drinkType');
   const glasses = Number(searchParams?.get('glasses'));
@@ -105,6 +106,18 @@ export const ResultContents = () => {
   const resultTitle = resultTitleData?.title as TitleDtoTitleEnum;
   const resultSubTitle = resultTitleData?.subTitle;
   const { svg, mainColor, color1, color2 } = AlcoholResultDetails[resultTitle];
+
+  const measureInApp = () => {
+    if (globalThis?.window.sulsulBridge) {
+      globalThis.window.sulsulBridge.onStartMeasureDrink();
+      return;
+    }
+
+    const deep_link =
+      'intent://measuring/#Intent;scheme=sulsul;package=com.mashup.alcoholfree;end';
+
+    router.push(deep_link);
+  };
 
   return (
     <Stack.Vertical
@@ -257,7 +270,7 @@ export const ResultContents = () => {
           <Button type="button" onClick={shareResult} size="lg">
             내 주량 공유하기
           </Button>
-          <Button type="button" appearance="primary" size="lg">
+          <Button type="button" appearance="primary" size="lg" onClick={measureInApp}>
             술자리에서 측정하기
           </Button>
         </Stack.Vertical>
