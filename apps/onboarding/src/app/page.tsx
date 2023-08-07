@@ -51,6 +51,7 @@ export default function Home() {
         background: '#1f2229',
         padding: '100px 0 32px',
         textAlign: 'center',
+        minHeight: '100vh',
       }}
     >
       <div

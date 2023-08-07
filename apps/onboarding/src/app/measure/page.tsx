@@ -82,6 +82,7 @@ export default function MeasurePage() {
         bottom: 0;
         background: url('/svgs/grainy.svg') repeat, #1f2229;
         background-size: contain;
+        padding-top: 50px;
       `}
     >
       <Box
