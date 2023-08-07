@@ -113,10 +113,22 @@ export const ResultContents = () => {
       return;
     }
 
-    const deep_link =
-      'intent://measuring/#Intent;scheme=sulsul;package=com.mashup.alcoholfree;end';
+    const checkAndroid = () => {
+      const u = navigator.userAgent;
+      return !!u.match(/Android/i);
+    };
 
-    router.push(deep_link);
+    if (checkAndroid()) {
+      const deep_link =
+        'intent://measuring/#Intent;scheme=sulsul;package=com.mashup.alcoholfree;end';
+
+      router.push(deep_link);
+      return;
+    }
+
+    router.push(
+      'https://play.google.com/store/apps/details?id=com.mashup.alcoholfree&hl=en-KR'
+    );
   };
 
   return (
