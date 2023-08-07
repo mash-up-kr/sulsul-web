@@ -78,7 +78,8 @@ export const ResultContents = () => {
   const glasses = Number(searchParams?.get('glasses'));
   const baseY = useMotionValue(0);
   const backgroundRef = useRef<HTMLDivElement>(null);
-  const scrollHeight = backgroundRef.current?.scrollHeight ?? 0;
+  const scrollHeight = backgroundRef.current?.scrollHeight ?? 200;
+
   const opacityOfY = useTransform(
     baseY,
     (v) => `${Math.max((v / scrollHeight) * 100, 30)}`
