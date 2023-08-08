@@ -292,7 +292,7 @@ export default function MeasurePage() {
                     +
                   </Box>
                 </Stack.Horizontal>
-                <p>350ml, 0.3병</p>
+                {/* <p>350ml, 0.3병</p> */}
               </Stack.Vertical>
             </Flex.Center>
           )}
