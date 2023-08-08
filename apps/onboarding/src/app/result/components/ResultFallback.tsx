@@ -31,7 +31,7 @@ const Description = styled.p`
 export const ResultFallback = () => {
   return (
     <Container>
-      <Image src={LoadingImage} alt="Calculating your limits" />
+      <Image src={LoadingImage} alt="Calculating your limits" unoptimized />
       <Title>오늘 마신 술을 계산하고 있어요</Title>
       <Description>잠시만 기다려 주세요.</Description>
     </Container>
