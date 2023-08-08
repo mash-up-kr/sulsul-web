@@ -26,6 +26,7 @@ export const metadata: Metadata = {
     images: `/metadata/main_image.png`,
   },
   manifest: '/favicons/site.webmanifest',
+  themeColor: '#1f2229',
 };
 
 export default function RootLayout({ children }: React.PropsWithChildren) {

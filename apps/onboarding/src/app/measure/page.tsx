@@ -14,7 +14,7 @@ import IcBack from '~/assets/icons/navigations/ic-back.svg';
 import IcDoublechevronLeft from '~/assets/icons/ic_doublechevron_left.svg';
 import IcDoublechevronRight from '~/assets/icons/ic_doublechevron_right.svg';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRef, useState } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import { drinkImage } from '~/constants/alcohol';
 // import IcRefresh from '~/assets/icons/navigations/ic-refresh.svg';
 
@@ -185,7 +185,7 @@ export default function MeasurePage() {
                     }}
                   >
                     {drinkTypes.map((drinkType) => (
-                      <>
+                      <Fragment key={drinkType}>
                         {constraintsRef.current && (
                           <Flex.Center
                             cursor="grab"
@@ -198,7 +198,7 @@ export default function MeasurePage() {
                             {drinkType}
                           </Flex.Center>
                         )}
-                      </>
+                      </Fragment>
                     ))}
                   </Stack.Horizontal>
                 )}
