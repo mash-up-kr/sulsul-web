@@ -14,7 +14,7 @@ import IcBack from '~/assets/icons/navigations/ic-back.svg';
 import IcDoublechevronLeft from '~/assets/icons/ic_doublechevron_left.svg';
 import IcDoublechevronRight from '~/assets/icons/ic_doublechevron_right.svg';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { drinkImage } from '~/constants/alcohol';
 // import IcRefresh from '~/assets/icons/navigations/ic-refresh.svg';
 
@@ -49,6 +49,13 @@ export default function MeasurePage() {
 
   const [drinkType, drinks] = watch(['drinkType', 'drinks']);
   const activeDrinkIndex = drinkTypes.findIndex((item) => item === drinkType);
+
+  // prevent text selection when touch event occured rapidly
+  useEffect(() => {
+    window.addEventListener('mousedown', (event) => {
+      event.preventDefault();
+    });
+  }, []);
 
   const addDrink = () => {
     const { image, size } = drinkImage[drinkTypes[activeDrinkIndex]];
