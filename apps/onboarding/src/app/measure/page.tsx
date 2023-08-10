@@ -116,7 +116,7 @@ export default function MeasurePage() {
           {!globalThis.window?.sulsulBridge && (
             <IcBack
               onClick={() => router.push('/')}
-              css={{ '&:hover': { cursor: 'pointer' } }}
+              css={{ '&:hover': { cursor: 'pointer' }, zIndex: 20 }}
             />
           )}
           <div>{/* <IcRefresh /> */}</div>
