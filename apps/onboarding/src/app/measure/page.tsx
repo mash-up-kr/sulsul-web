@@ -89,7 +89,6 @@ export default function MeasurePage() {
         bottom: 0;
         background: url('/svgs/grainy.svg') repeat, #1f2229;
         background-size: contain;
-        padding-top: 50px;
       `}
     >
       <Box
@@ -129,6 +128,7 @@ export default function MeasurePage() {
               css={{
                 ...token.text.subtitle[3],
                 color: token.colors.primary[300],
+                marginTop: '50px',
               }}
             >
               주량 등록하기
